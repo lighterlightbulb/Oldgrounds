@@ -1,0 +1,9 @@
+container/
+Oldgrounds.code-workspace
+adminer*
+
+# Docker
+docker-compose.yml
+docker-compose-local.yml
+Dockerfile.custom
+docker-entrypoint.custom.sh
