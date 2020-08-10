@@ -69,3 +69,7 @@
         </div>
     </body>
 </html>
+
+<?php
+    close_database_connection($sql, $statement);
+?>
