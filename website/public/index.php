@@ -7,7 +7,7 @@
     }
 
     $prefixes = ["This just in", "Breaking News", "Channel OG55"];
-    $prefix = array_rand($prefixes);
+    $prefix = $prefixes[array_rand($prefixes)];
 ?>
 
 <!DOCTYPE html>
