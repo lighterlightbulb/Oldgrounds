@@ -75,11 +75,7 @@ body {
 }
 
 .note-red {
-    border-image-slice: 20 20 20 20;
-    border-image-width: 20px 20px 20px 20px;
-    border-image-outset: 0 0 0 0;
     border-image-source: url("/html/img/border-red.png");
-    padding: 15px;
     background-color: #341a1b;
 }
 
@@ -112,7 +108,6 @@ a {
 }
 
 .comments {
-    display: grid;
     overflow-y: scroll;
     height: 198px;
     border-image-slice: 20 20 20 20;
@@ -155,4 +150,8 @@ a {
 
 audio {
     width: 170px;
+}
+
+.artwork {
+    overflow-y: scroll;
 }

@@ -8,7 +8,7 @@
         Welcome back, <a href="/users/view?id=<?= $_SESSION["user"]["id"] ?>"><?= $_SESSION["user"]["username"] ?></a> &bull;
         <?php endif; ?>
 
-        <a href="/news/">News</a> &bull; <a href="/video/">Videos</a> &bull; <a href="/chiptune/">Chiptunes</a> &bull; <a href="/midi/">MIDIs</a> &bull; <a href="/song/">Songs</a> &bull; <a href="/game/">Games</a> &bull; <a href="/art/">Artwork</a> &bull; <a href="/review/">Reviews</a> &bull; <a href="/blog/">Blogs</a> &bull; <a href="/file/">Files</a> &bull; <a href="/group/">Groups</a>
+        <a href="/headline/">Headlines</a> &bull; <a href="/video/">Videos</a> &bull; <a href="/chiptune/">Chiptunes</a> &bull; <a href="/midi/">MIDIs</a> &bull; <a href="/song/">Songs</a> &bull; <a href="/game/">Games</a> &bull; <a href="/art/">Artwork</a> &bull; <a href="/review/">Reviews</a> &bull; <a href="/blog/">Blogs</a> &bull; <a href="/file/">Files</a> &bull; <a href="/group/">Groups</a>
         
         <span style="float: right">
             <?php if (!isset($_SESSION["user"])): ?>

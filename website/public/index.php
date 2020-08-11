@@ -5,6 +5,9 @@
     {
         redirect("/my/dashboard");
     }
+
+    $prefixes = ["This just in", "Breaking News", "Channel OG55"];
+    $prefix = array_rand($prefixes);
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +37,7 @@
                     <hr>
 
                     <a href="<?= PROJECT["DISCORD"] ?>">Join our Discord</a><br>
-                    <a href="/news/create">Write a News Post</a><br>
+                    <a href="/headline/create">Write a Headline</a><br>
                     <a href="/review/create">Write a Review Post</a>
                     <hr>
 
@@ -50,7 +53,7 @@
                     <a href="/featured/">Featured</a>
                 </div>
 
-                <div class="note-red">
+                <div class="note note-red">
                     <div class="note-title">
                         <img src="/html/img/reviews.png" width="80">
                     </div>
@@ -59,17 +62,23 @@
                     There's nothing here.
                 </div>
 
-                <div class="note-red">
+                <div class="note note-red">
                     <div class="note-title">
-                        <img src="/html/img/news.png" width="55">
+                        <img src="/html/img/headlines.png" width="90">
                     </div>
                     <hr>
 
-                    There's nothing here.
+                    <span class="special-detail"><?= $prefix ?>:</span> Nothing.
                 </div>
             </div>
-            <br>
-            
+
+            <div class="right">
+                <div class="note">
+                    <div class="note-title">
+                        <img src="/html/img/artwork.png" width="100">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <?php
