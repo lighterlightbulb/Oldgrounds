@@ -13,4 +13,9 @@
     {
         require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/components/header.php");
     }
+
+    function build_footer()
+    {
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/components/footer.php");
+    }
 ?>

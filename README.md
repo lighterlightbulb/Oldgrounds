@@ -1,7 +1,7 @@
 # Oldgrounds
 A fan recreation of Newgrounds, with goals to recreate to add in more of a social network feel into it.
 
-This repository contains no copyrighted, or stolen code. All content here is 100% original. Oldgrounds is not sponsored by, or hosted by Newgrounds.
+This repository contains no copyrighted, or stolen code. All content here is 100% original. Oldgrounds is not sponsored by, hosted by, or affiliated with Newgrounds in any way.
 
 ## Features
 - Selling Feature: Customizability

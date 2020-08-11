@@ -7,6 +7,7 @@ services:
       MYSQL_DATABASE: oldgrounds
       MYSQL_PASSWORD: sample
       MYSQL_ROOT_PASSWORD: sample
+      MYSQL_ROOT_HOST: 172.19.0.3
     ports:
       - "3306:3306"
     volumes:

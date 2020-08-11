@@ -1,29 +1,22 @@
-<div class="header">
-    <div class="headerTop">
-        <a href="/"><b><?= PROJECT["NAME"] ?></b></a>
-        <form action="/search" method="get" class="search">
-            <input placeholder="Search" type="text" name="query">
-            <select name="query">
-                <option value="Users">Users</option>
-                <option value="Groups">Groups</option>
-                <option value="Blogs">Blogs</option>
-            </select>
-            <input type="submit" value="Search">
-        </form>
-    </div>
-    <div class="headerBottom">
-        <small>
-            <?php if (isset($_SESSION["user"])): ?>
-                <a href="/">Your Account</a>
-            <?php else: ?>
-                <a href="/register">Register</a> • <a href="/login.php">Login</a>
-            <?php endif; ?>
-            
-            • <a href="/groups/">Groups</a> • <a href="/blogs/">Blogs</a> • <a href="/jukebox/">Jukebox</a> • <a href="/random">Random</a> • <a href="/users/">Users</a>
-        </small>
-        
+<a href="/"><div class="header"></div></a>
+
+<div class="navbar">
+    <b>
         <?php if (!isset($_SESSION["user"])): ?>
-            <small><span style="float: right"> Not logged in. <a href="/login">Log in</a></span></small>
+        Not logged in &bull;
+        <?php else: ?>
+        Welcome back, <a href="/users/view?id=<?= $_SESSION["user"]["id"] ?>"><?= $_SESSION["user"]["username"] ?></a> &bull;
         <?php endif; ?>
-    </div>
+
+        <a href="/news/">News</a> &bull; <a href="/video/">Videos</a> &bull; <a href="/chiptune/">Chiptunes</a> &bull; <a href="/midi/">MIDIs</a> &bull; <a href="/song/">Songs</a> &bull; <a href="/game/">Games</a> &bull; <a href="/art/">Artwork</a> &bull; <a href="/review/">Reviews</a> &bull; <a href="/blog/">Blogs</a> &bull; <a href="/file/">Files</a> &bull; <a href="/group/">Groups</a>
+        
+        <span style="float: right">
+            <?php if (!isset($_SESSION["user"])): ?>
+                <a href="/register">Register</a> &bull; <a href="/login">Login</a>
+            <?php else: ?>
+                <a href="/logout">Logout</a>
+            <?php endif; ?>
+        </span>
+    </b>
 </div>
+<br>

@@ -12,7 +12,7 @@
     define("SQL", [
         "USERNAME" => "root",
         "PASSWORD" => "sample",
-        "DATABASE" => "spacemy",
+        "DATABASE" => "oldgrounds",
         "HOST"     => "database",
         "PORT"     => "3306"
     ]);

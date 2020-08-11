@@ -14,6 +14,6 @@
         "DISCORD" => "",
         "DEBUGGING" => true,
         "REFERRAL" => false,
-        "VALID_EMAIL_DOMAINS" => ["google.com", "protonmail.ch", "googlemail.com", "gmail.com", "yahoo.com", "yahoomail.com", "protonmail.com", "outlook.com", "hotmail.com", "microsoft.com", "inbox.com", "mail.com", "zoho.com"]
+        "VALID_EMAIL_DOMAINS" => ["hitius.com", "google.com", "protonmail.ch", "googlemail.com", "gmail.com", "yahoo.com", "yahoomail.com", "protonmail.com", "outlook.com", "hotmail.com", "microsoft.com", "inbox.com", "mail.com", "zoho.com"]
     ]);
 ?>
