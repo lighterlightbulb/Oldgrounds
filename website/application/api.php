@@ -196,7 +196,7 @@
 
                                         // Create user
                                         $statement = $sql->prepare("INSERT INTO `users` (`username`, `password`, `email`, `created`, `last_active`, `nickname`, `stylesheet`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                                        $statement->execute([$username, $email, $password, time(), time(), $username, "/* Welcome to the SpaceMy CSS editor! */"]);
+                                        $statement->execute([$username, $email, $password, time(), time(), $username, "/* Welcome to the Oldgrounds CSS editor! */"]);
 
                                         // Get user
                                         $statement = $sql->prepare("SELECT * FROM `users` WHERE `username` = ?");

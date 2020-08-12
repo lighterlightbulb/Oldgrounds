@@ -74,8 +74,8 @@ body {
     background-color: #25272d;
 }
 
-.note-red {
-    border-image-source: url("/html/img/border-red.png");
+.note-orange {
+    border-image-source: url("/html/img/border-orange.png");
     background-color: #341a1b;
 }
 
@@ -154,4 +154,8 @@ audio {
 
 .artwork {
     overflow-y: scroll;
+}
+
+.main {
+    background: url("/html/img/headerbg.jpg") top center no-repeat;
 }
