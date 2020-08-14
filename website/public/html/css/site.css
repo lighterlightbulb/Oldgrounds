@@ -1,161 +1,7464 @@
+/* Originally coded by Bob Rudderow for Newgrounds.com
+ * Repurposed for Oldgrounds (https://github.com/lighterlightbulb/Oldgrounds) by lighterlightbulb
+ * 99.99% rewritten.
+ * 
+ * Notes:
+ * Page from https://web.archive.org/web/20110203080057/http://www.newgrounds.com/
+ * Images begin with https://web.archive.org/web/20110203080353im_/http://img.ngfiles.com/
+ */
+
+/* ----- Site-Wide Elements ----- */
+
+#skip { display:none; }
+* { margin: 0; padding: 0; }
+img { border:none; }
+
+a img { border:none; }
+a, a:visited {
+	color: #f90; 
+	font-weight: bold;
+	text-decoration: none;
+	outline: none; 
+}
+a:visited { color: #d16d00 }
+a strong { font-size: 1.1em }
+a:hover { color: #fedf67 }
+a:active { outline: none }
+
+ul { list-style: none }
+ol { list-style-position: outside }
+ol li { margin-left: 30px }
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: left;
+	visibility: hidden;
+}
+.clearfix { display: inline-block }
+
+.hr {
+	height: 1px;
+	border: 0;
+	background: #000;
+	border-top: solid 1px #4a4f5a;
+	border-bottom: solid 1px #4a4f5a;
+	margin: 5px 0;
+	margin-left: -6px;
+	margin-right: -6px;
+	padding: 0px;
+}
+.hr hr { display: none }
+.hrfix { margin-top: 10px }
+
+
+/* ----- Page Layout ----- */
+
+
+html { height: 100% }
+
 body {
-    font-size: 62.5%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #d2d8e3;
-    height: 100%;
-    background: #26272b url("/html/img/bg.gif") top center repeat-y;
+	font-size: 62.5%; /* Resets 1em to 10px */
+	font-family: Arial, Helvetica, sans-serif;
+	color: #d2d8e3;
+	height: 100%;
+	background: #26272b url("/html/img/bg.gif") top center repeat-y;
 }
 
-.header {
-    margin-left: auto;
-    margin-right: auto;
-    width: 77em;
-    height: 109px;
-    background-image: url("/html/img/banner.png");
-    background-size: cover;
-    padding: 0;
-    border: 0;
+#mainframe {
+	position: relative;
+	min-height: 100%;
+	background: url("/html/img/tile.gif") repeat-x;
 }
 
-.navbar {
-    padding: 5px;
-    border-top: 1px solid red;
-    border-bottom: 1px solid red;
-    color: white;
-    background-color: #000 !important;
-    width: 759px !important;
-    margin-left: auto;
-    margin-right: auto;
+* html #mainframe { height: 100% }
+
+#main {
+	background: url("/html/img/headerbg.jpg") top center no-repeat;
+	padding-right: 1px; /* Fixes jiggle in FF3 */
+	padding-left: 1px; /* Fixes "jiggle" when resizing windo pixel by pixel 	*/
 }
 
-.container {
-    width: 770px;
-    margin: 0 auto 0 auto;
-    background: #555b66 url("/html/img/bg-content.gif") top center repeat-y;
-    height: 60em;
+#center {
+	border-left: #000 solid 5px;
+	border-right: #000 solid 5px;
+	width: 770px;
+	margin: 0 auto;
+	position: relative;	/* setting position adversely effects the rollover infobox */
+	overflow: visible; 
+	background: #000 url("/html/img/logobg.gif") top center no-repeat;
 }
 
-.title {
-    border-image-slice: 20 20 20 20;
-    border-image-width: 20px 20px 20px 20px;
-    border-image-outset: 0 0 0 0;
-    border-image-repeat: stretch stretch;
-    border-image-source: url("/html/img/border.png");
-    padding: 25px;
-    background-color: #101113;
-    margin-left: 10px;
-    margin-right: 10px;
+#banner { height: 142px }
+#skyplane { display: none }
+
+#cont-out {
+	width: 770px;
+	margin: 5px auto 0 auto;
+	background: url("/html/img/bg-content.gif") top center repeat-y;
 }
 
-.note-title {
-    text-align: center;
-    margin-top: 8px;
-    margin-bottom: 8px;
+#cont-mid {
+	padding-bottom: 344px;
+	background: url("/html/img/bg-contentbot2.gif") bottom center no-repeat; 
 }
 
-.left {
-    float: left;
-    width: calc(50% - 150px);
-    padding-left: 10px;
+#cont {
+	background: url("/html/img/bg-contenttop.gif") top center no-repeat; 
+	padding-top: 2px;
 }
 
-.right {
-    float: right;
-    width: 510px;
-    padding-right: 10px;
+#foot {
+	position: relative;
+	margin: -339px auto 0 auto;
+	height: 33.5em;
+	width: 756px;
+	color: #d2d8e3;
+	border-color: #000;
+	border-style: solid;
+	border-width: 2px 2px 0 2px;
+	background: #4a4f5a;
 }
 
-.note {
-    border-image-slice: 20 20 20 20;
-    border-image-width: 20px 20px 20px 20px;
-    border-image-outset: 0 0 0 0;
-    border-image-source: url("/html/img/border.png");
-    padding: 15px;
-    background-color: #25272d;
+
+/* ----- Site-Wide Menu Bar ----- */
+
+
+#nav-sub {
+	width: 770px;
+	float: left;
+	border-top: solid 1px #40444c;
 }
 
-.note-orange {
-    border-image-source: url("/html/img/border-orange.png");
-    background-color: #341a1b;
+#nav-sub a {
+	color: #f90;
+	text-decoration: none;
+	margin: 0 4px;
+}
+#nav-sub a:hover { color: #fedf67 }
+#nav-sub a:active { color: #fff }
+
+#nav-sub dl {
+	text-align: center;
+	margin-top: 4px;
 }
 
-.pfp {
-    border: 1px solid white;
-    width: 15em;
+#nav-sub dd {
+	display: inline;
+	font-size: 1.2em;
+	color: #40444c;
 }
 
-.note-hr {
-    border-top: 1px dashed gray;
+#nav-main {
+	width: 770px;
+	min-height: 38px;
+	float: left;
+	background: none;
+	margin: 3px 0 0 0;
+	border-bottom: solid 1px #40444c;
 }
 
-.user-info {
-    padding-left: 20px;
+#nav-main dl { list-style: none }
+
+#nav-main dt, #nav-main dd {
+	float: left;
+	text-indent: -9999em; 
+	margin-bottom: 4px;
 }
 
-.special-detail {
-    color: #f90;
+#nav-main dd a {
+	display: block;
+	height: 33px;
+	background: url("/html/img/nav.gif") no-repeat;
+	overflow: hidden;
 }
 
-a {
-    color: #f90;
-    font-weight: bold;
-    text-decoration: none;
-    outline: none;
+#nav-main dd#flashportal a {
+	width: 128px;
+	background-position: 0 0;
+}
+#nav-main dd#flashportal a:hover { background-position: 0 -33px }
+
+#nav-main dd#audioportal a {
+	width: 127px;
+	background-position: -128px 0;
+}
+#nav-main dd#audioportal a:hover { background-position: -128px -33px }
+
+#nav-main dd#artportal a {
+	width: 47px;
+	background-position: -255px 0;
+}
+#nav-main dd#artportal a:hover { background-position: -255px -33px }
+
+#nav-main dd#games a {
+	width: 68px;
+	background-position: -302px 0;
+}
+#nav-main dd#games a:hover { background-position: -302px -33px }
+
+#nav-main dd#movies a {
+	width: 72px;
+	background-position: -370px 0;
+}
+#nav-main dd#movies a:hover { background-position: -370px -33px }
+
+#nav-main dd#collections a {
+	width: 118px;
+	background-position: -442px 0;
+}
+#nav-main dd#collections a:hover { background-position: -442px -33px }
+
+#nav-main dd#series a {
+	width: 65px;
+	background-position: -560px 0;
+}
+#nav-main dd#series a:hover { background-position: -560px -33px }
+
+#nav-main dd#forums a {
+	width: 79px;
+	background-position: -625px 0;
+}
+#nav-main dd#forums a:hover { background-position: -625px -33px }
+
+#nav-main dd#store a {
+	width: 66px;
+	background-position: -704px 0;
+}
+#nav-main dd#store a:hover { background-position: -704px -33px }
+
+/* ----- Ubiquitous Header ----- */
+
+
+.hidecode { display: none }
+.show { display: block }
+
+div.loginbox {
+	float: right;
+	width: 150px;
+	margin: 3px 7px 0 0;
 }
 
-.note h1 {
-    margin: 0;
+div.loginbox ul { margin-bottom: 5px }
+
+div.loginbox li {
+	line-height: 1.2em;
+	padding-left: 5px;
+	margin: 2px 0;
+	background: #000 url("/html/img/bicons/bullet1.gif") 0 1px no-repeat;
+}
+	
+div.loginbox p {
+	line-height: 1.2em;
+	display: inline;
+	margin: 4px 2px 5px 0;
 }
 
-.comments {
-    overflow-y: scroll;
-    height: 198px;
-    border-image-slice: 20 20 20 20;
-    border-image-width: 20px 20px 20px 20px;
-    border-image-outset: 0 0 0 0;
-    border-image-repeat: stretch stretch;
-    border-image-source: url("/html/img/border.png");
-    padding: 20px;
-    background-color: #25272d;
+div.loginbox .btn {
+	float: right;
+	margin: 3px 2px 0 0;
 }
 
-.comment-right {
-    display: grid;
-    grid-template-columns: 75% auto;
-    padding: 5px;
-    background-color: #101113;
-    margin-bottom: 5px;
+div.loginbox .inputfield {
+	margin-right: 0;
+	width: 144px;
+}
+	
+div.loginbox p.save {
+	margin-top: 5px;
+	line-height: 1.35em;
+}
+div.loginbox p.save input {
+	float: left;
+	margin-right: 4px;
+	height: 13px; width: 13px;
 }
 
-.comment-content { 
-    word-wrap: break-word;
+div.loginbox strong.status {
+	float: none;
+	display: block;
+	margin: 13px 5px 0 5px;
+	height: 27px;
+	text-align: center;
+}
+div.loginbox p strong.status {
+	height: auto;
+	width: 145px;
+	margin: 0 auto;
 }
 
-.comment-name {
-    float: right;
+div.logged .btn {
+	float: none;
+	display: block;
+	margin: 10px auto;
+	width: 81px;
+	line-height: 1.2em;
 }
 
-.comment-pfp {
-    float: right;
+div.logged a {
+	text-align: center;
+	width: 69px;
 }
 
-.footer {
-    color: #60636b;
-    text-align: center;
+.hiddensubmit {
+	height: 7px;
+	width: 7px;
+	background-color: #000;
+	border: solid 1px #000;
+	display: none;
+}
+.hiddencolor {
+	background-color: #25272d; 
+	border: #25272d 2px solid; 
+	position: absolute; 
+	bottom:-10px; 
+	left: -10px;
 }
 
-.footer a {
-    color: #c87800;
+#search .inputfield { width: 72px }
+	
+#search .pulldown {
+	float: left;
+	margin-right: 6px;
+	border: 0;
+	padding: 1px;
+	height: 16px;
+}
+	
+form#search {
+	display: inline;
+	background: url("/html/img/form-mag.gif") top left no-repeat; 
+	padding-left: 19px;
+	margin: 109px 0 0 5px;
 }
 
-audio {
-    width: 170px;
+.search { float: left }
+
+#searchhint {
+	display: none; /* off by default, use js to turn on when needed */
+	left: 360px;
+	top: 128px;
+	width: 222px;
 }
 
-.artwork {
-    overflow-y: scroll;
+
+/* ----- Ubiquitous Footer ----- */
+
+
+#foot div#originalfooterdiv {
+	border-color: #3f434d;
+	border-style: solid;
+	border-width: 2px 2px 0 2px;
+	height: 100%;
+	background: #4a4f5a url("/html/img/footerimage.gif") bottom left no-repeat;
 }
 
-.main {
-    background: url("/html/img/headerbg.jpg") top center no-repeat;
+#foot span#originalfooterspan {
+	display: block;
+	position: absolute;
+	right: 5px;
+	bottom: 0;
+	width: 533px;
+	background: url("/html/img/dot.gif") left top repeat-x;
 }
+
+#foot strong {
+	color: #d2d8e3;
+	display: block;
+	padding-bottom: 6px;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+	margin-top: 4px;
+}	
+#foot .yellow a { color: #fc0 }
+#foot .orange a { color: #f90 }
+#foot .red a { color: #f60 }
+#foot .yellow a:hover, #foot .orange a:hover, #foot .red a:hover { color: #fedf67 }
+
+#foot .featurefix {
+	float: left;
+	width: 245px;
+}
+#foot h4 { padding: 5px }
+
+
+/* ----- Header Tags ----- */
+
+
+h1, h2, h3, h4, h5, h6 { position: relative }
+
+h2, h3, h1.ngpres, h1.view {
+	float: left; display: block;
+	background-position: left top;
+	background-repeat: no-repeat;
+	padding-left: 30px;
+	min-height: 30px;
+}
+
+#center h1.ng { text-indent: -9999em }
+#center h1.ng a {
+	float: left;
+	width: 347px;
+	height: 142px;
+	background: url("/html/img/logo.gif") repeat-x;
+}
+
+h1.ngpres {
+	font-size: 1.6em; 
+	line-height: 1.6em;
+	color: #fff;
+}
+h1.ngpres span {
+	background: url("/html/img/heads/ngpres.gif") 0 45% no-repeat;
+	width: 177px;
+	float: left; display: block;
+	text-indent: -999em;
+}
+h1.ngpres span.shortpres {
+	background: url("/html/img/heads/ngpres_sm.gif") 0 45% no-repeat;
+	width: 100px;
+}
+h1.flagged {
+	text-align: center;
+	color: #d00;
+	text-transform: uppercase;
+	font-size: 3em;
+}
+
+h2 {
+	letter-spacing: -1px;
+	color: #fc0;
+	font-size: 1.4em;
+	text-transform: uppercase;
+	line-height: 1.8em;
+}
+h2 span {
+	color: #fff;
+	text-transform: capitalize;
+	letter-spacing: normal;
+}
+h2 span.stet {
+	color: #fc0;
+	text-transform: uppercase;
+}
+h2 strong {
+	color: #fff;
+	text-transform: lowercase;
+	letter-spacing: normal;
+}
+h2 strong span {
+	color: #666d7a;
+}
+
+h2.author, h2.audioauthor {
+	float: none;
+	position: static;
+	padding: 0;
+	line-height: normal;
+	letter-spacing: normal;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-transform: none;
+	color: #fff;
+	margin-bottom: 0;
+	min-height: 0;
+}
+h2.audioauthor {
+	font-weight: normal;
+	color: #666d7a;
+	font-size: 1.1em;
+}
+h2.audioauthor em {
+	font-style: normal; 
+	color: #d2d8e3;
+}
+h2.audioauthor a { font-weight: normal }
+
+h3, h1.view {
+	color: #fc0;
+	font-size: 1.3em;
+	line-height: 1.85em;
+}
+#leftcol h1.view {
+	display: block;		/* fix long audio titles */
+	height: 25px;
+	width: 192px;
+	overflow: hidden;
+}
+
+
+h3 em {
+	color: #d2d8e3;
+	font-weight: normal;
+	margin-left: 8px;
+}
+
+h4 {
+	color: #fc0;
+	font-size: 1.2em;
+	line-height: 1.2em;
+	font-style: italic; 
+	margin: 0;
+}
+
+.twothird h4, .all h4 { margin-bottom: 5px }
+
+h4 a {
+	color: #f90;
+	font-style: normal;
+}
+h4 span { 
+	color: #666d7a; 
+	font-style: normal;
+}
+h4 a span { color: #d2d8e3 }
+
+.all h4 a {
+	font-style: italic;
+	color: #fc0;
+	text-decoration: underline;
+}
+
+h5 {
+	padding-bottom: 5px;
+	font-size: 1.1em;
+	text-align: center;
+	letter-spacing: 1px;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+}
+h5.sub {
+	letter-spacing: 0;
+	text-align: left;
+	padding: 5px;
+}
+
+.watchmovie h5 {
+	display: inline;
+	line-height: 1.5em;		/* Replaces padding and block display for icon hover. See also below. */
+	border-bottom: 0;
+	background: none;
+	letter-spacing: normal;
+	font-size: 20px;
+	color: #fc0;
+	text-align: left;
+	text-transform: uppercase;
+}
+.watchmovie h5 a, .watchmovie h5 a:visited {
+	border-bottom: solid 2px;
+	color: #fc0;
+}
+.watchmovie h5 a:hover { color: #fff }
+
+h6 {
+	float: right;
+	margin: 4px 5px 0 0;
+	color: #fc0;
+	font-size: 1.4em;
+	text-transform: uppercase;
+}
+
+h6.download {
+	display: inline;
+	line-height: 20px;		/* Same as above */
+	color: #666d7a;
+	float: none;
+	font-size: 10px;
+	text-transform: none;
+}
+
+
+/* ----- Breadcrumbs ----- */
+
+
+.bread { display: inline }
+
+.bread li {
+	display: inline;
+	line-height: 1em;
+	font-weight: bold;
+	color: #fff;
+}
+
+.bread li a {
+	padding-right: 9px;
+	margin-right: 2px;
+	background: url("/html/img/bicons/bullet4.gif") center right no-repeat;
+}
+
+
+/* ----- Generic Form Elements ----- */
+
+
+#leftcol select.pulldown {
+	display: block;
+	font-size: 10px;
+	max-width: 212px;
+}
+
+select option {
+	padding-left: 3px;
+	padding-right: 5px;
+}
+
+.inputfield {
+	height: 1.2em;
+	margin-right: 6px;
+	padding: 3px 0 2px 4px;
+	background: #fc0 url("/html/img/form-input.gif") top left repeat-x; 
+	border: 0;
+	color: #000;
+	font-weight: bold;
+}
+
+input.short { width: 80px }
+input.med2 { width: 150px }
+
+.formtext {
+	font-size: 1.1em;   /* un-fixed back from 11px */
+	font-weight: bold;
+}
+.formtextsmall {
+	font-size: 1em; 
+	font-weight: bold;
+}
+
+.pulldown {
+	background-color: #555b66; 
+	color: #fc0; 
+	border: solid 1px #000;
+}
+.pulldown2 {
+	background-color: #fc0; 
+	color: #000; 
+	border: solid 1px #000;
+}
+
+.pulldown[disabled], .pulldown2[disabled] { background-color: #999 }
+fieldset { border: 0 }
+
+
+/* -----  ubiquitous "in-progress" animations ----- */
+
+
+.line .working, .lastline .working {
+	float: left; 
+	line-height: 2.2em;
+	padding-left: 25px;
+	background: url("/html/img/form-indicator.gif") left center no-repeat;
+}
+.lftbtns .working {
+	float: left; 
+	line-height: 1.7em;
+	padding-left: 25px;
+	font-size: 1.1em;
+	background: url("/html/img/form-indicator.gif") left center no-repeat;
+}
+.sendlinks .working {
+	color: #666d7a;
+	font-weight: bold;
+	background: url("/html/img/bicons/bullet4.gif") left center no-repeat;
+	margin-left: -6px;
+	padding-left: 5px;
+}
+.right .working {
+	padding-left: 25px;
+	background: url("/html/img/form-indicator.gif") left center no-repeat;
+}
+.btnheight .working {
+	display: block; *display: inline-block;
+	height: 28px;
+	padding-left: 20px;
+	background: url("/html/img/form-indicator.gif") left center no-repeat;
+}
+
+span.workcircle {
+	width: 22px;
+	height: 22px;
+	color: #25272d;
+	background: url("/html/img/form-indicator-mini.gif") 3px center no-repeat;
+}
+
+.working_sm {
+	color: #666d7a;
+	padding-right: 12px;
+	font-weight: bold;
+	background: url("/html/img/form-indicator-mini.gif") right center no-repeat;
+}
+.working_sm:hover, .working_sm:active, .working_sm:visited {
+	color: #666d7a;
+	cursor: default;
+}
+	
+#lonep2 .working_sm {
+	color: #d2d8e3;
+}
+
+.activity .working_sm {
+	margin-right: 0;
+	font-weight: normal;
+}
+
+.review .mod .working {
+	text-transform: none;
+	color: #d675e1;
+}
+
+.bundle .mod a.working {
+	color: #666d7a;
+	padding-right: 12px;
+	margin-right: 2px;
+	background: url("/html/img/form-indicator-mini_blk.gif") right 2px no-repeat;
+}
+	
+
+
+/* ----- Buttons, Just Buttons ----- */
+
+	
+.btn {
+	position: relative;
+	float: left;
+	background: url("/html/img/form-buttonR.gif") top right no-repeat;
+	height: 18px;
+}
+	
+.btn a, .btn a:visited, .btn span, .btn label {
+	display: block;
+	height: 15px;
+	padding: 3px 4px 0 6px;
+	margin-right: 2px;
+	background: url("/html/img/form-buttonL.gif") top left no-repeat;
+	color: #000;
+	font-weight: bold;
+	font-size: 1.1em;
+	line-height: 12px;
+}
+
+.btn a:hover, .btn label:hover {
+	position: relative;
+	color: #000;
+	background-position: 0 -18px;
+	cursor: pointer;
+}
+
+div.btnheight { height: 28px }
+div.btnheight .btn, div.btnheight .button { margin: 5px }
+div.btnheight .formtext { font-size: 11px }
+div.btnheight p {
+	position: static;
+	margin: 0 5px;
+	line-height: 2.4em;
+}
+
+
+.btn a span, .btn span span {
+	display: block;
+	width: 6px;
+	margin: 0; padding: 0;
+	margin-right: 1px;
+	margin-left: 1px;
+	background-image: url("/html/img/form-nsew.gif");
+	background-repeat: no-repeat;
+	text-indent: -360px;
+	overflow: hidden;
+}
+.btn  span.up { background-position: 0 0 }
+.btn  span.down { background-position: -7px 0 }
+.btn  span.right { background-position: -14px 0 }
+.btn  span.left { background-position: -21px 0 }
+.btn  span.del { background-position: -28px 0 }
+.btn  span.shift { background-position: -35px 0 }
+
+.btn em { font-style: normal }
+
+.col { text-align: center }
+.col a { width: 200px }
+
+.halfcol {
+	overflow: hidden;
+	text-align: center;
+	margin-right: 6px;
+}
+.halfcol a { width: 88px }
+
+
+.dead { background: url("/html/img/form-buttonDeadR.gif") top right no-repeat }
+.dead span, .dead a, .dead a:visited { background: url("/html/img/form-buttonDeadL.gif") top left no-repeat }
+table .dead span span { margin-right: 0 } /* When the arrow buttons are in a table, they get a little wide, but not in other areas like favorites. */
+.heading .dead span { color: #fff }
+#leftcol .heading .dead span { color: #000 }	/* Added to dim checkout button in store, may have affected elsewhere, but prolly not */
+
+.kill { background: url("/html/img/form-buttonKillR.gif") top right no-repeat }
+.kill a, .kill a:visited { background: url("/html/img/form-buttonKillL.gif") top left no-repeat }
+.kill a:hover { background-position: 0 -18px; }
+
+.glow { background: url("/html/img/form-buttonSaveR.gif") top right no-repeat }
+.glow a, .glow a:visited { background: url("/html/img/form-buttonSaveL.gif") top left no-repeat }
+.glow a:hover { background-position: 0 -18px }
+
+/* large, short text on empty line with button */
+.box .singleline { margin: 5px; }
+.box .singleline .btn { z-index: 12 }
+.box .singleline .right .btn { margin-left: 10px }
+.box .singleline p {
+	margin: 0;
+	line-height: 1.5em;
+}
+	
+/* big 'ol buttons */
+a.sqbtn, a.sqbtn:visited {
+	position: relative;		/* necessary to get hover to work right */
+	z-index: 999;
+	width: 31px;
+	height: 31px;
+	float: left;
+	background: url("/html/img/form-bigbutOFF.gif") 0 0 no-repeat;
+}
+a.sqbtn:hover {
+	background: url("/html/img/form-bigbutON.gif") 0 0 no-repeat;
+	cursor: pointer;
+}
+a.sqbtn span {
+	display: block;
+	width: 31px;
+	height: 31px;
+	text-indent: -9999em;
+	overflow: hidden;
+}
+
+.sqbtn .listen { background: url("/html/img/audio_listen.gif") 6px 5px no-repeat }
+.sqbtn .download { background: url("/html/img/audio_dl.gif") 6px 5px no-repeat }
+
+
+.bigbtn a, .bigbtn a:visited, .bigbtn span {
+	display: block;
+	width: 105px;
+	height: 26px;
+	overflow: hidden;
+	text-align: center;
+	color: #000;
+	font-size: 14px;
+	font-weight: bold; 
+	line-height: 26px;
+	background: url("/html/img/big_button.gif") 0 0 no-repeat;
+}
+.bigbtn a:hover {
+	background-position: 0 -26px;
+	cursor: pointer;
+}
+.bigdead span { background: url("/html/img/big_button_dead.gif") 0 0 no-repeat }
+
+/* ACTUAL buttons, of the input kind, first used in the store */
+
+.button {
+	position: relative;
+	float: left;
+	background: url("/html/img/form-buttonR.gif") top right no-repeat;
+	height: 18px;
+}
+	
+.button input, .button button {
+	display: block;
+	height: 18px;
+	padding: 0 1px 0px 3px;
+	margin: 0 2px 0 0;
+	border: 0; outline: none;
+	font-family: Arial, Helvetica, sans-serif;
+	background: url("/html/img/form-buttonL.gif") top left no-repeat;
+	color: #000;
+	font-weight: bold;
+	font-size: 1.1em;
+	line-height: 18px;
+}
+.button button { padding: 2px 2px 2px 4px } /* added first time to "delete and ban" review mod button in art portal, and comment respond form */
+.button input:hover, .button button:hover {
+	position: relative;
+	color: #000;
+	background-position: 0 -18px;
+	cursor: pointer;
+}
+
+.buttonlarge input {
+	display: block;
+	width: 105px;
+	height: 26px;
+	padding-bottom: 1px;
+	border: 0; outline: none;
+	overflow: hidden;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000;
+	font-size: 14px;
+	font-weight: bold; 
+	line-height: 26px;
+	background: url("/html/img/big_button.gif") 0 0 no-repeat;
+}
+.buttonlarge input:hover {
+	background-position: 0 -26px;
+	cursor: pointer;
+}
+.bigdead input {
+	background: url("/html/img/big_button_dead.gif") 0 0 no-repeat;
+}
+.bigdead input:hover {
+	background-position: 0 0;
+	cursor: default;
+}
+
+.delete {
+	float: left;
+}
+.delete input {
+	float: left;
+	border: 0;
+	margin: 0; padding: 0;
+	background: url("/html/img/form-buttonDelete.gif") top left no-repeat;
+	width: 20px;
+	height: 18px;
+	font-size: 0px;
+	text-indent: -1000px;
+	overflow: hidden;
+}
+.delete input:hover {
+	background-position: 0 -18px;
+	cursor: pointer;
+}
+
+.buttonlink {
+	font-family: Arial, Helvetica, sans-serif;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1em;
+	color: #f90;
+	font-weight: bold;
+	vertical-align: middle;
+}
+.buttonlink:hover { color: #fedf67 }
+
+/* AWESOME for removing that firefox border around active buttons. */
+/* found in a comment by "polvero" @ http://stackoverflow.com/questions/71074/how-to-remove-firefoxs-dotted-outline-on-buttons-as-well-as-links */
+button::-moz-focus-inner { border: 0 }
+input::-moz-focus-inner { border: 0 }
+
+
+/* ----- Boxes, All Boxes ----- */
+
+
+.box {
+	display: inline;
+	margin: 1px 3px 0 3px;
+}
+.boxtop {
+	position: relative;
+	background: url("/html/img/box.gif") no-repeat 100% 0;
+	margin: 0 0 0 13px;
+	height: 13px;
+}
+.boxtop div {
+	position: absolute;
+	height: 13px;
+	width: 13px;
+	left: -13px;
+	background: url("/html/img/box.gif") no-repeat 0 0;
+}
+.boxtop div div { visibility: hidden }
+
+.boxbot {
+	position: relative;
+	background: url("/html/img/box.gif") no-repeat 100% 100%;
+	margin: 0 0 0 13px;
+	height: 13px;
+}
+.boxbot div {
+	position: absolute;
+	height: 13px;
+	width: 13px;
+	left: -13px;
+	background: url("/html/img/box.gif") no-repeat 0 100%;
+}
+.boxbot div div { visibility: hidden }
+
+.boxl {
+	padding: 0 0 0 11px;
+	background: url("/html/img/borders.gif") repeat-y 0 0;
+}
+.boxr {
+	padding: 0 11px 0 0;
+	background: url("/html/img/borders.gif") repeat-y 100% 0;
+}
+.boxm {
+	background:#25272d;
+	padding: 3px 5px 3px 5px;
+}
+.boxsizer { padding: 5px 5px 5px 5px }
+
+/* necessary only for forum post vertical bar */	
+.boxtop span {
+	position: absolute; 
+	background: url("/html/img/vr.gif") repeat-y; 
+	margin: 47px 0 0 118px; 
+	width: 3px; 
+	height: 3px;
+}
+.boxbot span {
+	position: absolute; 
+	background: url("/html/img/vr.gif") repeat-y;
+	margin: 0px 0 0 118px;
+	width: 3px; 
+	height: 3px;
+}
+.post .boxm { background: #25272d url("/html/img/vr.gif") 120px 0 repeat-y }
+.nostats .boxm { background: #25272d }
+
+
+/* ----- Columns ----- */
+
+
+#leftcol {
+	width: 257px; /* do not change, lest ye be changed */
+	float: left;
+}
+#leftcol .box {
+	width: 254px; 
+	margin-right: 0px;
+}
+
+
+#rightcol {
+	width: 513px; /* do not change, lest ye be changed */
+	float: right;
+}
+#rightcol .box {
+	margin-left: 1px;
+	margin-right: 0
+}
+#rightcol .onethird { width: 254px }
+
+
+#right2col {
+	width: 510px;
+	float: right; 
+	padding-right: 2px;
+}
+#right2col .box {
+	float: right;
+	margin-left: 0;
+	margin-right: 1px;
+}
+#right2col .onethird {
+	float: right;
+	width: 254px;
+}
+
+
+#reverse { float: left }
+#reverse #leftcol { width: 512px }
+#reverse #leftcol .twothird { width: 509px }
+#reverse #rightcol { width: 258px }
+#reverse #rightcol .box { width: 254px }
+	
+
+.twothird { width: 509px }
+
+
+.skinnycol {
+	width: 153px;
+	float: left;
+}
+.skinnycol .box {
+	width: 152px;
+}
+
+
+#widecol {
+	width: 615px;
+	float: right;
+}
+#widecol .box {
+	width: 278px;
+	margin-left: 1px; 
+	margin-right: 0
+}
+#widecol .widebox, .widebox {
+	margin-right: 1px;
+	width: 611px;
+}
+	
+	
+#midcol {
+	width: 459px;
+	float: left; }
+#midcol .box {
+	width: 458px;
+	margin-right: 0px;
+}
+
+
+.half, .otherhalf {
+	float: left; 
+	width: 384px;
+}
+.half .box {
+	margin-right: 0;
+	width: 381px;
+}
+.otherhalf .box {
+	margin-right: 0;
+	margin-left: 1px; 
+	width: 382px;
+}
+
+
+.all .box { width: 764px }
+
+
+/* ----- Column-Specific Styles ----- */
+
+
+.skinnycol p a {
+	max-width: 108px;
+	display: block;
+	margin-bottom: 1px;
+	padding-top: 2px;
+	font-size: 1.1em;
+	max-height: 2.4em;
+	overflow: hidden;
+}
+.skinnycol span {
+	line-height: 1em;
+	display: block;
+}
+
+.topbox img.ticon {
+	display: block;
+	margin: 5px auto 0px auto;
+}
+.topbox p { padding: 10px 5px 0 5px }
+.topbox img.cimage {
+	display: block;
+	margin: 10px 0 20px 0;
+}
+.topbox  dl {
+	font-size: 1.2em;
+	line-height: 1.2em;
+	margin: 5px;
+}
+.topbox dt {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#leftcol select {
+	margin: 5px 0;
+}
+
+code {
+	background: #25272d url("/html/img/bg_code.gif") repeat-y;
+	display: block; 
+	margin: 0 auto 10px auto;
+	padding: 5px; 
+	overflow: auto;
+	white-space: pre;
+	font-size: 11px;
+	line-height: 11px;
+}
+.all code { width: 712px }
+.twothird code { width: 455px }
+
+#leftcol .working {
+	color: #666d7a;
+	font-weight: bold;
+}
+#leftcol .review .mod .working {
+	text-transform: none;
+	color: #d675e1;
+	font-weight: normal;
+}
+	
+#leftcol .onethird p a { font-weight: normal }
+	
+
+
+/* ----- Ads and Ad Containers ----- */
+
+
+.ad {
+	float: left;
+	width: 764px;
+}
+.adhead {
+	float: left;
+	width: 764px;
+}
+.adfoot {
+	float: left;
+	width: 764px;
+}
+	
+.horzad {
+	border: 0;
+	margin: 0 2px;
+	height: 90px;
+	width: 728px;
+}
+
+.skyad {
+	border: 0;
+	margin: 1px 0;
+	height: 600px;
+	width: 120px;
+}
+
+.boxad {
+	display: inline;
+	border: 0;
+	margin: 0;
+}
+
+.onethirdad {
+	display: block;
+	border: 0;
+	width: 200px;
+	height: 200px;
+	margin: 5px auto;
+}
+
+#boxad .onethirdad {
+	margin: 0px auto;
+}
+
+.boxadcenter {
+	display: block;
+	border: none;
+	margin: 50px auto;
+	height: 250px;
+	width: 300px;
+}
+	
+.skinnybox {
+	float: right;
+	width: 152px; 
+	margin-left: 0;
+}
+
+#widecol .squarebox, .squarebox {
+	width: 332px;
+	margin-top: 88px;
+}
+
+
+.adheader {
+	position: absolute; 
+	width: 160px; 
+	height: 525px; 
+	z-index: 1000;
+	overflow: visible;
+}
+.adtopleft {
+	top: 0; 
+	left: -165px;
+}
+.adtopright { 
+	top: 0; 
+	right: -165px; }
+	
+.adheader100 {
+	position: absolute;
+	width: 100%;
+	height: 750px;
+}
+	
+
+/* ----- Box Titles ----- */
+
+
+.title div.boxtop, .title div.boxtop div { height: 50px }
+
+.box .heading {
+	position: relative;
+	display: block;
+	height: 24px;
+	margin: -42px -5px 8px -5px;
+	padding: 5px; 
+	background: url("/html/img/slants.gif") repeat; 
+	color: #666d7a;
+}
+
+.box .headsizer { width: 100% }
+
+.box .heading p {
+	float: right;
+	margin: 6px 3px 0 0; 
+	font-size: 1.1em;
+}
+
+.heading .btn, .heading .button {
+	float: right;
+	margin: 3px 0 0 5px;
+}
+
+.box .heading ul {
+	margin-top: 6px;
+	float: right;
+}
+
+.box .heading li {
+	float: left; 
+	padding-right: 10px;
+	line-height: 13px;
+	font-weight: bold;
+}
+.box .heading li img {
+	float:left;
+	margin-right: 5px;
+}
+
+
+/* ----- Feature Blocks ----- */
+
+
+.box .featurefix { width: 100%; }
+
+.box a.feature {
+	padding-right: 5px;
+	overflow: hidden;
+	display: inline-block;
+	line-height: 1.2em;
+	height: 6em;
+	color: #fff;
+	font-weight: normal;
+}
+.box a.feature:visited .ftitle { color: #9c5a12 }
+.box a.feature:visited .fblurb { color: #d16d00 }
+	
+
+#rightcol a.feature { width: 233px } 
+#leftcol a.feature, #rightcol .onethird a.feature, #right2col .onethird a.feature { width: 217px }
+#widecol .box a.feature { width: 241px }
+#widecol .widebox a.feature { width: 284px } 
+/* For Collections and Series pages */
+#midcol a.feature { width: 421px }
+#midcol a.feature .fin {font-size: 1.2em; line-height: 1.2em; color: #d2d8e3; }
+#midcol a.feature .ftitle { font-weight: bold }
+#reverse #rightcol a.feature { width: 217px }
+/* For BBS Posts */
+div.all div.post a.feature { width: 594px }
+div.all div.post .featurefix {margin-top: 5px; margin-bottom: 10px; }
+/* For Footer */
+#foot a.feature { width: 233px } 
+
+
+a:hover.feature { background: #383b44; cursor: pointer; }
+
+.feature img {
+	float: left;
+	height: 4.6em;
+	width: 4.6em;
+	margin: 5px 10px 5px 5px;
+	border: solid 2px #000;
+}
+
+.ftitle {
+	display: block;
+	height: 1.2em;
+	overflow: hidden;
+	color: #f90;
+	text-transform: uppercase;
+}
+
+.fout {
+	height: 60px;
+	position: relative;
+	overflow: hidden;
+}
+
+.fmid {
+	position: absolute;
+	top: 48%;
+	padding-right: 65px;
+}
+
+.fin {
+	*position: relative;
+	top: -50%;
+}
+
+.fout[class] {
+	display: table;
+	position: static;
+	*position: relative;
+	*display: block;
+}
+
+.fmid[class] {
+	display: table-cell;
+	vertical-align: middle;
+	position: static;
+	padding-right: 0;
+}
+
+
+.fblurb {
+	color: #f90;
+	font-weight: bold;
+	text-transform: none;
+	font-size: 1.1em; 
+	line-height: 1.1em;
+}
+.feature em {
+	display: block;
+	font-size: 1.1em;
+}
+.topbox .feature em {
+	display: inline;
+	font-size: 1em;
+}
+.fauthor {
+	color: #666d7a;
+	font-weight: normal;
+}
+.fauthor strong {
+	font-size: 1em;
+	font-weight: normal;
+	color: #f90;
+}
+.feature em.gray strong {
+	font-size: 1em;
+	font-weight: normal;
+	color: #fff;
+}
+.feature .fbot {
+	font-size: 1.1em;
+	font-style: italic;
+}
+
+.feature .fsub {
+	font-size: 1.1em;
+	display: block;
+}
+
+
+.box .falbum {
+	display: block;
+	position: relative;
+}
+.box .falbum img {
+	padding: 2px;
+	border: none;
+}
+.box .falbum span  {
+	position: absolute;
+	z-index: 33;
+	top: 5px;
+	left: 5px; _left: -60px;
+	width: 50px; height: 50px;
+	background: url("/html/img/cdicons/cd_overlay.png") top left no-repeat; 
+}
+.box a.feature:hover .falbum span {
+	background: url("/html/img/cdicons/cd_overlay_hover.png") top left no-repeat; 
+}
+
+
+.nouveaufeature .feature .ftitle {
+	font-size: 1.2em;
+	line-height: 1.2em;
+	height: auto;
+	text-transform: none;
+	font-weight: bold;
+}
+.nouveaufeature .feature img {
+	border: solid 2px #25272d;
+	margin: 5px;
+}
+	
+
+.box a.feature:visited .fbbsline1 strong { color: #d16d00 }
+.fbbsline1 { font-size: 1em }
+.fbbsline1 strong {
+	font-weight: normal;
+	font-size: 1em;
+	color: #f90;
+}
+.fbbsline1 strong.fname {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+.fbbsline2 {
+	display: block;
+	padding-top: 6px;
+	font-size: 1em;
+	color: #fff;
+}
+.fbbsline2 em {
+	display: inline;
+	padding-left: 5px;
+	margin-left: 3px;
+	background: url("/html/img/bicons/vertbar.gif") 0px 0px no-repeat;
+	font-style: normal;
+	font-size: 1em;
+	color: #fc0;
+}
+.fbbsline2 span {
+	float: left;
+	width: 14px;
+	text-indent: -1111em;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-position: left -4px;
+}
+.fbbsline2 .game { background-image: url("/html/img/bicons/tiny_game.gif") }
+.fbbsline2 .movie { background-image: url("/html/img/bicons/tiny_movie.gif") }
+.fbbsline2 .loop { background: url("/html/img/bicons/tiny_loop.gif") left center no-repeat }
+.fbbsline2 .song { background: url("/html/img/bicons/tiny_song.gif") left center no-repeat }
+
+
+
+/* ----- Paragraph Tags ----- */
+
+
+.boxm p { position:relative; } /* testing this out */
+.box p {
+	margin-bottom: 10px;
+	line-height: 1.2em;
+}
+.box p.last { margin-bottom: 0 }
+
+.box p.large { font-size: 1.1em }
+
+.twothird p { font-size: 1.2em }
+.all p { font-size: 1.2em }
+.widebox p { font-size: 1.2em }
+#midcol p { font-size: 1.2em; line-height: 1.3em }
+
+
+.oneline p { float: left }
+.all .oneline p {
+	padding-top: 1px; /* simulates faulty line-height */
+	font-size: 1.1em;
+}
+.twothird .oneline p {
+	padding-top: 3px; /* simulates faulty line-height */
+	font-size: 1em;
+}
+.widebox .oneline p {
+	padding-top: 3px; /* simulates faulty line-height */
+	font-size: 1em;
+}
+#midcol .oneline p {
+	padding-top: 2px; /* simulates faulty line-height */
+	line-height: normal;
+}
+
+
+
+/* ----- Box Innards ----- */
+
+
+.box .group {
+	text-align: center;
+	display: block;
+	margin: 5px;
+}
+
+.box .mod {
+	text-align: center;
+	color: #fff;
+	text-transform: lowercase;
+}
+.box .mod a, .box .mod input {
+	position: relative;
+	margin-top: -2px;
+	z-index: 20;
+	color: #ff3636;
+	font-weight: normal; 
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+.box .modworking {
+	display: block;
+	width: 12em;
+	margin: 10px auto;
+	text-align: left; 
+	color: #d675e1;
+}
+	
+.bundle .mod {
+	float: right;
+	margin: 0 5px;
+}
+.bread .mod {
+	position: static;
+	margin-left: 5px;
+}
+.bread .mod a {
+	padding: 0;
+	background: none;
+}
+
+
+.box .white {
+	font-weight: bold;
+	color: #fff;
+}
+.box .gray { color: #666d7a }
+.box .gray strong { color: #d2d8e3 }
+.box .gray strong.gray { color: #666d7a }
+.box .red { color: #ff3e3e }
+.box .green { color: #86bf00 }
+
+.box .dotted {
+	padding-bottom: 5px;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+	margin-bottom: 6px;
+}
+.twothird p.dotted { padding-bottom: 5px }
+.box .dottedtall {
+	padding-bottom: 10px;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+	margin-bottom: 6px;
+}
+.box h4.dotted { padding: 5px 0 5px 5px }
+.box .dottop {
+	padding: 10px 5px 5px 5px;
+	background: url("/html/img/dot.gif") left top repeat-x;
+	margin-top: 6px;
+}
+
+
+.sendlinks li {
+	position: relative;
+	padding: 0 0 0 6px;
+	margin: 1px 0;
+	background: url("/html/img/bicons/bullet3.gif") left 3px no-repeat;
+}
+.sendlinks li.subnav em {margin-bottom: 3px; color: #666d7a;
+}
+#leftcol .sendlinks li {
+	font-size: 1.1em;
+	margin: 2px 0;
+}
+.menu li {
+	line-height: 1.5em;
+}
+.menu a {
+	display: block;
+	width: 100%;
+}
+
+
+.shortlist { position: relative; margin: -5px 0 10px 10px; }
+.shortlist li {
+	font-size: 1.2em;
+	margin-bottom: 5px;	
+}
+ul.shortlist li {
+	padding-left: 10px;
+	background: url("/html/img/bicons/bullet8.gif") 0 5px no-repeat; 
+}
+
+
+.longlist {
+	padding: 6px; 
+	font-size: 1.1em;
+	line-height: 1.6em;
+	float: left;
+	width: 170px; 
+}
+
+
+
+.righttext {
+	position: relative;
+	z-index: 9;
+	text-align: right;
+}
+.righttext .btn {
+	float: right;
+	margin: 0 5px;
+}
+.righttext p, .righttext span.signupnow {
+	float: right;
+	width: 200px; 
+	line-height: 1.1em;
+}
+
+
+.oneline {
+	padding: 5px 5px 3px 5px;
+	width: 722px;
+}
+.twothird .oneline { width: 467px }
+.widebox .oneline { width: 569px }
+.topbox .oneline { width: 416px }
+.oneline div { min-height: 2em }
+.oneline .btn { margin-left: 10px }
+.oneline select { margin-right: 5px }
+.oneline .inputfield { margin-top: -1px }
+
+
+.right { float: right }
+.right .inputfield {
+	margin-right: 0;
+	font-size: 1em;
+}
+
+.lftbtns .btn { margin: 0 10px 0 0 }
+	
+
+/* ----- Icon-Related ----- */
+
+
+.box .icon {
+	height: 4.6em;
+	width: 4.6em;
+	border: solid 2px #000;
+}
+.box .rateicon {
+	border: 0;
+	height: 5em;
+}
+
+.iconarea { min-height: 50px }
+.shorticon {
+	padding: 5px;
+	min-height: 40px;
+}
+	
+.iconarea img {
+	float: left;
+	margin: 0 10px 0 0;
+}
+.iconarea p {
+	margin: 0;
+	line-height: 12px;
+	font-size: .9em;
+}
+.iconarea em {
+	line-height: 1em;
+	font-size: 1.1em;
+}
+.iconarea em span {
+	display: block;
+	padding-top: 1px;
+}
+.iconarea em span.mod {
+	display: inline; padding: 0;
+}
+.iconarea strong {
+	display: block;
+	line-height: 1em;
+	font-size: 1.1em;
+}
+.iconarea h4 {
+	font-style: normal;
+	color: #fff;
+	line-height: 1em;
+	margin-bottom: 5px;
+	padding-top: 5px;
+}
+
+.voteicon {		/* Voting Addendum */
+	float: left;
+	position: relative;
+	z-index: 200;
+	min-height: 9em;
+	margin-right: 5px;
+}
+.votecast { min-height: 0 }
+.voteicon img {
+	display: block;
+	margin-bottom: 5px;
+}
+.voteicon select { width: 50px }
+
+
+/* ----- Decorative Images ----- */
+
+
+.squarebox div div span {
+	height:198px;
+	width: 354px;
+	position: absolute;
+	z-index: 99;
+	top: -220px;
+	left: -136px;
+}
+
+#h-games	{ background-image: url("/html/img/heads/games.gif") }
+#h-toons	{ background-image: url("/html/img/heads/toons.gif") }
+#h-collections	{ background-image: url("/html/img/heads/strawberry.gif") }
+#h-series	{ background-image: url("/html/img/heads/series.gif") }
+#h-mature	{ background-image: url("/html/img/heads/mature.gif") }
+
+#wideheader div div div { height: 69px }
+#wideheader div div img {
+	position: absolute;
+	z-index: 99;
+	top: -180px;
+	left: 6px;
+}
+
+img.picothin {
+	position: relative;
+	background: #25272d;
+	padding: 25px;
+}
+	
+img.picowide {
+	position: relative;
+	background: #25272d;
+	padding: 35px 50px 15px 175px;
+}
+
+
+/* ----- Error Bubbles, Page and Form ----- */
+
+	
+#formerror {
+	min-height: 75px;
+	padding-left: 100px;
+	margin-top: 15px;
+	padding-bottom: 5px;
+	background: url("/html/img/msgs/error_angrySM.gif") 25px 0 no-repeat;
+}
+#formerror div, #formerror div div { background-image: url("/html/img/msgs/form_bubble.gif") }
+#pageerror {
+	min-height: 105px;
+	margin: 20px 25px 0px 50px;
+	padding-left: 160px;
+	padding-top: 50px;
+	*margin-right: 50px;
+	background: url("/html/img/msgs/error_angry.gif") left top no-repeat;
+}
+#pageerror div, #pageerror div div { background-image: url("/html/img/msgs/page_bubble.gif") }
+
+.emsg {
+	float: left;
+	overflow: hidden;
+	position: relative;
+	font-size: 1.4em;;
+	color: #d2d8e3;
+	background-repeat: no-repeat;
+	padding: 10px 0px 5px 31px;
+}
+.emsg strong, .emsg ol, .emsg ul {
+	display: block;
+	padding: 0px 10px 5px 10px;
+	background: #4a4f5a;
+}
+.emsg div {
+	background-repeat: no-repeat;
+	line-height: 0;
+	position: absolute;
+}
+.emsg .etr { width: 5px;	height: 70px; 	top: 0px;	right: -1px; 	background-position: top right; }
+.emsg .ebr { width: 85%;	height: 5px; 	right: -1px;	bottom: 0px; 	background-position: bottom right; }
+.emsg .ebl { width: 25%; 	height: 5px; 	left: 0px; 	bottom: 0px; 	background-position: bottom left;	z-index: 99; }
+
+/* ----- Pictures With Captions ----- */
+
+	
+.pictures {
+	display: block;
+	margin: 0 auto;
+	width: 672px;
+}
+	
+.pictures p {
+	margin: 10px 0;
+	width: 324px;
+	overflow: hidden;
+}
+
+.pictures img {
+	display: block;
+	border: solid 2px #101113;
+}
+
+.caption {
+	margin: 5px 0 10px 0;
+	display: block;
+	font-size: .85em;
+	line-height: 1.1em;
+	text-align: center;
+}
+
+p.leftimg { float: left }
+p.rightimg  { float: right }
+
+.centerimg {
+	display: block;
+	margin: 0 auto;
+}
+
+
+/* ----- Hover Boxes ----- */
+
+
+#submission {
+	position: absolute;
+	visibility: hidden;
+	z-index: 200;
+}
+
+.hovcontain {  /* might be redundant to #submission */
+	position: absolute;
+	z-index: 69;
+}
+
+.hoverbox {
+	position: relative;
+	width: 179px;
+	padding: 1px 0 7px 0;
+	font-weight: bold;
+	color: #fff;
+	font-size: 1em;
+	line-height: normal;
+}
+.hoverbox div {
+	line-height: 1.1em;
+	padding: 5px 7px 7px 7px;
+	margin-bottom: 6px;
+	width: 165px;
+}
+.hoverbox img {
+	position: absolute;
+	bottom: 3px;
+	right: 3px;
+}
+.hoverbox span {
+	display: block;
+	padding: 1px 7px;
+}
+.hoverbox strong { color: #a6adbb }
+.hoverbox em {
+	font-weight: normal;
+	color: #a6adbb;
+}
+.hovnone			{ background: url("/html/img/hoverbg.gif") left bottom no-repeat }
+.hovnone div		{background: url("/html/img/hoverbg2.gif") no-repeat }
+.hovnone div div 	{background: #616772 url("/html/img/hoverbg2.gif") no-repeat;
+					border-bottom: solid 1px #4b515a; }
+
+.hovwide { 		/* these three styles added for medals and should have been done this way for all rollovers */
+	width: 200px;
+	border-top: solid 1px #6d737d; 
+	border-bottom: solid 1px #3f444e;
+}
+.hovwide div {
+	width: auto;
+	background: url("/html/img/hoverbg-vert.gif") bottom left repeat-x; 
+	margin: 0 -1px;
+}
+.hovwide div div {
+	margin: 0 0 6px 0;
+	background: #6d737d;
+	border-bottom: solid 1px #4b515a;
+}
+
+
+.hovjudge			{ background: url("/html/img/hoverbg-j.gif") left bottom no-repeat }
+.hovjudge strong 	{ color: #d675e1 }
+.hovjudge div		{ background: url("/html/img/hoverbg-j2.gif") no-repeat }
+.hovjudge div div 	{ background: #67316d url("/html/img/hoverbg-j2.gif") no-repeat;
+					  border-bottom: solid 1px #512256; }
+
+.hovverge 			{ background: url("/html/img/hoverbg-v.gif") left bottom no-repeat }
+.hovverge strong 	{ color: #ff3636 }
+.hovverge div		{ background: url("/html/img/hoverbg-v2.gif") no-repeat }
+.hovverge div div 	{ background: #7a0000 url("/html/img/hoverbg-v2.gif") no-repeat;
+					  border-bottom: solid 1px #620000; }
+
+.hovgreat  			{ background: url("/html/img/hoverbg-g.gif") left bottom no-repeat }
+.hovgreat strong	{ color: #86bf00 }
+.hovgreat div		{ background: url("/html/img/hoverbg-g2.gif") no-repeat }
+.hovgreat div div 	{ background: #465e00 url("/html/img/hoverbg-g2.gif") no-repeat;
+					 border-bottom: solid 1px #344700; }
+
+.hovawesome  		{ background: url("/html/img/hoverbg-a.gif") left bottom no-repeat }
+.hovawesome strong 	{ color: #15b2f3 }
+.hovawesome div		{ background: url("/html/img/hoverbg-a2.gif") no-repeat }
+.hovawesome div div { background: #005a79 url("/html/img/hoverbg-a2.gif") no-repeat;
+					 border-bottom: solid 1px #004461; }
+
+
+
+.hoveruser {
+	position: relative;
+	width: 169px;
+	height: 32px;
+	padding: 5px;
+	color: #fff;
+	font-size: 1em;
+	line-height: normal;
+}
+.hoveruser div {
+	margin: 1px 0 3px 1px;
+	font-size: 1.1em;
+	font-weight: bold;
+	width: 169px;
+	height: 13px;
+	overflow: hidden;
+}
+.hoveruser span {
+	color: #a6adbb;
+	padding: 1px;
+}
+.hoverusernone { background: url("/html/img/hoverbg-2x.gif") no-repeat }
+
+.i-arrow		{ background-image: url("/html/img/hicons/i0.gif") }
+.i-folder		{ background-image: url("/html/img/hicons/i1.gif") }
+.i-article		{ background-image: url("/html/img/hicons/i2.gif") }
+.i-readme		{ background-image: url("/html/img/hicons/i3.gif") }
+.i-important	{ background-image: url("/html/img/hicons/i4.gif") }
+.i-question		{ background-image: url("/html/img/hicons/i5.gif") }
+.i-info			{ background-image: url("/html/img/hicons/i6.gif") }
+.i-faves		{ background-image: url("/html/img/hicons/i7.gif") }
+.i-features		{ background-image: url("/html/img/hicons/i8.gif") }
+.i-no			{ background-image: url("/html/img/hicons/i9.gif") }
+.i-error		{ background-image: url("/html/img/hicons/i10.gif") }
+.i-search		{ background-image: url("/html/img/hicons/i11.gif") }
+.i-flash		{ background-image: url("/html/img/hicons/i12.gif") }
+.i-flash2		{ background-image: url("/html/img/hicons/i13.gif") }
+.i-dls			{ background-image: url("/html/img/hicons/i14.gif") }
+.i-movies		{ background-image: url("/html/img/hicons/i15.gif") }
+.i-photos		{ background-image: url("/html/img/hicons/i16.gif") }
+.i-webcams		{ background-image: url("/html/img/hicons/i17.gif") }
+.i-audio		{ background-image: url("/html/img/hicons/i18.gif") }
+.i-music		{ background-image: url("/html/img/hicons/i19.gif") }
+.i-art			{ background-image: url("/html/img/hicons/i20.gif") }
+.i-walls		{ background-image: url("/html/img/hicons/i21.gif") }
+.i-web			{ background-image: url("/html/img/hicons/i22.gif") }
+.i-numlist		{ background-image: url("/html/img/hicons/i23.gif") }
+.i-collection	{ background-image: url("/html/img/hicons/i24.gif") }
+.i-look			{ background-image: url("/html/img/hicons/i25.gif") }
+.i-message		{ background-image: url("/html/img/hicons/i26.gif") }
+.i-ok			{ background-image: url("/html/img/hicons/i27.gif") }
+.i-feedback		{ background-image: url("/html/img/hicons/i28.gif") }
+.i-settings		{ background-image: url("/html/img/hicons/i29.gif") }
+.i-share		{ background-image: url("/html/img/hicons/i30.gif") }
+.i-update		{ background-image: url("/html/img/hicons/i31.gif") }
+.i-prize		{ background-image: url("/html/img/hicons/i32.gif") }
+.i-staff		{ background-image: url("/html/img/hicons/i33.gif") }
+.i-user			{ background-image: url("/html/img/hicons/i34.gif") }
+.i-users		{ background-image: url("/html/img/hicons/i35.gif") }
+.i-interview	{ background-image: url("/html/img/hicons/i36.gif") }
+.i-achieve		{ background-image: url("/html/img/hicons/i37.gif") }
+.i-opinions		{ background-image: url("/html/img/hicons/i38.gif") }
+.i-comments		{ background-image: url("/html/img/hicons/i39.gif") }
+.i-bbs			{ background-image: url("/html/img/hicons/i40.gif") }
+.i-portal		{ background-image: url("/html/img/hicons/i41.gif") }
+.i-hazard		{ background-image: url("/html/img/hicons/i47.gif") }
+.i-ipod			{ background-image: url("/html/img/hicons/i52.gif") }
+.i-psp			{ background-image: url("/html/img/hicons/i53.gif") }
+.i-games		{ background-image: url("/html/img/hicons/i63.gif") }
+.i-aim			{ background-image: url("/html/img/hicons/i64.gif") }
+.i-icon			{ background-image: url("/html/img/hicons/i65.gif") }
+.i-dump			{ background-image: url("/html/img/hicons/i66.gif") }
+
+.i-activity		{ background-image: url("/html/img/hicons/i67.gif") }
+
+.i-cart			{ background-image: url("/html/img/hicons/i68.gif") }
+.i-mod			{ background-image: url("/html/img/hicons/i69.gif") }
+
+.i-cc1		{ background-image: url("/html/img/hicons/icc-byncsa.gif"); padding-left: 116px; }
+.i-cc2		{ background-image: url("/html/img/hicons/icc-byncnd.gif"); padding-left: 116px; }
+.i-cc3		{ background-image: url("/html/img/hicons/icc-bync.gif"); padding-left: 87px; }
+.i-cc4		{ background-image: url("/html/img/hicons/icc-bynd.gif"); padding-left: 87px; }
+.i-cc5		{ background-image: url("/html/img/hicons/icc-bysa.gif"); padding-left: 87px; }
+.i-cc6			{ background-image: url("/html/img/hicons/icc-by.gif"); padding-left: 58px; }
+
+.i-rate-e		{ background-image: url("/html/img/wide_rate_e.gif") }
+.i-rate-t		{ background-image: url("/html/img/wide_rate_t.gif") }
+.i-rate-m		{ background-image: url("/html/img/wide_rate_m.gif") }
+.i-rate-a		{ background-image: url("/html/img/wide_rate_a.gif") }
+
+/* ----- Tiny Additions to Individual Sections ----- */
+
+
+#lonep {
+	display: block;
+	position: relative;
+	margin: 6.5em 3em;
+	font-size: 1.5em;
+}
+#lonep2 {
+	display: block;
+	position: relative;
+	font-weight: strong;
+	text-align: center;
+	margin: 2em;
+	font-size: 1.2em;
+}
+.lonep3 {
+	padding-top: 10px; 
+	text-align: center;
+}
+
+#gold { height: 200px; }
+
+
+#ontheweb .boxm { text-align: center; }
+#ontheweb img {
+	display: block;
+	margin: 10px auto;
+	*margin: 5px auto;
+}
+#ontheweb a {
+	display: block;
+	margin: 5px 0;
+}
+
+
+#indexsub .boxm { min-height: 422px; }
+	
+#indexsub #colorlabels {
+	margin-top: 2px;
+	padding-bottom: 3px;
+}
+#indexsub ol { padding: 0; }
+
+.bytesize {
+	display: inline;
+	margin: 1px 0 0 3px;
+}
+#infobox {
+	display: inline;
+	margin: 1px 0 0 1px;
+}
+
+
+.webcam { margin: 0 12px }
+.webcam div { 
+	width: 320px;
+	height: 240px; 
+	margin: 24px auto 12px auto; 
+	border: solid 2px #000;
+	overflow: hidden;
+}
+.webcam p { font-size: 1.2em }
+
+
+
+.progbar {
+	display: block;
+	position: relative;
+	height: 14px;
+	background: url("/html/img/progress.gif") right top no-repeat;
+}
+.progbar span {
+	display: block;
+	height: 14px;
+	text-indent: -100em;
+	overflow: hidden;
+	min-width: 1px;
+	background: url("/html/img/progress.gif") left -14px no-repeat;
+}
+.heading .progbar {
+	display: inline;
+	margin: 5px 5px 0 0;
+}
+.heading .progbar strong {
+	position: absolute;
+	right: 80px;
+	width: 100px;
+	font-size: 1.1em; 
+	line-height: 14px;
+	text-align: right;
+}
+.all .heading .progbar {
+	width: 250px;
+}
+.all .heading strong {
+	right: 255px;
+}
+
+
+/* ----- WELCOMING THE FORMER BBS STYLE SHEET TO NGSECTS.CSS ----- */
+
+
+/* ----- Styles that happen to be first implemented in the Forum Thread ----- */
+
+
+.post .heading { background: #26272b }
+
+.post .heading .btn {
+	float: right;
+	margin: 3px 5px 0 5px; }
+
+.post h3 { padding-left: 0 }
+.post h3 a, .post h3 a:visited { color: #fc0 }
+
+
+.post .heading p.userlinks {
+	float: left;
+	margin-left: 5px;
+}
+
+.post .heading img {
+	float: left;
+	width: 22px;
+	height: 22px;
+	margin-right: 5px;
+	margin-top: 1px;
+}
+
+
+.post .userstats {
+	width: 100px;
+	margin: -6px 0 -3px -5px;
+	padding: 11px 13px 8px 10px;
+	float: left;
+}
+
+.post .userstats img {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 3px;
+}
+
+.post .userstats p {
+	font-size: 10px;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+.post .message {
+	margin: 0 0 0 10px; *margin-bottom: -13px;
+	display: inline;
+}	
+
+.post .admin {
+	color: #fff;
+}
+
+.post .message p {
+	margin: 5px 0 10px 0;
+	padding: 0;
+}
+
+.post .message a {
+	font-weight: normal;
+}
+
+.post .message ol {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+.post .message ol li span.snippet {
+	display: block;
+	margin: 2px 0px 15px 30px; 
+}
+
+
+.post .message ol.featuresnumbered {
+	font-size: 1em;
+	list-style-type: none;
+}
+.post .message ol.featuresnumbered li {
+	margin-left: 0;
+	height: 60px; *height: 57px;
+}
+
+.post .message li a.feature img { margin-left: 35px; }
+
+.post .message li a.feature {
+	background-image: url("/html/img/review-scorenumbersGRAY.gif");
+	background-repeat: no-repeat;
+	background-position: 10px 0;
+}
+
+.post .message li a:hover.feature { background-image: url("/html/img/review-scorenumbersGRAY.gif") }
+
+.post .message li.rank_1 a { background-position: 10px -50px }
+.post .message li.rank_2 a { background-position: 10px -100px }
+.post .message li.rank_3 a { background-position: 10px -150px }
+.post .message li.rank_4 a { background-position: 10px -200px }
+.post .message li.rank_5 a { background-position: 10px -250px }
+.post .message li.rank_6 a { background-position: 10px -300px }
+.post .message li.rank_7 a { background-position: 10px -350px }
+.post .message li.rank_8 a { background-position: 10px -400px }
+.post .message li.rank_9 a { background-position: 10px -450px }
+.post .message li.rank_0 a { background-position: 10px 0px }
+
+
+.post .message li a ins {
+	display: block;
+	display: inline;
+	margin-left: 28px;
+	margin-right: -25px;
+	background-image: url("/html/img/review-scorenumbersGRAY.gif");
+}
+.post .message li.rankplus_1 a ins { background-position: 0 -50px }
+.post .message li.rankplus_2 a ins { background-position: 0 -100px }
+.post .message li.rankplus_3 a ins { background-position: 0 -150px }
+.post .message li.rankplus_4 a ins { background-position: 0 -200px }
+.post .message li.rankplus_5 a ins { background-position: 0 -250px }
+.post .message li.rankplus_6 a ins { background-position: 0 -300px }
+.post .message li.rankplus_7 a ins { background-position: 0 -350px }
+.post .message li.rankplus_8 a ins { background-position: 0 -400px }
+.post .message li.rankplus_9 a ins { background-position: 0 -450px }
+.post .message li.rankplus_0 a ins { background-position: 0 0px }
+
+
+
+.post blockquote {
+	font-size: 12px;
+	margin: 5px 0 10px 0;
+	display: block;
+	color: #666d7a;
+	font-style: italic; 
+	padding-left: 5px;
+	border-left: solid 1px #666d7a;
+}
+	
+.post .quotestamp {
+	margin-left: -6px;
+	background-color: #25272d;
+	display: block;
+}
+
+.post .message .sig {
+	border-top: #666d7a 1px dotted;
+	margin: 9px 0 5px 0;
+	padding: 8px 0 0 0;
+	color: #666d7a;
+}
+.post .message .sig p {
+	margin: 0;
+}
+.sig img {
+	display: block;
+	margin-top: 5px; 
+
+}
+.nosig {
+	display: block;
+	min-height: 68px;
+}
+
+.nosig code {
+	width: 588px;
+}
+
+.nostats .heading h1 {
+	display: inline;
+	margin: 1px 5px;
+	font-size: 2em;
+	line-height: 1.1em;
+}
+.nostats .heading h3 { color: #d2d8e3 }
+.nostats .heading h3 a { color: #f90 }
+.nostats .heading h3 a:hover { color: #fedf67 }
+.nostats  h3 a:visited { color: #d16d00 }
+.nostats .heading img { float: right }
+.nostats .heading p { margin-right: 10px }
+.nostats .heading strong { color: #d2d8e3 }
+.nostats .heading span { color: #666d7a }
+.nostats .heading input {
+	float: left; 
+	margin: 5px;
+}
+.nostats .message {
+	width: 722px;
+	margin: 5px 5px 0 5px;
+}
+
+
+
+
+.userstats .mod { display: block; padding-bottom: 5px; }
+.sig .mod { float: left }
+
+
+
+
+#modholder {
+	position: absolute;
+	visibility: hidden;
+	z-index: 200;
+}
+#modpop {
+	float: left;
+	color: #fff;
+	font-size: 1.2em;
+	padding: 15px 20px 5px 20px;
+	max-width: 590px;
+	background: #3f4652 url("/html/img/bg-modpop.gif") top left repeat-x;
+}
+
+#modpop strong {
+	float: left; 
+	width: 130px;
+	text-align: right;
+	color: #a6adbb;
+}
+
+#modpop p { margin: 0px 0 0px 140px }
+
+
+/* ----- Forum support boxes ----- */
+
+.ibg { display:none }
+
+
+.legend { height: 9em }
+.legend div {
+	float: left;
+	width: 183px;
+	height: 4.6em;
+	color: #666d7a;
+}
+.legend img {
+	margin: 5px 10px 0px 5px;
+	float: left;
+}
+.legend strong {
+	display: block;
+	margin-top: 10px;
+	font-size: 1.1em;
+	color:#d2d8e3;
+}
+
+
+
+
+div#mainform { padding-top: 5px }
+#mainformbot { float: right }
+#mainformbot select { margin: 0 0 0 5px }
+
+
+
+.moderator { color: #9adf21 }
+.moderator:visited { color: #6eb300 }
+.administrator { color: #ff3e3e }
+.administrator:visited { color: #d10d0d }
+
+
+#angry { position:absolute; visibility:hidden; z-index:200; }
+
+.outwiththeold { display:none }
+
+
+#newtopicbtn {		/* button shifts any other way */
+	margin: 3px 0 0 0;
+	padding-left: 10px;
+}
+
+
+
+/* ----- PORTAL-EFFING-VIEW PAGE ----- */
+
+
+ul.award {
+	float: left; 
+	margin: 5px;
+	margin-right: 15px;
+	font-size: 1.1em;
+	line-height: 1.8em;
+}
+ul.award li { margin: 3px 0 }
+ul.award img {
+	float: left;
+	margin: 0 5px 0 0;
+}
+
+ul.share { margin-right: 0 }
+ul.share li {
+	display: inline;
+	margin-left: 20px;
+}
+
+
+/* ----- Review and Comments ----- */
+
+
+.bundle {
+	position: relative;
+	background: #101113; 
+	padding: 8px;
+}
+.response {
+	padding-bottom: 1px;
+	margin: 5px 0 0 30px;
+	background: #101113;
+}
+	
+span.subjectline {
+	display: block;
+	font-size: 1.1em;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+	padding-bottom: 8px;
+}
+span.subjectline strong {
+	position: relative;
+	float: right;
+	color: #666d7a;
+}
+span.subjectline span {
+	color: #666d7a;
+}
+
+.bundle p, .response p { margin: 10px 0 0 0 }
+.response p { color: #fc0 }
+
+.response div {
+	min-height: 60px;
+	background: url("/html/img/arrow.gif") top left no-repeat;
+	margin-left: -30px;
+	padding: 8px 8px 8px 65px;
+}
+	
+.response .updated {
+	display: block;
+	background: url("/html/img/dot.gif") left top repeat-x;
+	padding-top: 6px;
+	margin-bottom: 0;
+	margin-top: 10px;
+	text-align: right;
+	font-size: 1.1em;
+}
+.updated { color: #fff }
+
+/* review stuff added and modified 8/27/7 for userpages and mod system. change affected ALL review boxes */
+
+span.scoreline {
+	display: block; position: relative;
+	margin-top: 10px;
+	min-height: 1.8em;
+	background: url("/html/img/dot.gif") left top repeat-x;
+}
+.score {
+	background: none;
+	float: right;
+	padding-top: 6px;
+	font-size: 1.1em;
+}
+.score span { color: #fc0 }
+
+.scorenote {
+	display: block;
+	padding-top: 6px;
+	font-size: 1.1em;
+}
+span.scorenote { color: #666d7a }
+	
+.mod-review .subjectline em {
+	display: block;
+	margin-top: 3px; 
+	color: #ff3e3e;
+}
+.mod-review .mod-subject {
+	display: block;
+	font-size: 1.1em;
+	border-bottom: solid 1px #666d7a;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+
+
+
+.yellow { color: #fc0 }
+
+
+.activity {
+	margin: 10px;
+	text-align: center;
+}
+.activity span { margin-right: 10px }
+div.last { margin-bottom: 5px }
+
+
+
+.helpful {
+	display: inline;
+	padding-right: 4px;
+	background: url("/html/img/pipe.gif") right center no-repeat;
+}
+.bundle .helpful { color: #fff }
+.ad .bundle .helpful {
+	position: absolute;
+	right: 328px;
+}
+.helpful dt { display: inline }
+.helpful dd {
+	display: inline;
+	padding-right: 0px;
+	margin-left: 1px;
+	padding-left: 5px;
+	background: url("/html/img/pipe.gif") left center no-repeat;
+}
+.helpful a { font-weight: normal }
+.helpful dd .gray { margin: 0 }
+
+
+
+/* ----- Left Column Moderation Box ----- */
+
+
+#leftcol .modbox select { margin: 0 }
+.modbox fieldset { padding: 5px }
+.modbox label, .modbox span.white {
+	display: block;
+	margin-bottom: 3px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.modbox .pulldown2 {
+	width: 212px;
+	border: 0;
+}
+.modbox .inputfield {
+	width: 208px;
+	margin-bottom: 3px;
+}
+
+.modbox .ratelist, .modbox .ratelist dl { width: 202px }
+.modbox .ratelist dt {
+	width: 80px;
+	font-weight: normal;
+}
+.modbox .ratelist dd span{ display: none }
+.modbox .rateguide dd {
+	float: right;
+	margin-left: 15px;
+}
+
+.heading p.openmodbox { float: right }
+
+.inlineoptions label {
+	display: inline;
+	font-weight: normal;
+	vertical-align: middle;
+	line-height: 1.5em;
+}
+.inlineoptions li input { vertical-align: middle }
+
+.modbox dl { margin: 10px 5px 0 5px }
+.modbox dt { float: left }
+.modbox dt .button {
+	float: left;
+	margin-right: 10px;
+	margin-top: 2px;
+}
+.modbox dd {
+	margin-bottom: 10px;
+	line-height: 1em;
+	font-size: 1.1em;
+}
+
+
+
+/* ----- ADULT PAGE ----- */
+
+
+.adultbox {
+	float: left;
+	width: 431px;
+	margin-right: -2px;
+}
+.adultbox .boxm { min-height: 300px }
+.adultbox p {
+	font-size: 1.4em;
+	text-align: center;
+}
+.adultbox strong {
+	display: block;
+	margin: 5em 3.5em;
+}
+.adultbox .btn {
+	float: none;
+	display: block;
+	margin: 10px auto;
+	width: 14em;
+	line-height: 1.2em;
+}
+.adultbox .btn a {
+	text-align: center;
+	width: 11.6em;
+}
+
+
+
+/* ----- Entry Lists (Flash and Audio Portals, mainly) ----- */
+
+
+
+ol.entries {
+	line-height: 1.9em;
+	list-style-position: inside;
+	list-style-type: decimal-leading-zero;
+	padding: 5px 0 5px 0;
+}
+
+ol.entries li {
+	display: list-item;
+	position: relative;
+	right: 0px;		/* added 10/26/7 to fix opera (6/22 change messed it up) used in conjunction with styles at bottom of page */
+	z-index: 1;		/* goddamn opera */
+	height: 1.9em;
+	margin: 1px 3px;
+	padding: 0 0 0 20px;   /* gotta be 20 on the left so operas special color backgrounds don't hit the icons */
+}
+
+ol.entries li a {
+	position: absolute;
+	top: 0px;
+	right: 0px;  /* Added 6/22 to fix FF tabbing issue. Also removed last line of page */
+	font-size: 1.1em;
+	width: 196px;
+	height: 19px;
+	overflow: hidden;
+	margin-left: -5px;
+	padding-left: 3px;
+}
+
+.box a.judge { color: #d675e1; background: url("/html/img/list_bg-purple.gif") 0 0 repeat-y; }
+.box li a.judge:hover { color: #f6a9ff }
+.box a.judge:visited { color: #94489c }
+
+.box a.awesome { color: #15b2f3; background: url("/html/img/list_bg-blue.gif") 0 0 repeat-y; }
+.box li a.awesome:hover { color: #8bd2ff }
+.box a.awesome:visited { color: #197ea8 }
+
+.box a.great { color: #86bf00; background: url("/html/img/list_bg-green.gif") 0 0 repeat-y; }
+.box li a.great:hover { color: #c9ff6a }
+.box a.great:visited { color: #5c8007 }
+
+.box a.verge { color: #ff3636; background: url("/html/img/list_bg-red.gif") 0 0 repeat-y; }
+.box li a.verge:hover { color: #ff8484 }
+.box a.verge:visited { color: #b42020 }
+
+.box .dottedtall a.verge {
+	background: none;
+}
+
+.box p.view {
+	padding: 10px 0 0px 0;
+	text-align: center; 
+	font-size: 1.2em; 
+	background: url("/html/img/dot.gif") left top repeat-x;
+}
+
+.box .view a {
+	display: block;
+	font-size: 1.2em;
+}
+
+.box .group strong {
+	text-align: left;
+	display: block;
+	margin: 3px 0;
+	font-size: 1.1em; 
+	line-height: 1.3em;
+}
+
+.box .group a { margin: 0 2px }
+
+.box p.group { font-size: 1.1em }
+
+#awards {
+	width: 212px;
+	height: 165px;
+	overflow: hidden;
+	margin: 0 auto 10px auto;
+	padding: 8px 5px 8px 5px;
+}
+
+#awards p {
+	width: auto;
+	line-height: 1.2em;
+	height: 27px;
+	margin-bottom: 6px;
+}
+
+#awards span {
+	display: block;
+	height: 1.1em;
+}
+	
+#awards img { margin: 2px 10px 0 0 }
+.aicon {
+	float: left; 
+	width: 20px;
+	height: 20px;
+}
+
+#awards a {       /* everything but font-size added 4/2/8 to fix Turd Award winner overflow */
+	display: block;
+	height: 1.13em;
+	line-height: 1.2em;
+	width: 182px;
+	overflow: hidden;
+	font-size: 1.1em;
+}
+
+#key .boxm { min-height: 125px }
+#keyshort .boxm { height: 6.9em }
+
+#colorlabels {
+	float: left;
+	width: 222px;
+	margin-top: 4px;
+	padding-bottom: 8px;
+}
+
+#colorlabels li {
+	float: left; 
+	width: 11em;
+	padding-left: 1.6em;
+	line-height: 1.8em;
+	margin-left: .3em;
+	text-transform: uppercase;
+	font-size: .9em;
+	background-position: left 3px;
+	background-repeat: no-repeat;
+}
+
+li.judge { background-image: url("/html/img/bicons/flash_judge.gif") }
+li.verge { background-image: url("/html/img/bicons/flash_verge.gif") }
+li.awesome { background-image: url("/html/img/bicons/flash_awesome.gif") }
+li.great { background-image: url("/html/img/bicons/flash_great.gif") }
+
+#colorlabels li.narrow {
+	width: auto;
+	padding-right: 0;
+}
+
+#flashlabels {
+	display: inline;
+	line-height: 1.3em;
+}
+#keyshort #flashlabels {
+	line-height: 1em;
+	height: 1em; }
+	
+
+#flashlabels li {
+	display: inline;
+	padding: 0 2.5em 0 1.7em; 
+	margin: 0 0 0 2px;
+	font-size: 1em;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+#flashlabels li.narrow {
+	width: auto;
+	padding-right: 0;
+}
+	
+
+.fixheight .boxm { min-height: 233px }
+
+
+.box .interview { padding: 6px 5px 10px 5px; }
+
+.box .interview p {
+	margin: 0;
+	font-size: 1.1em;
+	line-height: 1.1em;
+}
+
+
+.box .linklist { margin: 3px 0 2px 0 }
+
+.box .linklist p {
+	line-height: 1.4em;
+	font-size: 1em;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.box .linklistshort { margin: 5px 0; }
+.box .linklistshort p {
+	line-height: 1.7em;
+	font-size: 1em;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+
+.portal_search { min-height: 47px; }
+.portal_search .inputfield {
+	width: 208px;
+	margin-right: 0;
+	margin-bottom: 11px;
+}
+.portal_search label {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.portal_search .btn, .portal_search .button {
+	float: right;
+	margin-bottom: 0;
+}
+
+#leftcol .portal_search select, #right2col .portal_search select {
+	float: left;
+	margin: 0;
+	width: auto;
+}
+
+
+
+/*	Audio Players	*/
+
+
+#abotplayer {
+	background: none;
+	position: absolute;
+	z-index: 99;
+	top: -395px;
+	left: -27px;
+}
+
+#audioplayer {
+	width: 477px;
+	height: 278px;
+	padding: 5px 0 4px 0;
+}
+
+#abot { margin-top: 322px }
+#abot .boxm { max-height: 353px }
+
+
+.playlist .dotted {
+	padding-bottom: 6px; 
+	margin-bottom: 5px;
+}
+.playlist p {
+	display: block;
+	height: 34px;
+	font-size: 1.1em;
+	line-height: 1.2em;
+	margin: 0px;
+	padding: 5px 5px 2px 5px;
+}
+.playlist .none p {
+	border: none;
+	background: none; 
+	margin-bottom: 0;
+}
+span.genre {
+	color: #d2d8e3;
+	font-style: italic;
+	font-weight: normal;
+}
+.playlist a {
+	display: block;
+	overflow: hidden;
+	height: 1.2em;		/* Added 1/17/7 to fix long titles in A-Bot's list */
+	padding-top: 1px;
+}
+.playlist .sqbtn {
+	margin-right: 7px;
+	height: auto;
+	padding: 0;
+}
+
+.playlist p.playing { background: #101113 }
+.playlist p.playing .sqbtn {background: url("/html/img/form-bigbutON.gif") 0 0 no-repeat }
+
+
+#audio_intro .boxm {
+	min-height: 62px;
+}
+#audio_intro p {
+	margin: 3px 5px;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+	
+#genre_select .boxm { height: 30px }
+#genre_select select {
+	width: 210px;
+	margin: 6px;
+}
+#genre_select option { text-indent: 10px }
+
+	
+
+
+/* ----- Obituaries ----- */
+
+
+#cemetery {
+	height: 200px;
+	background: url("/html/img/flash/obits.gif") center center no-repeat;
+}
+
+#deadswf {
+	margin: 0;
+	padding: 0;
+	float: right;
+}
+
+
+
+#tombstone {
+	text-shadow: #000 -2px -2px;
+	background: url("/html/img/gravestone.jpg") right top no-repeat;
+	width: 579px;
+	height: 240px;
+	text-align: center;
+}
+#tombstone #obit {
+	display: inline;
+	margin-left: 55px;
+	padding-top: 45px; 
+}
+
+#tombstone .obithead {
+	margin: 0;
+	font-weight: bold;
+	overflow: hidden;
+	line-height: 1.1em;
+	height: 48px;
+	font-size: 15px;
+}
+
+#tombstone p {
+	overflow: hidden;
+	padding: 0 20px;
+	height: 95px;
+	margin: 10px auto;
+	font-size: 12px;
+}
+
+#tombstone .date {
+	font-size: 1.5em;
+	font-weight: bold;
+	height: auto;
+	padding: 6px 0 0 0;
+}
+
+
+ol.obits {
+	float: left;
+	width: 170px; 
+	list-style-position: inside;
+	list-style-type: decimal-leading-zero;
+	margin-left: 5px;
+	padding: 5px 3px;
+	*margin-bottom: -12px;
+}
+
+ol.obits li {
+	height: 1.2em;
+	overflow: hidden;
+	line-height: 1.2em;
+	margin: 1px 0px;
+}
+
+ol.obits li a {
+	font-size: 1em;
+	height: 1.2em;
+}
+
+
+#obituary {
+	margin-top: 3px;
+	float: right;
+}
+
+
+
+/* ----- Entry Listing Sections and Tables ----- */
+
+
+div#headingform, div.headingform {
+	padding-top: 3px;
+	height: 21px;
+	line-height: 1em;
+	max-width: 450px; /* commented 12/10/7 to fix bbs thread headers in IE6 (unneccessary)    _width: 450px;   */
+	float: right; 
+	text-align: right;
+}
+	
+div#headingform strong, div.headingform strong {
+	color: #d2d8e3;
+	font-size: 1.1em;
+}
+
+div#headingform .btn, div.headingform .btn, div.headingform .button {
+	margin-top: 0;
+	margin-right: 3px;
+	float: right;
+}
+
+div#headingform select, div.headingform select { margin-right: 5px }
+
+div#headingform span.white, div.headingform span.white {
+	margin-right: 5px;		/* BBSFIX */
+	font-size: 1.1em;
+}
+
+
+/* ----- Chat Styles ----- */
+
+
+#happyadvice {
+	min-height: 245px;
+	margin: 13px 5px 5px 5px;
+	padding-top: 5px;
+	background: url("/html/img/msgs/rules.gif") left top no-repeat;
+}
+#happyadvice div {
+	float: right;
+	width: 565px;
+	padding: 5px 10px 10px 10px;
+	background: #4a4f5a url("/html/img/msgs/rulesbot.gif") right bottom no-repeat;
+}
+#happyadvice ul { padding-bottom: 10px }
+#happyadvice li {
+	font-size: 1.2em;
+	padding-left: 8px;
+	background: url("/html/img/bicons/bullet8.gif") left 5px no-repeat;
+}
+
+
+/* ----- Staffpage Styles ----- */
+
+
+.flashborder { border: solid 2px #000 }
+.stafflist {
+	display: block;
+	min-height: 5em;
+	margin-top: 10px;
+}
+.stafflist img {
+	float: left;
+	margin: 0 10px 0 0;
+}
+.stafflist h4 {
+	display: inline;
+	margin-right: 5px;
+	font-size: 1.4em;
+	font-style: normal;
+}
+.stafflist span {
+	color: #666d7a;
+	font-size: 1.2em;
+}
+.stafflist p {
+	margin: 2px 0 0 0;
+}
+
+
+/* ----- Downloads Section ----- */
+
+
+div.download {
+	line-height: normal; 
+	display: inline;
+	margin: 5px 0;
+	padding-left: 5px;
+}
+
+div.download .btn { margin: 5px 5px 0 0 }
+
+div.download img { border: solid 2px #000 }
+
+div.download span.note {
+	display: block;
+	line-height: 1em;
+	text-align: center;
+}
+div.download span.note a { font-weight: normal }
+
+div.download .dlinfo {
+	padding-top: 5px;
+	margin-bottom: 5px;
+	text-align: right;
+	width: 234px;
+	padding-bottom: 10px;  *padding-bottom: 0;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+}
+
+div.download .dlinfo div {
+	float: left;
+	text-align: left;
+}
+
+div.download h4 {
+	margin: 0;
+	text-align: left;
+}
+
+div.download h5 {
+	text-align: left;
+	font-weight: normal;
+	letter-spacing: normal;
+	padding-bottom: 0px; *padding-bottom: 10px;
+	background: none;
+}
+	
+.dlinfo p { color: #fff; font-size: 1.1em; }
+.dlinfo a { font-weight: normal }
+
+.dlinfo span {
+	margin: 2px 0;
+	line-height: 1.1em;
+	color: #666d7a;
+	display: block;
+}
+
+div.download .dltips {
+	padding-top: 5px;
+	margin-bottom: 5px;
+	width: 234px;
+	padding-bottom: 10px;  
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+}
+div.download .dltips li {
+	padding-left: 5px;
+	margin-left: 1px;
+	background: url("/html/img/dot.gif") left center no-repeat;
+}
+
+.dllist {
+	font-size: 1.2em;
+	padding: 0; 
+	margin-top: 10px;
+	line-height: 1.3em;
+}
+.dllist li {
+	float: left;   /* was changed to 'display: block', but broke DLs */
+	width: 234px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+ul.dllist li {
+	background: url("/html/img/bicons/bullet3b.gif") 0 center no-repeat;
+	padding-left: 7px;
+}
+.dllist li a {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+dl.colorchoice dt {
+	float: left;
+	margin-right: 2px;
+	font-weight: bold;
+}
+dl.colorchoice dd {
+	float: left;
+	width: 11px;
+	height: 11px;
+	margin: 1px 2px;
+	text-indent: -1111em;
+	overflow: hidden;
+}
+dl.colorchoice a {
+	background: url("/html/img/dl-squarecover.gif") 0 0 no-repeat;
+	display: block;
+	width: 11px;
+	height: 11px;
+}
+
+.dlicon img {
+	position: relative;
+	z-index: 1;	
+	float: left;
+	margin-right: 5px;
+}
+.dlicon p {
+	font-size: 1.1em;
+	line-height: 1.2em;
+	margin-bottom: 0px;
+}
+.dlicon strong {
+	display: block;
+	padding-top: 6px;
+	font-size: 1.2em;
+	color: #fff;
+}
+.dlicon li {
+	display: inline;
+	margin-left: 1px;
+}
+
+.all .sharing {
+	background: #101113 url("/html/img/dot-tall.gif") left bottom repeat-x;
+	border-left: solid 1px #4a4f5a;
+	border-right: solid 1px #4a4f5a;
+	border-top: solid 1px #4a4f5a;
+	width: 238px;
+	margin: -1px 0 -10px -1px;
+	padding: 5px 0 13px 5px;
+}
+
+
+/* ----- NG.Mag ----- */
+
+
+/* Listing and Front */
+
+p.large { line-height: 1.15em }
+
+h4.lefty { float: left }
+h5.righty {
+	padding: 2px 0 0 0;
+	text-align: right;
+	color: #666d7a;
+	font-size: 1em;
+	letter-spacing: normal;
+	border: 0;
+	background: none;
+	font-weight: normal;
+}
+
+.namelist {
+	height: 5em;
+	overflow: hidden;
+	margin: 10px 5px;
+	font-size: 1.1em;
+	line-height: 1.25em;
+}
+
+ol.thinlist {						/* fixed for FF only, not yet tweaked for Internet Crapper */
+	line-height: 1.3em; 
+	margin: 0;
+	padding: 0 0 1px 0;
+}
+ol.thinlist li {
+	height: 1.3em;
+	margin: 1px 0 1px 5px;
+	padding: 0 0 0 20px;
+	list-style-type: decimal;
+}
+ol.thinlist li a {
+	width: 181px;
+}
+
+p.looking {
+	margin: 0px 3px 0px 3px;
+	padding-bottom: 1.1px;
+	padding-left: 54px;
+	text-align: center; 
+	line-height: 1.2em;
+}
+.dec1 { background: url("/html/img/anims/pix_madness.gif") 2px 0 no-repeat }
+.dec2 { background: url("/html/img/anims/pix_zoe.gif") 2px 0 no-repeat }
+.dec3 { background: url("/html/img/anims/pix_bitey.gif") 2px -1px no-repeat }
+
+.sendlinks em {
+	display: block;
+	line-height: 1em;
+	height: 1em;
+	margin: 1px 0 8px 0;
+	padding-left: 7px;
+	background: url("/html/img/bicons/bullet6.gif") left center no-repeat;
+}
+ul.last { margin-bottom: -8px }
+.sendlinks em a { font-weight: normal }
+	
+
+/* Alpha View */
+
+.commentdetails {
+	display: block;
+	margin-bottom: 5px;
+	color: #666d7a;
+	font-style: italic;
+}
+
+div.info { position: relative }
+div.info strong {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 1.2em;
+	color: #fff;
+}
+
+p.alphaview {
+	margin: 0;
+	color: #666d7a;
+	font-size: 1.2em;
+}
+
+.thumbs a {
+	float: left;
+	width: 97px;
+	height: 65px;
+	border: #000 solid 2px;
+	margin: 5px;
+}
+
+.fileicon {
+	width: 3.6em;
+	height: 4.4em;
+}
+
+
+/* Interview */
+
+.byline {
+position: relative;
+	color: #d2d8e3;
+	font-size: 1.2em;
+	line-height: 2.2em;
+	margin: 5px;
+}
+.byline span {
+	float: right;
+	line-height: 2.2em;
+	margin: 0;
+}
+
+.intbanner {
+	width: 722px;
+	height: 100px;
+	margin: 5px;
+}
+	
+.inttext p {
+	padding-left: 10px;
+	border-left: solid 1px #666d7a;
+	margin: 10px 0;
+}
+
+p.bookend {
+	margin-bottom: 0;
+	font-style: italic;
+}
+p.bookend em { font-style: normal }
+
+p .pulldown {
+	margin-left: 5px;
+	font-size: .95em;
+}
+
+/* Article */
+
+#article {
+	background: url("/html/img/bg-article.gif") top center repeat-y;
+	margin: 10px 5px;
+}
+
+#arttext {
+	float: left;
+	width: 542px;
+}
+
+#artimages {
+	background: url("/html/img/bg-artimages.gif") center 15px no-repeat;
+	min-height: 250px;
+	float: right;
+	width: 150px;
+	padding: 10px;
+}
+
+#artimages img {
+	width: 150px;
+	height: 200px;
+	margin: 5px 0;
+}
+
+#artimages p {
+	color: #fff;
+	font-size: 1em;
+	text-align: center;
+}
+
+
+/* "About" Pages: Bio, History, FAQ */
+
+
+.boxdeep { padding: 30px; height: 1%; }
+.boxdeep h4 { padding-top: 10px; font-size: 1.4em; }
+.boxdeep h4.number { margin-left: -15px }
+.boxdeep h4 a { text-decoration: none }
+
+.qanda { padding-left: 2em }
+.qanda h4, .qanda h4 a { text-indent: -1.6em; color: #d2d8e3; }
+.qanda p strong {
+	margin-left: -1.5em;
+	font-size: 1.2em; 
+	font-style: italic;
+	padding-right: .2em;
+}
+.qanda ul, .boxdeeper{ padding: 5px 20px }
+.qanda li {
+	font-size: 1.2em;
+	padding-left: 10px;
+	margin-bottom: 5px;
+	background: url("/html/img/bicons/bullet8.gif") 0 5px no-repeat;
+}
+
+ol.legal {
+	list-style-type: upper-alpha; 
+	font-size: 1.2em;
+}
+ol.legal ol { list-style-type: lower-roman }
+ol.legal li { margin: 5px 0 5px 20px }
+
+#FAQnav { margin-top: 20px }
+#FAQnav dl {
+	float: left;
+	margin: 0 15px 0 15px;
+	line-height: 1.3em;
+}
+#FAQnav dt {
+	margin-top: 15px;
+	font-size: 1.2em;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+#FAQnav dd {
+	font-size: 1.1em;
+	padding-left: 12px;
+	background: url("/html/img/bicons/bullet5.gif") 2px 3px no-repeat;
+}
+#FAQnav dd a { font-weight: normal }
+
+#flashtest {
+	float: right;
+	width: 320px;
+	height: 270px;
+	background: url("/html/img/flash/flashtest.gif") 0 0 no-repeat;
+}
+
+.FAQblock {
+	display: inline;
+	margin: 10px 11px;
+	line-height: 1.1em;
+}
+.FAQblock img {
+	height: 10em;
+	width: 10em;
+}
+.FAQblock img.badge {
+	padding: 10px 13px 3px 13px;
+	width: 7.5em;
+	height: 7.5em;
+}
+.FAQblock img.banner {
+	padding: 0 6px 6px 6px;
+	width: 88px;
+	height: 31px;
+}
+.FAQblock p {
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+	padding-bottom: 5px;
+	display: block;
+	text-align: center;
+}
+.FAQblock h4 {
+	display: block;
+	text-align: center;
+	margin: 2px auto;
+}
+.FAQblock strong {
+	display: block;
+	font-weight: normal;
+	margin: 5px 0;
+}
+.FAQblock li { float: left; margin-right: 3px; }
+
+.twothird .FAQblock { margin: 10px 9px; }
+
+
+
+dl.biostats {
+	height: 19em;
+	font-size: 1.2em;
+}
+dl.biostats dd { line-height: 2.9em }
+dl.biostats span {
+	float: left;
+	font-weight: bold;
+	padding-right: 5px;
+	width: 85px;
+}
+
+dl.biostats img {
+	border: solid 2px #101113;
+	margin: 0 25px 10px 0;
+}
+
+ul.bio {
+	padding: 10px 0 5px 0;
+	font-size: 1.2em;
+}
+
+ul.bio li {
+	padding-left: 20px;
+	padding-bottom: 10px;
+	background: url("/html/img/bicons/bullet7.gif") 1px 3px no-repeat;
+}
+ul.bio span {
+	display: block;
+	margin-top: 2px;
+}
+
+img.aboutimg {
+	float: right;
+	margin: 0 5px 5px 10px;
+	border: solid 2px #000;
+}
+
+
+/* ----- Private Messaging ----- */
+
+
+#pheader, .pheader {
+	min-height: 50px;
+	padding: 5px;
+}
+#pheader img, .pheader img {
+	float: left;
+	margin-right: 10px;
+}
+#pheader div, .pheader div {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 3px 0 -3px 0;
+}
+#pheader span, .pheader span {
+	color: #666d7a;
+	font-size: .95em;
+}
+
+#pmessage { margin: 10px 5px 0 5px }
+#pmessage p { padding: 0 }
+
+#pmessage blockquote {
+	font-size: 12px;
+	margin: 10px 0;
+	display: block;
+	color: #666d7a;
+	font-style: italic; 
+	padding-left: 5px;
+	border-left: solid 1px #666d7a;
+}
+	
+#pmessage .quotestamp {
+	font-weight: bold;
+	margin-left: -6px;
+	background-color: #25272d;
+	display: block;
+}
+
+	
+/* ----- Personal User Pages ----- */
+
+
+#uheader {
+	position: relative;
+	margin-top: 5px; *margin: 0 0 2px 0;
+	width: 770px;
+	overflow: hidden;
+}
+#uheader span {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 5px;
+	width: 100%;
+}
+#uheader span.t {
+	top: 0;
+	background: url("/html/img/bannercover-t.gif") top left no-repeat;
+}
+#uheader span.b {
+	bottom: 0;
+	background: url("/html/img/bannercover-b.gif") bottom left no-repeat;
+}
+
+.emoticon {
+	width: 2.2em;
+	height: 2.2em;
+	float: left; 
+}
+
+img.userphoto {
+	width: 212px;
+	height: 159px; 
+	margin: 5px;
+}
+
+#ustats .boxm div div {
+	padding: 5px;
+}
+#ustats p {
+	color: #666d7a;
+	font-size: 1.1em;
+	line-height: 1.4em; 
+	margin: 0;
+}
+#ustats strong { color: #d2d8e3 }
+
+#ustats #ulevel {
+	min-height: 100px;
+	padding: 5px 5px 5px 115px;
+	color: #666d7a;
+	background: 5px 5px no-repeat;
+}
+#ulevel span {
+	display: block;
+	padding: 10px 0 0 0;
+}
+	
+#ustats #urank {
+	min-height: 75px;
+	padding: 12px 0 0 90px; 
+	background: 5px 5px no-repeat;
+}
+	
+#ustats #uwhistle {
+	height: 50px;
+	padding: 20px 5px 5px 90px;
+	background: 10px 0px no-repeat;
+}
+#uwhistle strong { display: block }
+
+
+.wideline p {
+	padding: 2px 4px 6px 70px;
+	line-height: normal;
+	margin: 5px 0 0px 0;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+}
+
+.wideline p.last {
+	padding-bottom: 0;
+	border: 0;
+	background: none;
+}
+
+.wideline .linestat {
+	margin-left: -65px;
+	width: 65px;
+	float: left;
+	color: #666d7a;
+}
+
+.all .wideline p { padding-left: 130px }
+.all .wideline .linestat { width: 120px; margin-left: -125px; }
+
+#userlog {
+	margin-top: 4px;
+	float: right; }
+
+ol.ufaves {
+	width: 234px;
+	display: inline-block;
+	padding: 0 2px;
+}
+ol.ufaves li a { width: 190px }
+
+.noiconfaves { position: relative }
+.noiconfaves h4 {
+	padding: 5px 0 0 5px; 
+	margin: 0;
+}
+.noiconfaves ol {
+	position: relative;
+	float: left;
+	width: 234px;
+	list-style-type: decimal-leading-zero;
+	*margin-bottom: -16px;
+}
+.noiconfaves li { margin-top: 5px; margin-bottom: 5px;
+}
+.noiconfaves a { font-size: 1.1em }
+
+ul.iconlinks { margin: 10px 5px 5px 5px }
+ul.iconlinks li {
+	margin: 5px 0;
+	padding-top: 1px;
+	padding-left: 20px;
+	font-size: 1.1em;
+}
+
+li.game { background: url("/html/img/bicons/tiny_game.gif") left center no-repeat }
+li.movie { background: url("/html/img/bicons/tiny_movie.gif") left center no-repeat }
+li.user { background: url("/html/img/bicons/tiny_user.gif") left center no-repeat }
+li.loop { background: url("/html/img/bicons/tiny_loop.gif") left center no-repeat }
+li.song { background: url("/html/img/bicons/tiny_song.gif") left center no-repeat }
+li.mail { background: url("/html/img/bicons/tiny_letter.gif") left center no-repeat }
+li.friend { background: url("/html/img/bicons/tiny_heart.gif") left center no-repeat }
+li.art { background: url("/html/img/bicons/tiny_art.gif") left center no-repeat }
+/*  below added to avoid a bunch of class names on every li in art favorites. */
+ol.liartists li { background: url("/html/img/bicons/tiny_user.gif") left center no-repeat }
+ol.liart li { background: url("/html/img/bicons/tiny_art.gif") left center no-repeat }
+
+.commentlink {
+	color: #666d7a;
+	padding-left: 3px;
+	font-size: 1.2em;
+	line-height: 1.8em; 
+	padding-left: 26px;
+	display: block;		/* from here to end of class, added 3/12 to replace img tags */
+	height: 22px;
+	background-image: url("/html/img/emoticons/emote-6.gif");
+	background-position: 0 center;
+	background-repeat: no-repeat;
+}
+.commentlink a, .commentlink strong { margin: 0 1px }
+.commentlink .updated {
+position: relative;	/*  Added 6/25: fixed HEADER SHIFT in IE7 */
+max-width: 270px;
+	font-size: 11px;
+ 	float: right;
+	color: #fff}
+.emote1		{ background-image: url("/html/img/emoticons/emote-1.gif") }
+.emote2		{ background-image: url("/html/img/emoticons/emote-2.gif") }
+.emote4		{ background-image: url("/html/img/emoticons/emote-4.gif") }
+.emote3		{ background-image: url("/html/img/emoticons/emote-3.gif") }
+.emote4		{ background-image: url("/html/img/emoticons/emote-4.gif") }
+.emote5		{ background-image: url("/html/img/emoticons/emote-5.gif") }
+.emote6		{ background-image: url("/html/img/emoticons/emote-6.gif") }
+.emote7		{ background-image: url("/html/img/emoticons/emote-7.gif") }
+.emote8		{ background-image: url("/html/img/emoticons/emote-8.gif") }
+.emote9		{ background-image: url("/html/img/emoticons/emote-9.gif") }
+.emote10	{ background-image: url("/html/img/emoticons/emote-10.gif") }
+.emote11	{ background-image: url("/html/img/emoticons/emote-11.gif") }
+.emote12	{ background-image: url("/html/img/emoticons/emote-12.gif") }
+.emote13	{ background-image: url("/html/img/emoticons/emote-13.gif") }
+.emote14	{ background-image: url("/html/img/emoticons/emote-14.gif") }
+.emote15	{ background-image: url("/html/img/emoticons/emote-15.gif") }
+.emote16	{ background-image: url("/html/img/emoticons/emote-16.gif") }
+.emote17	{ background-image: url("/html/img/emoticons/emote-17.gif") }
+.emote18	{ background-image: url("/html/img/emoticons/emote-18.gif") }
+.emote19	{ background-image: url("/html/img/emoticons/emote-19.gif") }
+.emote20	{ background-image: url("/html/img/emoticons/emote-20.gif") }
+
+.ulinks {
+	min-height: 2.2em;
+	margin-top: 5px;
+	padding: 5px;
+	background: url("/html/img/dot.gif") left top repeat-x;
+}
+.ulinks a {
+	float: right;
+	padding: 8px 0 0 0;
+	font-size: 1.2em;
+}
+.ulinks select { width: 225px }
+
+.blogimg {
+	display: block;
+	margin: 15px auto;
+}
+
+.friendlinks a {
+	display: block;
+	height: 29px;
+	width: 212px;
+	overflow: hidden;
+	padding: 5px;
+	line-height: 1.1em;
+}
+#leftcol .friendlinks img {
+	float: left;
+	margin-right: 6px;
+	width: 25px;
+	height: 25px;
+}
+.friendlinks strong {
+	display: block;
+	padding-top: 3px;
+}
+.friendlinks em {
+	display: block;
+	margin-top: 2px;
+	font-style: normal;
+	font-weight: normal;
+	color: #d2d8e3;
+}
+.friendlinks a:hover { background: #383b44 }
+
+
+.ureviews {
+	min-height: 1.2em;
+	margin-top: 5px;
+	padding: 3px 5px;
+	font-size: 1.2em;
+}
+.ureviews a {
+	float: right;
+	padding: 4px 0;
+}
+.ureviews strong {
+	display: block;
+	padding: 4px 0;
+}
+
+
+.blogmedia object {
+	display: block;
+	border: solid 2px #101113;
+	margin: 0 auto 10px auto;
+}
+
+
+a.podlink {
+	float: right;
+	width: 15px;
+	height: 23px;
+	margin-left: 5px;
+	text-indent: -1522em;
+	overflow: hidden;
+	background: url("/html/img/podmove.gif") 0 0 no-repeat;
+}
+	
+.box .podhover { cursor: move }
+.box .podhover a.podlink { background-position: -15px }
+
+.box .podmove { background-image: url("/html/img/slants-yellow.gif"); cursor: move }
+.box .podmove a.podlink { background-position: -30px }
+
+.box .podsave a.podlink { background-position: -45px; cursor: default; }
+
+
+.box .heading p.userfeed {
+	width: 20px;
+	height: 20px;
+	margin: 2px 0 0 2px;
+	text-indent: -4000em;
+	line-height: 1em;
+	overflow: hidden;
+	background: url("/html/img/rss.gif") top left no-repeat;
+}
+.userfeed a {
+	display: block;
+	width: 20px;
+	height: 20px;
+}
+
+
+/* ----- Edit Favorites ----- */
+
+
+ul.sortlist {
+	margin-top: -2px;
+	margin-bottom: 10px;
+}
+ul.sortlist li {
+	display: block;
+	height: 27px;
+	margin: 4px 0 7px 0;
+	padding-top: 7px;
+	padding-left: 5px;
+	border-top: dotted 1px #4a4f5a;
+	line-height: 2.5em;
+	font-size: 1.2em;
+}
+ul.sortlist li:first-child { border-top: none }
+
+ul.sortlist span.btn {
+	float: right;
+	margin: 5px 10px 0 0px;
+}
+ul.sortlist span.drag_faves a { cursor: move }
+ul.sortlist span.drag_faves span.dead a { cursor: default }
+
+ul.sortlist a.podlink { margin: 2px 5px 0 5px }
+
+ul.sortlist img.icon {
+	float: left;
+	height: 25px;
+	width: 25px;
+	margin: 0 10px 0 0px;
+	border: solid 1px #000;
+}
+
+ul.sortlist a.falbum img.icon {
+	padding: 1px;
+	border: 0;
+}
+ul.sortlist a.falbum span {
+	top: 0;
+	left: 0;
+	background: url("/html/img/cdicons/cd_overlay_mini.gif") top left no-repeat;
+}
+
+
+/* ----- Portal View Pages ----- */
+
+
+.rating { width: 209px }
+.rating .fout { height: 50px }
+.rating span {		/* Added 3/26	*/
+	font-size: 9px;
+	line-height: 11px;
+}
+
+
+.watchmovie { width: 299px }
+
+p.staffcomment { color: #ff3636 }
+p.staffcomment strong { display: block }
+
+#votebar {
+	display: inline;
+	position: relative;
+	margin: 1px 0 3px 2px;
+	line-height: 10px;
+}
+
+#votebar p {
+	position: relative;
+	width: 253px;
+	height: 19px;
+	padding-top: 12px;
+	padding-left: 1px;
+	text-align: center;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #891814;
+	background-repeat: no-repeat;
+	background-position: 0 -50px;
+}
+#votebar .flashvote p { background-image: url("/html/img/vote.gif") }
+#votebar .audiovote p { background-image: url("/html/img/vote2.gif") }
+#votebar .artvote p { background-image: url("/html/img/vote3.gif") }
+
+#votebar p.votetext {
+	height: 19px;
+	padding-top: 12px;
+	color: #feba16;
+	font-size: 11px;
+	background: none;
+	font-style: italic;
+}
+#votebar p.votetext .voting {
+	float: left;
+	margin-left: 75px;
+}
+
+	
+
+#votebar ul { margin-top: -2px }
+
+#votebar li {
+	float: left;
+	text-indent: -9999em;
+}
+#votebar li input { display: none; }
+
+#votebar li a, #votebar li label {
+	margin-top: 2px;
+	width: 41px;
+	height: 46px;
+	background-repeat: no-repeat;
+}
+#votebar li label { display: block; /* needed for Art Portal since we're not obfuscating stuff  */  }
+#votebar .flashvote li a { background-image: url("/html/img/vote.gif") }
+#votebar .audiovote li a { background-image: url("/html/img/vote2.gif") }
+#votebar .artvote li label { background-image: url("/html/img/vote3.gif") }
+
+#votebar li a:hover, #votebar li label:hover {
+	margin-top: 0px;
+	height: 48px;
+}
+
+#votebar li#v0 a, #votebar li.v0 label { width: 45px; background-position: 0 -81px }
+#votebar li#v0 a:hover, #votebar li.v0 label:hover { background-position: 0 -2px; margin-top: 0px;}
+#votebar li#v1 a, #votebar li.v1 label { background-position: -45px -81px }
+#votebar li#v1 a:hover, #votebar li.v1 label:hover {background-position: -45px -2px }
+#votebar li#v2 a, #votebar li.v2 label { background-position: -86px -81px }
+#votebar li#v2 a:hover, #votebar li.v2 label:hover {background-position: -86px -2px }
+#votebar li#v3 a, #votebar li.v3 label { background-position: -127px -81px }
+#votebar li#v3 a:hover, #votebar li.v3 label:hover {background-position: -127px -2px }
+#votebar li#v4 a, #votebar li.v4 label { background-position: -168px -81px }
+#votebar li#v4 a:hover, #votebar li.v4 label:hover {background-position: -168px -2px }
+#votebar li#v5 a, #votebar li.v5 label { width: 45px; background-position: -209px -81px }
+#votebar li#v5 a:hover, #votebar li.v5 label:hover {background-position: -209px -2px }
+
+#votebar label:hover { cursor: pointer }
+
+.audiovote, .flashvote, .artvote, .votedead {
+	height: 100%;
+	width: 100%;
+}
+#votebar .flashvote .votedead { background: url("/html/img/vote-dead.gif") left bottom no-repeat }
+#votebar .audiovote .votedead { background: url("/html/img/vote2-dead.gif") left bottom no-repeat }
+#votebar .artvote .votedead { background: url("/html/img/vote3-dead.gif") left bottom no-repeat }
+
+#voteprompt {
+	color: #fff;
+	font-size: 1.1em;
+	font-weight: bold;
+	margin: 5px 0;
+	text-align: center;
+}
+
+
+.review { padding: 5px }
+.review .head {
+	height: 50px;
+	padding-bottom: 10px;
+	margin-bottom: 7px;
+	line-height: 1.2em;
+	background: url("/html/img/dot.gif") left bottom repeat-x; }
+.review .head img {
+	position: relative;
+	z-index: 2;
+	float: left;
+	margin-right: 8px; }
+.review .head p, .widebox .review .head p {
+	margin: 0;
+	max-width: 340px;
+	overflow: hidden;
+	padding-top: 5px;
+}
+.review .head span {
+	color: #666d7a;
+	font-size: 1.1em;
+}
+.review .head a.falbum {
+	cursor: pointer;
+	z-index: 20;
+}
+.review .head a.falbum span {
+	top: 0;
+	left: 0;
+} 
+.reviewscore {
+	float: right;
+	position: relative;
+	width: 60px;
+	height: 50px;
+	text-indent: -999em;
+	overflow: hidden;
+	background: url("/html/img/review-score.gif") 5px 0 no-repeat;
+}
+.reviewscore strong {
+	display: block;
+	position: absolute;
+	bottom: 0; left: 0;
+	width: 60px;
+	height: 34px;
+	background: url("/html/img/review-scorenumbers.gif") top center no-repeat;
+}
+.reviewscore strong.score1 { background-position: 0 -35px }
+.reviewscore strong.score2 { background-position: 0 -70px }
+.reviewscore strong.score3 { background-position: 0 -105px }
+.reviewscore strong.score4 { background-position: 0 -140px }
+.reviewscore strong.score5 { background-position: 0 -175px }
+.reviewscore strong.score6 { background-position: 0 -210px }
+.reviewscore strong.score7 { background-position: 0 -245px }
+.reviewscore strong.score8 { background-position: 0 -280px }
+.reviewscore strong.score9 { background-position: 0 -315px }
+.reviewscore strong.score10 { background-position: 0 -350px }
+
+.twothird .review p { overflow: hidden; }
+.widebox .review p { overflow: hidden }
+
+.review .foot {
+	padding: 10px 0 0px 0;
+	width: 100%;
+	background: url("/html/img/dot.gif") left top repeat-x;
+	font-size: 1.1em;
+	color: #666d7a;
+}
+.review .foot dl {
+	background: url("/html/img/review-votechoices.gif") right top no-repeat;
+	float: right;
+	width: 75px;
+	margin-top: 2px;
+	text-indent: -999em;
+	overflow: hidden;
+}
+.review .foot dt {
+	background: url("/html/img/review-vote.gif") 0 2px no-repeat;
+	float: left;
+	width: 27px;
+	height: 10px;
+}
+.review .foot dt.voted { background-image: url("/html/img/review-voted.gif") }
+.review .foot dd {
+	margin-left: 6px;
+	float: left;
+	width: 10px;
+	height: 10px;
+	line-height: 5px;
+}
+.review .foot dd a, .review .foot dd span {
+	display: block;
+	width: 10px;
+	height: 10px;
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+.review .foot dd a:hover { background-position: 0 -10px }
+dd.goodreview a { background-image: url("/html/img/review-votegood.gif") }
+dd.badreview a { background-image: url("/html/img/review-votebad.gif") }
+dd.abusivereview a { background-image: url("/html/img/review-voteflag.gif") }
+.review .foot dd span { background-image: url("/html/img/review-voterecorded.gif") }
+.review .foot dd.badreview span { background-position: 0 -10px }
+.review .foot dd.abusivereview span { background-position: 0 -20px }
+
+.goodreview { color: #5e7048 }
+.badreview { color: #7c4e56 }
+.abusivereview { color: #7c7348 }
+
+.reviewresponse {
+	background: #383b44;
+	padding: 10px 0px 10px 0px;
+	margin-bottom: 10px;
+	position: relative;
+	overflow: hidden;
+}
+.reviewresponse strong {
+	color: #666d7a;
+	font-size: 1.1em;
+	float: right;
+}
+.reviewresponse .dotted {
+	margin: 0 10px -3px 10px;
+	padding-bottom: 5px;
+}
+.reviewresponse p { margin: 8px 10px 0 10px }
+.reviewresponse span {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 5px;
+	width: 100%;
+}
+.reviewresponse span.t {
+	top: 0;
+	background: url("/html/img/review-responsecoverT.gif") top left no-repeat;
+}
+.reviewresponse span.b {
+	bottom: 0;
+	background: url("/html/img/review-responsecoverB.gif") bottom left no-repeat;
+}
+.widebox .reviewresponse span.t { background: url("/html/img/review-responsecoverWT.gif") top left no-repeat }
+.widebox .reviewresponse span.b { background: url("/html/img/review-responsecoverWB.gif") bottom left no-repeat }
+
+
+p.reviewlink {
+	margin: 0;
+	padding: 5px;
+	text-align: right;
+	font-weight: bold;
+	color: #666d7a;
+}
+
+.reviewvote .working {
+	display: block;
+	width: 10px;
+	height: 10px;
+	background: url("/html/img/form-indicator-mini.gif") 0px 0px no-repeat;
+}
+
+.review .mod {
+	display: block;
+	text-align: left;
+	margin-top: -5px;
+	padding-bottom: 5px;
+}
+
+.review .extrainfo .right {
+	width: 350px;
+	position: relative;
+	z-index: 10;
+	text-align: right;
+}
+.review .extrainfo .right img {
+	float: right;
+	margin: 0 0 0 8px;
+	height: 50px; width: 50px; /* added for art portal review modding */
+}
+.review .extrainfo .right a.falbum span {
+	left: auto;
+	right: 0;
+} 
+.review .extrainfo p {
+	padding-top: 0;
+	font-size: 1.1em;
+}
+
+
+div.creditsizer { margin: 5px 5px 0 5px }
+.title div.creditsizer { margin-top: 13px }
+div.creditsizerlined {
+	margin: 10px 5px 0 5px;
+	padding-top: 10px;
+	border-top: #666d7a 1px dotted;
+}
+div.credits {		/* text "div" necessary to distinguish from class in ngsub.css....   grrr.... */
+	height: 50px;
+	margin-bottom: 10px;
+	line-height: 1.2em;
+}
+div.credits:last-child {	
+	margin-bottom: 0;
+}
+div.credits img {
+	position: relative;
+	z-index: 2;
+	float: left;
+	margin-right: 6px;
+}
+div.credits h2 {
+	font-size: 1.1em;
+	color: #666d7a;
+}
+div.credits p {
+	color: #666d7a;
+	font-size: 1em;
+}
+div.credits a.falbum {
+	cursor: pointer;
+	z-index: 20;
+}
+div.credits a.falbum span {
+	top: 0;
+	left: 0;
+}
+
+.authorcontact {
+	display: inline-block;
+	width: 150px; height: 9px;
+	margin-top: 3px;
+}
+.authorcontact a {
+	float: left;
+	width: 12px;
+	height: 9px;
+	margin-right: 10px;
+	overflow: hidden;
+	text-indent: -921em;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+.authorcontact a:hover, .authorcontact a:active { background-position: 0 -9px }
+.authorcontact a.ac_wide { width: 16px; margin-right: 2px; }
+.ac_mail { background-image: url("/html/img/bicons/author_contact.gif") }
+.ac_web { background-image: url("/html/img/bicons/author_site.gif") }
+.ac_fave { background-image: url("/html/img/bicons/author_fav_add.gif") }
+.ac_faved { background-image: url("/html/img/bicons/author_fav_manage.gif") }
+.authorcontact span.working_sm { line-height: 1em }
+
+
+.achievements {
+	margin-top: 3px;
+	margin-left: -6px;
+}
+.achievements div.medal_locked, .achievements div.medal_unlocked {
+	float: left; 
+	height: 50px;
+	width: 50px;
+	margin: 5px 0 5px 10px;
+	background: #000;
+	position: relative;
+}
+.achievements div.medal_locked img {
+	filter:alpha(opacity=40);
+	-moz-opacity: 0.4;
+	opacity: 0.4;
+}
+.achievements div.medal_locked img.medaloverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	filter:alpha(opacity=100);
+	-moz-opacity: 1;
+	opacity: 1;
+}
+.achievements div.medal_unlocked img.medaloverlay { display: none }
+	
+	
+/* ----- Search Page Mini-Search Boxes ----- */
+
+
+.all .shortsearch {
+	float: left;
+	width: 306px;
+	margin-right: 0px;
+}
+
+.bbs_search {
+	float: left;
+	margin: 5px; }
+	
+.bbs_search_form { min-height: 29px }
+
+.bbs_search_form .inputfield { width: 114px }
+.bbs_search_form select { width: 72px }
+
+
+.all .shortnotice {
+	float: right;
+	width: 457px; 
+	margin-left: 0;
+}
+
+.notice {
+	min-height: 58px;
+	padding: 8px 10px 0 80px;
+	background: url("/html/img/ficons/head.gif") 5px 5px no-repeat;
+}
+	
+.notice strong.pleasenote {
+	display: block;
+	padding: 0px;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-bottom: 8px;
+}
+
+.notice strong { font-size: 1.1em }
+	
+	
+/* ----- Login Page and Secrets ----- */
+
+
+.biglogin, .verify {
+	min-height: 315px;
+	padding: 30px 30px 10px 30px;
+	background: url("/html/img/picos/login.jpg") 95% 20px no-repeat;
+}
+.verify { background: url("/html/img/picos/login_halt.jpg") 95% 20px no-repeat }
+.biglogin div, .verify div {
+	width:280px; 
+	margin: 15px 20px;
+}
+.biglogin h4 {
+	margin-bottom: 0;
+	font-size: 1.4em;
+}
+.biglogin p {
+	position: static;
+	display: block;
+	height: 30px;
+	font-size: 1.2em;
+	line-height: 1.5em;
+}
+.biglogin p.short {
+	height: auto;
+	line-height: normal;
+}
+.biglogin .verify p {
+	height: auto;
+	line-height: normal;
+}
+.biglogin .dotted strong {
+	float: left;
+	width: 85px;
+}
+.biglogin .inputfield {
+	margin: 0;
+	width: 185px;
+	float: right;
+}
+.biglogin .chk { margin-right: 10px }
+.biglogin label { line-height: 2.2em }
+.biglogin strong label { line-height: 1.7em }
+a.bigbutton, a.bigbutton:visited {
+	float: right;
+	width: 105px;
+	height: 26px;
+	overflow: hidden;
+	text-align: center;
+	color: #000;
+	font-size: 14px;
+	line-height: 26px;
+	background: url("/html/img/big_button.gif") 0 0 no-repeat;
+}
+a.bigbutton:hover { background-position: 0 -26px }
+span.buttonlarge { float: right }
+
+
+.secrets {
+	float: right; 
+	width: 415px;
+	min-height: 140px;
+}
+.secrets ol {
+	margin: 0px 0 0 0;
+	font-size: 1.2em;
+}
+.secrets ol li { margin: 15px 23px }
+.secrets ol span {
+	display: block;
+	font-size: .85em;
+}
+.secrets input { float: left }
+.secrets .btn { margin-right: 10px }
+	
+	
+/* ----- Admin Tools ----- */
+
+
+.fdetails {
+	display: block;
+	padding: 2px;
+	margin-bottom: 2px;
+	margin-left: -65px;
+	min-width: 229px;
+	height: 10px;
+	background: #000;
+	text-align: right;
+	color: #fff;
+	filter:alpha(opacity=70);
+	-moz-opacity: 0.7;
+	opacity: 0.7;
+}
+
+table.pm tr.adminhighlight td { background-color: #4a4f5a }
+	
+dl.hulksmash {
+	position: relative;
+	margin: 15px 10px 10px 10px;
+	padding: 0;
+}
+dl.hulksmash dt {
+	line-height: normal;
+	left: 0;
+	font-size: 1.2em;
+}
+dl.hulksmash dd {
+	position: absolute;
+	right: 0;
+	line-height: 1em;
+	margin-top: -1.2em;
+	text-align: right;
+}
+	
+ul.hulksmash li{
+	display: inline; 
+	margin: 0 0px 0 5px;
+	padding-left: 15px;
+	font-size: 1.2em;
+}
+	
+.hulksearch select { margin: 3px 0 }
+.hulksearch .inputfield {
+ 	margin: 2px 0;
+ 	width: 200px; }
+.hulksearch h4.white { margin-top: 10px }
+.hulksearch .button {
+	position: absolute;
+	right: 25px;
+	margin-top: 2px;
+}
+
+
+div.inpageresults {
+	float: left;
+	width: 570px;
+	margin-left: 145px;
+	padding: 5px;
+	background: #101113;
+}
+table.inpageresults {
+	margin: 0 !important;
+	float: left;
+	width: 570px;
+	background: #101113;
+}
+div.inpageresults p { font-size: 1.1em }
+div.inpageresults ol {
+	float: left;
+	width: 250px;
+}
+table.inpageresults td { padding: 0 5px 5px 5px }
+table.inpageresults th { padding: 5px 5px 0 5px }
+table.inpageresults span { font-size: 1.2em }
+
+div.inpageresults table {
+	width: 100%;
+	margin: 5px;
+}
+div.inpageresults table h4 { text-align: left }
+div.inpageresults td.squish, div.inpageresults th.squish h4 { text-align: center }
+
+.addressblock {
+	margin-bottom: 5px;
+	padding: 5px;
+	background: #101113;
+}
+.address4mailing {
+	float: right;
+	width: 324px;
+}
+.addressblock p { margin: 0 5px !important }
+.addressblock p span {
+	float: left;
+	width: 5em;
+	text-align: right;
+	padding-right: 5px;
+}
+
+
+/* ----- And Finally... The NG Store!! ----- */
+
+
+.prodimages { min-height: 300px }
+.prodimages img {
+	float: right;
+	border: solid 2px #101113;
+	margin: 5px;
+	width: 65px;
+	height: 46px;
+}
+.prodimages img.prodshot {
+	float: left;
+	width: 384px;
+	height: 286px;
+}
+
+.prodinfo {
+	color: #666d7a;
+	padding-left: 2px;
+}
+.prodinfo span { margin: 0 3px }
+.prodinfo span strong {
+	color: #d2d8e3;
+	font-weight: normal;
+}
+
+.prodselect dl {
+	margin: 10px 5px;
+	height: 18px;
+}
+.prodselect dt {
+	float: left;
+	min-width: 80px;
+	line-height: 1.5em;
+	color: #fc0;
+	font-size: 1.2em;
+	font-weight: bold;
+	font-style: italic;
+}
+.prodselect dd .inputfield { width: 35px }
+.prodselect dd label {
+	margin-right: 5px;
+	cursor: pointer;
+}
+.prodselect label.highlight span { color: #fff }
+
+dl.prodsummary {
+	display: inline;
+	margin: 0 5px;
+	text-align: right;
+}
+dl.prodsummary dt {
+	float: none;
+	line-height: 1em; 
+}
+	
+.prodrelated {
+	display: inline;
+	margin: 5px 5px 5px 5px
+}
+.prodrelated img {
+	width: 145px;
+	height: 200px;
+	margin-bottom: 3px;
+	border: solid 2px #101113;
+}
+.prodrelated .gray {
+	display: block; 
+	margin: 0 0 5px 0;
+}
+.prodrelated strong {
+	color: #fff;
+	padding-left: 7px;
+	margin-left: 5px;
+	background: url("/html/img/bicons/vertbar.gif") left center no-repeat;
+}
+.prodrelated p {
+	display: block;
+	margin-top: 10px;
+}
+.prodrelated .btn a {
+	text-align: center;
+	width: 136px;
+}
+	
+.total strong {
+	margin: 5px;
+	color: #fc0;
+	font-size: 14px;
+	line-height: 36px;
+}
+.total em {
+	color: #9adf21;
+	font-style: normal;
+	padding-left: 7px;
+	margin-left: 3px;
+	background: url("/html/img/bicons/vertbar.gif") left center no-repeat;
+}
+.total .button, .total .buttonlarge, .total .btn, .total .bigbtn {
+	float: right; 
+	margin: 5px;
+}
+.tallbtn { margin: 10px 8px }
+.total .working {
+	padding-left: 45px;
+	background: url("/html/img/form-indicator.gif") 20px center no-repeat;
+}
+
+.subtotal strong {
+	display: block;
+	font-size: 14px;
+	line-height: 18px;
+	margin: 5px;
+	text-align: right;
+}
+.subtotal em {
+	font-style: normal;
+	padding-left: 7px;
+	margin-left: 3px;
+	width: 55px;
+	background: url("/html/img/bicons/vertbar.gif") left center no-repeat;
+}
+
+.cart p { margin-bottom: 5px }
+.cart p.large {
+	margin-bottom: 0;
+	font-size: 1.2em;
+}
+.cart .lineitem {
+	line-height: 16px;
+	padding-left: 20px;
+	background: url("/html/img/bicons/bullet5b.gif") 5px 0 no-repeat;
+}
+.cart .working { background: url("/html/img/form-indicator-mini.gif") 3px center no-repeat }
+.cart .lineitem .inputfield {
+	float: left;
+	width: 35px;
+	margin-right: 10px;
+}
+.cart .lineitem .button, .cart .lineitem .delete { margin-right: 10px }
+.cart .lineitem strong { font-size: 1.1em }
+.cart .total strong { line-height: 28px }
+	
+.orderblock {
+	float: left;
+	width: 150px;
+	margin: 0 15px 10px 15px;
+}
+.orderblock p { margin: 0 }
+.orderblock a {
+	font-size: 10px;
+	font-weight: normal;
+}
+	
+.cartnote {
+	font-size: 1.2em;
+	float: right;
+	line-height: 2.3em;
+	margin-right: 5px;
+}
+
+.storegallery img {
+	border: solid 2px #101113;
+	width: 97px;
+	height: 75px;
+	margin: 5px 2px 3px 5px;
+}
+.storegallery .uploadlinks span {
+	float: left;
+	margin-left: 12px;
+	margin-right: 5px;
+	width: 101px;
+	text-align: center;
+}
+.storegallery .uploadlinks span em { display: block; text-transform: capitalize; }
+.twothird .storegallery img {
+	margin-left: 12px;
+	margin-top: 12px;
+}
+
+.storebadges .FAQblock strong {
+	height: 2.5em;		/* ensures four badges per line */
+	font-size: 10px;
+	line-height: normal;
+}
+.storebadges .FAQblock p {
+	background: none;
+	margin-bottom: 0;
+}
+.storebadges ul li { float: none; display: block; line-height: 1.8em; }
+.storebadges .chk { width: 11px; height: 11px; margin: 2px 4px 2px 0; float: left; position: relative; }
+
+
+.storepurchases p {
+	margin-bottom: 0;
+	color: #666d7a;
+}
+.storepurchases	img {
+	float: left;
+	margin-right: 10px;
+}
+.storepurchases .fout {
+	margin-bottom: 0px;
+	height: 50px;
+	overflow: visible;
+}
+.storepurchases .fmid {
+	position: relative;
+	padding-right: 0;
+}
+/* following only for secret message, might be overkill */
+.storepurchases .dottop { padding-bottom: 0; margin-top: 10px; }
+.storepurchases .boxsizer { padding-bottom: 0; margin-top: 0px; }
+.storepurchases div div { overflow: hidden; background: url("/html/img/store-hiddenholycrap.gif") 0px 52px no-repeat; }
+.storepurchases div div div { background: none }
+
+.shippingcalc {
+	display: inline;
+	margin: 0 10px;
+}
+.shippingcalc strong {
+	width: 300px;
+	display: block;
+	color: #fff;
+	font-weight: normal;
+	font-size: 1.2em;
+	line-height: 1.2em;
+}
+.shippingcalc em {
+	padding-left: 3px;
+	color: #9adf21;
+	font-style: normal;
+}
+	
+
+/* Heavy Ad stuff */
+
+#ad-wrap {
+	width: 990px;
+	position: relative;
+	margin: 0 auto;
+}
+#ad-wrap #player-wrap {
+	left: 220px;
+	top: 35px;
+	position: absolute;
+}
+#popin .heavy .box { width: 550px }
+#popin .heavy .boxl { padding: 0px }
+#popin .heavy .boxr { padding: 0px }
+#popin .heavy .boxm { padding: 0 }
+
+#popin .heavy .boxm .heading {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+	
+
+/* Tabbed browsing for NG Tank Awards */
+
+#tabbed, #tabbed:visited {
+	display: block;
+	position: absolute;
+	top: 0;
+	right:0;
+	width: 394px;
+	height: 48px;
+	background: url("/html/img/awards/boxtabr.gif") top left no-repeat;
+	cursor: pointer;
+}
+#tabbed:hover { background-position: 0 -48px }
+#tabbed span {
+	margin-top: 16px;
+	margin-left: 27px;
+	display: block;
+	background-repeat: no-repeat;
+	color: #f90;
+	font-size: 1.6em;
+	text-transform: uppercase;
+	text-decoration: underline;
+	padding-left: 60px;
+	line-height: 1.4em;
+}
+#tabbed:hover span { color: #fa0 }
+	
+#tabbed2, #tabbed2:visited {
+	display: block;
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 394px;
+	height: 48px;
+	background: url("/html/img/awards/boxtabl.gif") top left no-repeat;
+	cursor: pointer;
+}
+#tabbed2:hover { background-position: 0 -48px }
+#tabbed2 span {
+	margin-top: 16px;
+	margin-left: 16px;
+	display: block;
+	background-repeat: no-repeat;
+	color: #f90;
+	font-size: 1.6em;
+	text-transform: uppercase;
+	text-decoration: underline;
+	padding-left: 60px;
+	line-height: 1.4em; }
+#tabbed2:hover span { color: #fa0 }
+
+
+/* Admin payment pages */
+
+.paymentprofile p {
+	font-size: 1.2em;
+	margin-bottom: 0;
+}
+
+
+/*  Safari rules must be last on line  */
+
+#votebar p { position: static }
+ol.entries li a { right: auto; width: 177px; }
+
+#formstuff h5 {
+	font-size: 1.3em; 
+	border: none;
+	text-align: left;
+	letter-spacing: normal;
+	color: #fff;
+	margin: 10px 0 5px 5px;
+}
+
+#formstuff h3 {
+	float: none;
+	padding: 5px 10px 0px 10px;
+	font-size: 1.5em;
+}
+	
+#formstuff h6 {
+	float: left;
+	line-height: 1em;
+	margin-right: 8px;
+	text-transform: none;
+}
+
+
+#formstuff .btnheight { height: 28px }
+#formstuff .btnheight .btn, #formstuff .btnheight .button { margin: 5px }
+
+
+a.textclick, a.textclick:visited, a.textclick:visited, a.textclick:active  {
+	color: #d2d8e3;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.box .blank { background: #26272d }
+.box .blank h2 {
+	text-transform: uppercase;
+	padding-left: 5px;
+	background: none;
+}
+.box .blank h3 {
+	text-transform: capitalize;
+	font-style: italic;
+	font-size: 1.4em; line-height: 1.8em;
+	padding-left: 5px;
+	background: none;
+}
+
+#formstuff p {
+	position: static;
+	margin: 0 10px;
+	padding: 5px 0;
+	line-height: 1.2em; 
+}
+
+/* Font-size moved out of above rule 7/5 to fix unncessarily smal text atop forms */
+.line p, .lastline p {font-size: 1.1em }
+
+#formstuff .line {
+	width: 722px; /* makes sections visible to IE6 */
+	margin-bottom: 5px;
+	padding: 5px 0 12px 10px;
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+}
+#formstuff .lastline {
+	width: 722px; /* makes sections visible to IE6 */
+	margin-bottom: 0px;
+	padding: 5px 0 5px 10px; *padding-bottom: 4px;
+}
+.twothird #formstuff .line, .twothird #formstuff .lastline {  /* added 9/15/7 for uploading form in userpage image gallery */
+	width: 467px;
+}
+
+#formstuff .narrowform .lastline { width: 339px; }  /* sigh, these fixes are for the store billing/shipping addresses */
+#formstuff .narrowform span.fl { width: 120px; }
+#formstuff .narrowform div.boxsizer { padding: 0; height: 135px; }
+#formstuff .narrowform .quickoptions { margin: 0; }
+#formstuff .narrowform .quickoptions li { margin: 0px 0 5px 0; padding-bottom: 0px; }
+#formstuff .narrowform .quickoptions label { cursor: pointer; line-height: 1.2em; }
+#formstuff .narrowform .quickoptions input { margin-top: 1px; *margin-bottom: 3px; }
+.box .narrowform { float: left; margin: 5px; }
+.box .narrowform h4 {padding: 0 0 5px 0; }
+	
+#formstuff .inputnote {
+	display: inline;
+	margin-left: 135px; }
+
+#formstuff .inputnote span.btn {
+	margin-right: 7px;
+	float: right; }
+#formstuff .inputnote p {
+	margin-left: 0; }
+
+#formstuff .line p, #formstuff .lastline p {
+	line-height: 1.1em;
+	padding: 0; }
+	
+#formstuff p.short {
+	padding: 0;
+	line-height: 2.2em; }
+#formstuff .zero {
+	display: block;
+	height: 2.3em; }
+/*
+#formstuff .subzero {
+	display: block;
+	height: 2.3em;
+	padding: 0 0 0 10px; }
+*/
+
+#formstuff .line img, #formstuff .lastline img {
+	float: left;
+	margin: 2px 10px 2px 0; }
+
+#formstuff span.fl, #formstuff div.fl {
+	float: left;
+	width: 135px;
+	padding: 4px 0;
+	font-size: 1.3em;
+	font-weight: bold;
+	color: #666d7a; 
+	line-height: normal; }
+
+#formstuff label {
+	color: #fff; }
+
+#formstuff .infoknown {
+	float: left;
+	font-size: 1.3em;
+	margin-right: 10px;
+	font-weight: bold;
+	padding: 4px 0;
+	font-style: italic; }
+	
+#formstuff .inputfield {
+	font-size: 1em;
+	float: left;
+	height: 1.3em;
+	margin: .3em 10px .5em 0; }
+	
+#formstuff select {
+	font-size: 1em;
+	float: left;
+	margin: .5em 10px 1em 0; *margin-top: .3em;
+	height: 1.5em; *height: auto;
+	border: 0; }
+#formstuff .heading select {
+	margin-top: 1px; }
+
+#formstuff .shortinput {float: left; width: 35px;}
+#formstuff .shortinput2 {float: left; width: 60px;}
+#formstuff .shortinput3 {float: left; width: 25px;}
+#formstuff .medinput {width: 200px;}
+#formstuff .medinput2 {width: 150px;}
+#formstuff .wideinput {width: 576px; margin-right: 0px; margin-left: 0px; }
+#formstuff .chk {float: left; font-size: 1em; width: 11px; height: 11px; margin-top: 3px; margin-right: 5px; vertical-align: middle; *margin-top: 6px; }
+#formstuff .heading .chk {margin-top: 1px; }
+#formstuff .inlineoptions .chk { *margin-top: 3px; }
+
+
+
+#formstuff .buddies, #formstuff .collections, #formstuff ol.credits {
+	float: left;
+	width: 580px; }
+#formstuff .buddies li, #formstuff .collections li, #formstuff .credits li {
+font-size: 1.1em;
+	height: 2em;
+	float: left;
+	line-height: 2.1em; 
+	min-width: 145px; }
+#formstuff .collections li {
+	width: 190px;
+	font-weight: bold;
+	overflow: hidden; }
+#formstuff .credits li {
+	margin-left: 18px; *margin-left: 0;
+	width: 100%; }
+#formstuff .buddies li.nobuds {
+	font-size: 1.2em; }
+
+
+#formstuff .inlineoptions li {
+	float: left;
+	font-size: 1.1em;
+	line-height: 1.9em;
+	margin: 2px 45px 0 0;
+	*margin-top: 5px;
+	*line-height: 1.6em;
+	vertical-align: middle; }
+
+
+div.ratelist {
+width: 570px; 		/*  Added 7/11 to fix Safari seeing this container div as 100% - just matches inside dl's  */
+	float: left; }
+div.ratelist dl {
+	margin-top: 3px;
+	float: left;
+	width: 570px;
+	font-size: 1.1em;
+	line-height: 1.6em; }
+div.ratelist dl.even { padding: 0 5px; }
+div.ratelist dl.odd { padding: 2px 5px; background: #383b44; }
+div.ratelist dt {
+	float: left;
+	width: 195px;
+	font-weight: bold;
+	line-height: 2em; }
+div.ratelist dd {
+	float: left;
+	margin-left: 20px;
+	line-height: 1.6em; }
+div.ratelist input {
+	float: left;
+	width: 12px; height: 12px;
+	margin: 3px 5px 0 0; }
+/* 	#formstuff div.ranklist dt { width: 85px; }      Removed 9/9/8 since ranklist wasn't used. "Formlist" is now "ratelist" .
+	#formstuff div.ratelist dt { } */
+div.ratelist label {
+	font-size: 11px;
+	color: #d2d8e3 !important;
+	}
+
+
+#formstuff .cclicense {
+	float: left; }
+#formstuff .cclicense span {
+	height: 25px;
+	display: block; 
+	font-weight: bold;
+	font-size: 1.1em;
+	line-height: 2em;
+	margin: 4px 0; }
+#formstuff .cclicense img {
+	float: left;
+	margin-right: 4px; }
+#formstuff .cclicense p {
+	margin: 0;
+	width: 425px;}
+
+
+#formstuff ul.sex { width: 214px; }
+
+
+#formstuff dl.sublabel {
+	float: left;
+	margin-top: 15px;
+	color: #666d7a;
+	font-size: .85em;
+	font-weight: normal; }	
+#formstuff dl.sublabel dt {font-style: italic; }
+#formstuff dl.sublabel span.yellow {
+	float: left;
+	width: 5em;
+	font-size: 1.1em;
+	margin-bottom: -3px;}
+
+
+#formstuff textarea {
+	width: 577px;
+	height: 150px;
+	margin-top: .3em;
+	margin-bottom: .5em;
+	padding: 4px 0 0 3px;
+	background: #fc0 url("/html/img/skyline.gif") 0 0 scroll no-repeat;
+	border: 0;
+	overflow: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+	font-weight: bold;}
+#formstuff textarea.altheight {
+	height: 35px;
+	background: #fc0 url("/html/img/field_medium.gif") 0 0 scroll repeat-x; }
+#formstuff textarea.altbacktop {
+	height: 50px;
+	background: #fc0 url("/html/img/textbg.gif") 0 0 scroll no-repeat; }
+#formstuff textarea.altbackbot {
+	height: 95px;
+	background: #fc0 url("/html/img/textbg.gif") 0 -64px scroll no-repeat; }
+#formstuff textarea.taller {
+	height: 180px; }
+#formstuff textarea.streetaddress {
+	width: 200px;
+	height: 60px; }
+/* #formstuff textarea.skinnier {   deleted 2/21
+	width: 200px; } */
+
+#formstuff .widetext {
+	margin: 5px 0; }
+#formstuff .widetext label {
+display: block;
+margin: 0 0 .75em 0;
+	font-size: 1.3em;
+	font-weight: bold;
+	color: #fff; 
+	line-height: normal; }
+#formstuff .widetext textarea {
+	height: 65px;
+	width: 577px;
+	background: #fc0 url("/html/img/field_medium.gif") 0 0 scroll repeat-x;
+	*background-color: #fe0; }		/* Added 7/5 to fix non-continuous bg color in IEs when scrolling past image */
+#formstuff .widetext p {
+	margin: 0; }
+	
+#formstuff .audio {
+	min-height: 6.5em;
+	line-height: 2.3em; }
+
+#formstuff .audio li {
+	height: 2.1em;
+	float: left;
+	width: 180px; }
+	
+#formstuff .audio a {
+	float: left; }
+#formstuff .audio span {
+	float: left;
+	text-align: right;
+	width: 2em;
+	padding-right: 5px; }
+
+
+#formstuff .postnotes {
+	display: block;
+	font-size: 1.1em; }
+#formstuff .postnotes li {
+	padding: 2px 0 2px 8px; 
+	background: url("/html/img/bicons/bullet3.gif") 0 4px no-repeat; }
+
+	
+.notes {
+	float: left;
+	margin: .4em 10px 1em 10px; 
+	font-size: 1.4em; }
+	
+	
+#formstuff .btn, #formstuff .button {
+	margin: 3px 10px 0 0; }
+#formstuff .heading .btn {
+	margin: 3px 0 0 5px; }
+
+#formstuff .fileinput {
+	position: relative;
+	float: left;
+	margin-right: 10px;
+	width: 280px; }
+	
+#formstuff .thefile {
+	position: relative;
+	float: right; 
+	margin-right: 0px;
+	text-align: right;
+	height: 18px;
+	width: 200px;
+	margin-bottom: 0;
+	filter:alpha(opacity=0);
+	opacity: 0;
+	z-index: 2;
+}	
+
+.facadeform span.btn {
+	float: right; }
+.facadeform span.btn a {
+	padding-right: 7px;  }
+	
+.facadeform span.btn a:hover {
+	background-position: top left; }	
+.facadeform {
+	width: 295px;
+	position: absolute;
+	top: 0px;
+	right: -10px;
+	z-index: 1; }
+
+#formstuff .facadeform input.fakefile {
+	float: left;
+	margin-left: 5px;
+	margin-right: 0px;
+	width: 200px; }
+
+#formstuff .upload_working {
+	display: inline;
+	margin: -2px -2px -2px -5px; 
+	padding: 8px 15px 0 10px; 
+	background: url("/html/img/form-loadbar.gif") 0 0 no-repeat;
+	color: #000; }
+#formstuff .upload_working span {
+	display: block;
+	width: 195px;
+	height: 14px;		/* Added 7/13 to hide multi-line submissions resulting from spaces and dashes */
+	overflow: hidden; }
+
+#formstuff .facadeform .upload_working {
+margin-left: 0 !important;
+width: 195px !important;
+padding-right: 10px; *padding-right: 5px;
+margin-right: -5px;
+	}
+
+#formstuff .upload_thumbs {
+	float: left;
+	padding-left: 135px; }
+#formstuff .upload_thumbs div {
+min-width: 350px;		/*  Added 7/11 for Safari to make sure it (1) allows space for filename and (2) flows way left as it does everywhere else  */
+	float: left;
+	margin-top: 10px;
+	padding-right: 10px;}
+#formstuff .upload_thumbs span.framesizer {
+	display: inline;
+	background: #25272d;
+	border: solid 1px #000;
+	margin-right: 10px;
+	overflow: hidden; }
+#formstuff .upload_thumbs span.static {	/* Added 6/20 for flash upload form */
+	width: 55px;
+	height: 55px; }
+#formstuff .upload_thumbs em {
+	display: block;
+	font-size: 1.1em; 
+	margin: 5px 0; }
+#formstuff .upload_thumbs em strong {
+	color: #fff;
+	font-style: normal; }
+#formstuff .upload_thumbs span.btn {
+	margin-top: 3px; }
+.twothird #formstuff .upload_thumbs h4 {
+	overflow: hidden; 
+	width: 210px; }
+
+
+#formstuff .quickoptions {
+	float: left;
+	margin-bottom: -5px; *margin-bottom: -15px;
+	font-size: 1.1em;
+	line-height: 1.1em; }
+#formstuff .quickoptions li {
+	margin: 5px 0 10px 0; *margin: 5px 0; }
+#formstuff .quickoptions li input { 
+	width: 11px; height: 11px; margin-top: 0px; margin-right: 5px; }
+
+#formstuff .smiley_on img, #formstuff .smiley_off img {
+	margin: 0; }
+#formstuff .smiley_on {
+	float: left; 
+	width: 22px; 
+	margin: 2px 6px 0 0;
+	background: #666d7a; }	
+#formstuff .smiley_off {
+	float: left; 
+	width: 22px; 
+	margin: 2px 6px 0 0;
+	background: none; }
+
+#infochanged {
+	width: 600px;
+	line-height: normal;
+	margin: 10px auto 0 auto; }
+#infochanged .fl {
+	float: left; 
+	width: 160px;
+	text-align: right;
+	color: #a6adbb; }
+#infochanged .infoknown {
+	display: block;
+	float: none;
+	margin: 0px 0 0px 170px;
+}
+#infochanged .infoknown p {		/* Added 2/21 */
+	font-size: 1em;
+	margin: 0 0 5px 0; padding: 0; }
+#infochanged .wide {
+	color: #666d7a;
+	padding-top: 6px;
+	font-size: 1.2em;
+	font-weight: normal;
+	font-style: normal; }
+#infochanged .wide a {
+	font-weight: normal; }
+#infochanged .buttons {
+	margin-left: 170px; }
+#infochanged .btn {
+	margin-top: 10px; }
+#infochanged img {
+	display: block;
+	font-size: .77em;
+	margin: 10px 0 0 0; }
+
+#passrating {
+line-height: 1em;
+font-size: 1.1em;
+	text-align: center;
+	display: inline;
+	margin: 0 8px;}
+#passstar {
+	background: url("/html/img/bicons/bullet9a.gif") repeat-x;
+	margin: 3px auto 0 auto;
+	width: 50px;
+	height: 10px; }
+#passstar span {
+	background: url("/html/img/bicons/bullet9b.gif") repeat-x;
+	text-indent: -12345em;
+	display: block; float: left; }
+#passstar .star0 {width: 0px; }
+#passstar .star1 {width: 10px;}
+#passstar .star2 {width: 20px;}
+#passstar .star3 {width: 30px;}
+#passstar .star4 {width: 40px;}
+#passstar .star5 {width: 50px;}
+
+
+#formstuff .quickline {
+	display: block;
+	float: left;
+	width: 722px;
+	padding: 0 5px;
+	height: 2.5em; }
+#formstuff .quickline .fl {
+	line-height: 1.3em; 
+	font-size: 1.2em;
+	width: 95px; }
+#formstuff .quickline p {
+	font-size: 1.2em; }
+
+
+/* ----- Tiny, In-line Forms ----- */
+
+
+.insidepod .heading {
+	background: #101113; 
+	margin: -5px; }
+
+.insidepod .boxsizer {
+	margin-top: 5px; }
+
+.shortform textarea {
+	width: 463px;
+	height: 100px;
+	margin-top: .3em;
+	margin-bottom: 1em;
+	padding: 4px 0 0 3px;
+	background: #fc0 url("/html/img/textbg.gif") 0 0 scroll no-repeat;
+	border: 0;
+	overflow: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+	font-weight: bold;
+	line-height: 13px; }	/* added LAUNCH DAY to fix text jiggle */
+.widebox .shortform textarea {
+	width: 568px;  }
+.all .shortform textarea {
+	width: 568px; 
+	margin-right: 140px; }
+
+.shortform .inputnote {
+	font-size: 1.1em;
+	margin: 0; }
+.shortform .inputnote em {
+	max-width: 125px;
+	text-align: right;
+	float: right; }
+
+.shortform .btn {
+	float: right; }
+
+/*		removed 9/12/7 when realize this was for old in-page review (before star-rating system)
+.shortform select {
+position: relative;
+z-index: 2;
+	float: left;
+	margin-right: 8px;
+	*margin-top: -2px;
+	border: 0;
+	background: #fb0; }
+*/
+
+.shortform .inputfield {
+	width: 463px;
+	margin-right: 0; }
+
+.shortform p.rules { margin: 10px 0 0 0; }
+.shortform p.agreement, .shortform label.agreement {
+	margin: 10px 0 0 0;
+	line-height: 1.5em; }
+p.agreement label {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 1.9em; *line-height: normal; }
+.shortform p.agreement input {
+	float: left;
+	width: 11px;
+	height: 11px;
+	margin: 3px 8px 0 0; *margin: 4px 5px 0 0; }
+
+.shortform div.pulldownrow {		/* added 9/12/7 for mod ban pull-downs */
+	margin-bottom: 10px;}
+.shortform .pulldownrow select {
+	margin-right: 10px; }
+	
+/*										removed 10/19/7 to fix in-page-review spacing 
+.shortform p {
+	display: inline; }
+*/
+	
+/* Added 10/19/7 for new mod tools/whistle system */
+.shortform ul { margin-bottom: 10px; font-size: 1.2em; }
+.shortform li { margin-top: 2px; }
+.shortform ul input {width: 11px; height: 11px; margin-right: 5px; *margin-bottom: 3px; vertical-align: middle; margin-bottom: 2px; }
+.shortform ul label {
+	font-weight: normal;
+	font-size: 1em; }
+
+.bigline {
+	margin: 10px 5px 5px 5px; }
+.bigline .bigbtn  {
+	position: relative; 
+	z-index: 100;
+	float: left; 
+	margin-right: 10px; }
+.bigline p {
+	padding: 5px 0; }
+.bigline input {
+	position: relative;
+	height: 11px;
+	width: 11px; 
+	margin-left: 12px;
+	margin-bottom: -1px; *margin-bottom: 3px; }
+
+.shortform label {
+	font-weight: bold;
+	font-size: 1.2em;  }
+
+.star-rating ul {
+	float: left;
+	position:relative;
+	width:260px;
+	height:26px;
+	overflow:hidden;
+	list-style:none;
+	margin:10px 0 5px 0;
+	padding:0;
+	background: url("/html/img/form-stars.gif") 0 0 repeat-x; }
+
+.star-rating em {
+	float: left;
+	font-style: normal; 
+	font-size: 1.2em;
+	line-height: 1.2em;
+	margin: 15px 10px; }
+	
+.star-rating li{
+	display: inline; }
+
+.star-rating li a,
+.star-rating li a.current-rating,
+.star-rating li label {
+	position:absolute;
+	top:0;
+	left:0;
+	text-indent:-1000em;
+	height:26px;
+	line-height:26px;
+	outline:none;
+	overflow:hidden;
+	border: none; }
+
+.star-rating li a:hover,
+.star-rating li label:hover,
+.star-rating li label.ie-hover {
+	background: url("/html/img/form-starshov.gif") top right no-repeat; } 
+.star-rating li a:focus,
+.star-rating li a:active,
+.star-rating li label:focus,
+.star-rating li label:active { 
+	background: url("/html/img/form-starshov.gif") -26px 0 no-repeat; }
+
+.star-rating a.star1, .star-rating label.star1 { width: 10%; z-index: 14; }
+.star-rating a.star2, .star-rating label.star2 { width: 20%; z-index: 13; }
+.star-rating a.star3, .star-rating label.star3 { width: 30%; z-index: 12; }
+.star-rating a.star4, .star-rating label.star4 { width: 40%; z-index: 11; }
+.star-rating a.star5, .star-rating label.star5 { width: 50%; z-index: 10; }
+.star-rating a.star6, .star-rating label.star6 { width: 60%; z-index: 9; }
+.star-rating a.star7, .star-rating label.star7 { width: 70%; z-index: 8; }
+.star-rating a.star8, .star-rating label.star8 { width: 80%; z-index: 7; }
+.star-rating a.star9, .star-rating label.star9 { width: 90%; z-index: 6; }
+.star-rating a.star10, .star-rating label.star10 { width: 100%; z-index: 5; }
+
+.star-rating a.current-rating,
+.star-rating label.current-rating {
+	background: url("/html/img/form-starshov.gif") -26px 0 no-repeat; }
+/*
+.star-rating .nostars {
+	color: #666d7a;
+	float: right;
+	margin-top: 15px;
+	font-size: 1.1em; }
+.star-rating .nostars a {
+	font-weight: normal; }
+*/
+
+.star-rating a.star0,
+.star-rating label.star0 {
+	width: 67px;
+	height: 25px;
+	float: right; 
+	margin-top: 10px; 
+	text-indent: -1000em; 
+	overflow: hidden;
+	background: url("/html/img/form-nostar-off.gif") 0 0 no-repeat; }
+.star-rating .nostars a.star0:hover,
+.star-rating .nostars label.star0:hover {
+	background: url("/html/img/form-nostar-hover.gif") 0 0 no-repeat; }
+.star-rating .nostars a.current-rating,
+.star-rating .nostars label.current-rating {
+	background: url("/html/img/form-nostar-on.gif") 0 0 no-repeat; }
+
+.star-rating input {
+	display: none;
+}
+
+
+/* ----- Autocompletes ----- */
+
+
+.autocomplete {
+	position: absolute;
+	max-height: 350px;
+	overflow: auto;
+	z-index: 100;
+	min-width: 100px;
+	margin-top: 1px;
+	font-size: 1.1em;
+	line-height: 1.1em;
+	background:  #6d737d url("/html/img/hoverbg-vert.gif") 0 bottom repeat-x;
+	background-attachment: fixed; }
+
+.autocomplete ul {
+	padding: 4px 3px;
+	margin: -1px 1px -1px 1px;
+	color: #fff; 
+	background:  url("/html/img/hoverbg-vert.gif") 0 bottom repeat-x; }
+.autocomplete li {
+	padding: 1px;
+	cursor: pointer; }
+.autocomplete li:hover, .autocomplete li.selected {
+	color: #25272d;
+	background: #fff; }
+
+.linkcomplete {
+	position: absolute;
+	max-height: 350px;
+	overflow: auto;
+	z-index: 10000;
+	min-width: 100px;
+	padding: 2px 0;
+	font-size: 10px;
+	background:  #6d737d url("/html/img/hoverbg-vert.gif") 0 bottom repeat-x;
+	background-attachment: fixed; }
+.linkcomplete ul li a, .autocompete ul li a:visited, .autocomplete ul li a:active {
+	display: block;
+	margin: 0 2px;
+	padding: 0 3px;
+	color: #fff; }
+.linkcomplete ul li a:hover {
+	color: #25272d;
+	background: #fff; }
+	
+	
+/* ----- Captcha ----- */
+
+
+.captchaholda {
+	position: relative;
+	float: left; 
+	width: 455px;
+	height: 7em; }
+#formstuff .captchaholda p {
+	width: 200px;
+	margin: 5px 0;
+	position: absolute;
+	bottom: 0;
+	left: 0; }
+.captchaholda img {
+	position: absolute;
+	top: 0;
+	right: 0; }
+
+
+
+
+table {
+	border-collapse: collapse; }
+
+td#emptycell {
+	padding: 20px 0;
+	background: none;
+	border-top: #666d7a 1px dotted; *border: 0;
+	*background: url("/html/img/dot.gif") left top repeat-x;
+	font-size: 13px;
+	text-align: center; }
+td#emptycell a {
+	display: inline; }
+
+
+table.biglist {
+	position: relative;
+	width: 100%;
+	border-spacing: 0; }
+
+table.biglist th {
+	color: #fc0;
+	font-size: 1.2em;
+	font-style: italic;
+	padding: 0 0 5px 0; }
+
+table.biglist td {
+	font-size: 1.1em; }
+table.biglist tr.odd td {
+	height: 20px;
+	background: #383b44; }
+table.biglist tr.even td {
+	height: 28px;
+	background: #25272d; }
+table.biglist tr.last td {	/* Added 1/22 to fix search results */
+height: auto;
+padding-top: 8px;}
+table.searchlist tr.last td {
+height: auto;
+padding-top: 10px; }
+
+table.biglist .listnum {
+	padding-left: 5px;
+	text-align: center;
+	font-weight: bold; }
+
+table.biglist .listrank {
+	text-align: left;
+	padding-left: 5px;}
+table.biglist .listrank span {
+	display: block;
+	text-indent: -9999em;
+	overflow: hidden; 
+	width: 10px;
+	height: 10px; }
+.rankup {
+	background: url("/html/img/rank_up.gif") 0 0 no-repeat; }
+.rankdown {
+	background: url("/html/img/rank_down.gif") 0 0 no-repeat; }
+
+table.biglist .listtitle {
+	padding-right: 5px;
+	padding-left: 5px;		/*	Added 6/2/8 for half-col flash ads admin payment page	*/
+	white-space: nowrap;
+	text-align: left; }
+table.biglist .listtitle a {
+	width: 202px;
+	display: block;
+	overflow: hidden; }
+.paymentprofile table.biglist .listtitle a {
+	width: 170px; }
+.paymentprofile table.biglist .liststat li {
+	display: inline-block; *float: left;
+	margin-left: 5px;
+	width: 11px;
+	height: 9px;
+	text-indent: -119px;
+	overflow: hidden; }
+
+table.biglist .listauthor {
+	width: 180px;
+	text-align: left; }
+table.biglist td.listauthor {
+	padding-top: 2px;
+	padding-bottom: 2px;  /*	Added 3/20 to fix multi-authors		*/
+	font-size: 1em; }
+table.biglist .listauthor a {
+	font-weight: normal; }
+
+table.biglist .listrating {
+	width: 145px;
+	padding-right: 25px;
+	text-align: center; }
+	
+table.biglist .liststamp {
+	text-align: center; }
+table.biglist td.liststamp {
+	width: 105px;
+	padding-top: 1px;
+	font-size: 1em;
+	color: #666d7a; }
+
+table.biglist .liststat {
+	text-align: center; }
+table.biglist th.liststat {
+	padding: 0 5px 5px 5px; }
+table.biglist .liststat a {
+	font-weight: normal; }
+
+table.biglist td.listtallrating {
+	padding: 4px 5px;
+	line-height: 1.1em;
+	text-align: center; }
+table.biglist td.listtallrating a {
+	font-weight: normal; }
+
+table.biglist td.listsite {
+	padding-top: 1px;
+	font-size: 1em;
+	text-align: center; }
+table.biglist td.listsite a {
+	font-weight: normal; }
+
+table.biglist .gray {
+	padding-right: 5px;
+	padding-top: 1px;
+	font-size: 1em;
+	color: #666d7a; }
+
+table.biglist .coll {
+	padding-right: 5px;
+	padding-left: 5px;
+	white-space: nowrap;
+	text-align: left; }
+table.biglist .coll a {
+	width: 100%;
+	display: block;
+	overflow: hidden; }
+
+table.biglist td.subhead {
+	padding-bottom: 5px;
+	font-weight: bold;
+	text-decoration: underline; }
+	
+table.biglist .buttoncol {
+	padding: 5px 5px 5px 34px; }
+table.biglist .buttoncol span.btn {
+	float: right; }
+table.biglist .buttoncol span.btn a {
+	font-size: 11px; }
+
+
+
+
+
+table.pm {		/* For use in non-forms, stylistically speaking */
+	position: relative;
+	width: 100%;
+	border-spacing: 0;
+/*	margin-bottom: -3px;		removed now that "last" class has been implemented		*/
+	}
+
+table.pm tr.odd td {
+	border: none;
+	background: #383b44;
+	height: 24px; }
+
+table.pm tr.even td {
+	border: none;
+	background: none; }
+
+table.pm tr.last td {	/* Added 5/2 to fix PMs like we did search */
+height: auto;
+padding-top: 6px;}
+
+table.pm th {
+	padding: 5px; }
+
+table.pm td {
+	border-top: #666d7a 1px dotted; *border: 0;
+	background: none;
+	*background: url("/html/img/dot.gif") left top repeat-x;
+	height: 36px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 1.1em;
+	padding: 0 5px; }
+table.pm td a { padding: 6px 0; display: block; }
+table.pm td .btn a { padding: 3px 3px 0 6px; font-size: 1em; }
+table.pm td .dead span { font-size: 1em; }
+
+table.pm h4 { font-size: 1.2em; margin-bottom: 0 }
+
+.twothird table.pm h4 { /* added 11/8/7 for mod tools in two thirds pages */
+	font-size: 1.1em;
+	font-style: normal;
+	color: #d2d8e3; }
+
+table.pm .mailchk {
+	width: 15px;
+	*padding: 0 2px; }
+table.pm th.mailchk h4 {
+	text-indent: -9999em;
+	background: url("/html/img/bicons/check.gif") 5px 3px no-repeat;
+}
+table.pm .what {text-align: left; width: 365px;}
+table.pm td.what a {
+padding-left: 35px;
+	width: 315px;
+	overflow: hidden;
+background-image: url("/html/img/emoticons/emote-6.gif");
+background-position: 0px center;
+	background-repeat: no-repeat; }
+
+table.pm td.emote6 a {
+padding-left: 0px !important;
+}
+
+
+table.pm .what2 {text-align: left; width: 365px;}
+table.pm td.what2 a {
+	width: 315px;
+	overflow: hidden; }
+
+table.pm td.status {
+	width: 22px;
+	padding-left: 10px;
+	padding-right: 10px; }
+table.pm td.status a {
+	padding: 0;
+	width: 22px;
+	height: 22px;
+	overflow: hidden;
+	text-indent: -2200em;
+	background-image: url("/html/img/emoticons/emote-6.gif");
+	background-position: 0px center;
+	background-repeat: no-repeat; }
+table.pm td.status span.new a {
+	display: block;
+	background: url("/html/img/emoticons/emote_new.gif") 0px center no-repeat; }
+
+table.pm td.what span.new {	/* Added back in 8/19 until we actually launch new PM status stuff. (Broke on store launch day.) */
+display: block;
+	background: url("/html/img/emoticons/emote_blinky.gif") 10px center no-repeat; }
+
+table.pm td.emote1 a			{background-image: url("/html/img/emoticons/emote-1.gif");}
+table.pm td.emote2 a			{background-image: url("/html/img/emoticons/emote-2.gif");}
+table.pm td.emote3 a			{background-image: url("/html/img/emoticons/emote-3.gif");}
+table.pm td.emote4 a			{background-image: url("/html/img/emoticons/emote-4.gif");}
+table.pm td.emote5 a			{background-image: url("/html/img/emoticons/emote-5.gif");}
+/*table.pm td.emote6 a			{background-image: url("/html/img/emoticons/emote-6.gif");}*/
+table.pm td.emote6 a			{background: #25272d;}
+table.pm td.emote7 a			{background-image: url("/html/img/emoticons/emote-7.gif");}
+table.pm td.emote8 a			{background-image: url("/html/img/emoticons/emote-8.gif");}
+table.pm td.emote9 a			{background-image: url("/html/img/emoticons/emote-9.gif");}
+table.pm td.emote10 a			{background-image: url("/html/img/emoticons/emote-10.gif");}
+table.pm td.emote11 a			{background-image: url("/html/img/emoticons/emote-11.gif");}
+table.pm td.emote12 a			{background-image: url("/html/img/emoticons/emote-12.gif");}
+table.pm td.emote13 a			{background-image: url("/html/img/emoticons/emote-13.gif");}
+table.pm td.emote14 a			{background-image: url("/html/img/emoticons/emote-14.gif");}
+table.pm td.emote15 a			{background-image: url("/html/img/emoticons/emote-15.gif");}
+table.pm td.emote16 a			{background-image: url("/html/img/emoticons/emote-16.gif");}
+table.pm td.emote17 a			{background-image: url("/html/img/emoticons/emote-17.gif");}
+table.pm td.emote18 a			{background-image: url("/html/img/emoticons/emote-18.gif");}
+table.pm td.emote19 a			{background-image: url("/html/img/emoticons/emote-19.gif");}
+table.pm td.emote20 a			{background-image: url("/html/img/emoticons/emote-20.gif");}
+
+ul.pmstatusholder {
+	display: inline-block;
+	padding: 5px; }
+ul.pmstatusholder li {
+	position: relative;
+	float: left;}
+ul.pmstatusholder input {
+	position: absolute;
+	z-index: -1; }
+ul.pmstatusholder li label:hover {
+	background-color: #fff; }
+
+table.pm td a.pmnew, table.pm td label.pmnew { background-image: url("/html/img/emoticons/emote_new.gif"); }
+table.pm td a.pmimportant, table.pm td label.pmimportant { background-image: url("/html/img/emoticons/emote_exclamation.gif"); }
+table.pm td a.pmquestion, table.pm td label.pmquestion { background-image: url("/html/img/emoticons/emote_question.gif"); }
+table.pm td a.pmfriend, table.pm td label.pmfriend { background-image: url("/html/img/emoticons/emote_friend.gif"); }
+table.pm td a.pmfave, table.pm td label.pmfave { background-image: url("/html/img/emoticons/emote_favorite.gif"); }
+table.pm td a.pmfeature, table.pm td label.pmfeature { background-image: url("/html/img/emoticons/emote_featured.gif"); }
+table.pm td a.pmnone, table.pm td label.pmnone { background-image: url("/html/img/emoticons/emote-6.gif") }
+
+table.pm td.status ul.pmstatusholder {
+cursor: pointer !important;
+	position: absolute; display: inline;
+	background: #25272d;
+	margin-left: 25px;
+	padding: 2px 1px;
+	border: dotted 1px #666d7a;
+	}
+table.pm td.status ul.pmstatusholder:hover {
+cursor: pointer !important;
+}
+table.pm td.status ul.pmstatusholder label {
+	float: left;
+	width: 22px;
+	height: 22px;
+	margin: 0 1px; 
+	text-indent: -99em;
+	overflow: hidden}
+table.pm td.status ul.pmstatusholder label:hover {
+cursor: pointer !important;
+	background-color: #666d7a; }
+
+
+table.pm td.deleting {
+	text-align: left;
+	/*padding-left: 15px;*/
+	color: #d675e1; }
+table.pm td.deleting span {
+	display: block;
+	padding: 5px 0 5px 35px;
+	background-image: url("/html/img/form-indicator.gif");
+	background-position: 2px 2px;
+	background-repeat: no-repeat;}
+	
+table.pm tr.odd td.deleting, table.pm tr.even td.deleting {
+	padding-left: 5px; }
+table.pm tr.odd td.deleting span, table.pm tr.even td.deleting span {
+	background-image: none;
+	padding-left: 0px; }
+
+table.pm tr.nodots td {	/* Added 6/14 to remove divide between reordering table row */
+	background: none;
+	border-top: solid 1px #25272d;
+	height: auto;
+	padding-bottom: 8px; }
+table.pm td.moving {
+	text-align: left; }
+table.pm td.moving span {
+	display: block;
+	padding: 5px 0 5px 25px;
+	color: #d675e1;
+	background-image: url("/html/img/form-indicator.gif");
+	background-position: 0 2px;
+	background-repeat: no-repeat;}
+
+table.pm td.swf a	{background-image: url("/html/img/licons/s-swf.gif");}
+table.pm td.fla a	{background-image: url("/html/img/licons/s-fla.gif");}
+table.pm td.gif a	{background-image: url("/html/img/licons/s-gif.gif");}
+table.pm td.png a	{background-image: url("/html/img/licons/s-png.gif");}
+table.pm td.jpg a	{background-image: url("/html/img/licons/s-jpg.gif");}
+table.pm td.psd a	{background-image: url("/html/img/licons/s-psd.gif");}
+table.pm td.tif a	{background-image: url("/html/img/licons/s-tif.gif");}
+table.pm td.bmp a	{background-image: url("/html/img/licons/s-bmp.gif");}
+table.pm td.mp3 a	{background-image: url("/html/img/licons/s-mp3.gif");}
+table.pm td.wav a	{background-image: url("/html/img/licons/s-wav.gif");}
+
+
+table.pm .who, table.pm .when, table.pm .comments {
+	font-size: 1em;
+	text-align: center;
+	color: #666d7a; }
+
+table.pm .when { width: 130px }
+table.pm .when span { color: #9adf21; }
+table.pm .who { width: 125px; /*padding-right: 35px;*/ }
+table.pm .wholong { text-align: left; width: 250px }
+table.pm td.why { width: 145px; font-size: 1em; }
+table.pm .how { text-align: left; font-size: 1em; }
+table.pm .which { text-align: left; font-weight: bold; }  /* the bold attribute added for mod tools. shouldn't mess anything up */
+table.pm .which a, table.pm .which em { display: block; width: 250px; }		/* em added for store inventory table */
+table.pm .where { width: 165px; text-align: center; font-size: 1em; }
+table.pm .wherewide { font-size: 1em; }
+table.pm .comments a { padding: 0; }
+
+table.pm .where .btn, table.pm .wherewide .btn {
+	float: right;
+	margin-left: 10px;
+	font-size: 1.1em; }
+table.pm .where select {
+	float: right;
+	width: 61px;
+	margin-top: 1px;
+	margin-left: 10px;
+}
+table.pm th.actions {
+	text-align: right;
+	width: 75px; }
+table.pm .actions .btn {
+	float: right;
+	margin-left: 10px; }
+
+table.pm .listno {
+/*	width: 10px;  	removed to fix alignment in IE	*/
+	font-size: 1.1em; }
+table.pm .listno a.newitem {color:#9adf21}
+table.pm .listno a.newitem:visited {color:#6eb300}
+table.pm .listno a.refundeditem {color:#ff3e3e}
+table.pm .listno a.refundeditem:visited {color:#d10d0d}
+table.pm .listno a.onholditem {color:#d675e1}
+table.pm .listno a.onholditem:visited {color:#94489c}
+
+table.pm .listrank {
+	width: 20px;
+	text-align: center;
+	font-size: 1.1em; }
+table.pm td.kind {
+	width: 10px; }
+table.pm td.kind span {
+	display: block;
+	width: 15px;
+	height: 20px;
+	text-indent: -200px;
+	overflow: hidden; }
+table.pm td.kind span.game {
+	background: url("/html/img/bicons/tiny_game.gif") 2px 0 no-repeat }
+table.pm td.kind span.movie {
+	background: url("/html/img/bicons/tiny_movie.gif") 2px 0 no-repeat }
+
+
+table.resource td {
+	padding: 10px 10px 10px 0;
+	font-size: 1em;
+	text-align: left;
+	vertical-align: top; }
+table.resource th {
+	padding: 5px 0;
+	text-align: left; }
+table.resource td strong, table.resource td a {
+	padding: 0 0 1px 0;
+	font-size: 1.2em;
+	display: block; }
+table.resource .description {
+	padding-right: 0;
+	padding-left: 10px;
+	width: 300px; }
+
+
+#formstuff table.pm th { text-align: left; }
+#formstuff table.pm td { height: 40px; }
+#formstuff table.pm .fl { padding: 0 0 0 10px; }
+#formstuff table.pm td.fl {
+	text-align: left;
+	width: 130px;
+	font-weight: bold;
+	color: #fff;
+	font-size: 1.3em; }
+#formstuff table.pm th.center { text-align: center; }
+#formstuff table.pm .inputfield, #formstuff table.pm .pulldown, #formstuff table.pm .btn { margin-top: 0; margin-bottom: 0; }
+
+
+/* ----- Search Results ----- */
+
+
+table.searchlist {
+	position: relative;
+	width: 100%;
+	border-spacing: 0; }
+
+table.searchlist th {
+	color: #fc0;
+	font-size: 1.2em;
+	font-style: italic;
+	padding: 0 0 5px 0; }
+
+table.searchlist td {
+	height: 70px; }
+table.searchlist tr.odd td {
+	background: #383b44; }
+table.searchlist tr.even td {
+	background: #25272d; }
+
+table.searchlist td.num {
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	font-weight: bold; }
+table.searchlist td.num span {
+	display: block;
+	padding-bottom: 25px; }
+table.searchlist td.num span.game {
+	background: url("/html/img/bicons/tiny_game.gif") 40% 15px no-repeat }
+table.searchlist td.num span.movie {
+	background: url("/html/img/bicons/tiny_movie.gif") 40% 15px no-repeat }
+table.searchlist td.num span.song {
+	background: url("/html/img/bicons/tiny_song.gif") 40% 15px no-repeat }
+table.searchlist td.num span.loop {
+	background: url("/html/img/bicons/tiny_loop.gif") 40% 15px no-repeat }
+
+table.searchlist .iconcol {
+	width: 50px;
+	padding-right: 10px; }
+
+table.searchlist .det {
+	text-align: left;
+	width: 470px; }
+table.searchlist .icon {
+	float: left;
+	height: 46px;
+	width: 46px; }
+table.searchlist .det strong {
+	font-size: 1em;
+	color: #f90; }
+table.searchlist .det a {
+	font-size: 1.1em;
+	float: left;
+	height: 50px;
+	margin-right: 5px;
+	line-height: 1.2em;
+	color: #d2d8e3;
+	font-weight: normal; }
+table.searchlist .det a span {
+	display: block;
+	width: 400px;
+	height: 3.7em; 
+	margin: 5px;
+	overflow: hidden; }
+
+table.searchlist .det span.falbum {		/* Added 7/12 to fix audio search spacing */
+	margin-right: 5px; }
+/*										This is for when clickable icons are added to audio search. Simply uncomment this and comment the above rule.
+table.searchlist .det a span.falbum {
+	margin: 0;
+	width: 50px;
+	float: left;
+	height: 50px; }
+table.searchlist .det a span.falbum span {
+	margin: 0;
+	height: 50px; }
+*/
+
+table.searchlist tr.odd .det a:hover {
+	cursor: pointer;
+	background: #4c505c; }
+table.searchlist tr.even .det a:hover {
+	cursor: pointer;
+	background: #383b44; }
+table.searchlist .sts {
+	text-align: left;
+	padding-left: 0px;
+	padding-right: 5px;
+	line-height: 1.4em; }
+table.searchlist .sts strong {
+	font-size: 1.1em; }
+table.searchlist .sts p {
+	margin: 0;
+	font-size: 1em; }
+
+table.searchlist .sublinks {
+	text-align: left;
+	width: 240px; }
+table.searchlist .sublinks p {
+	margin: 0 0 0 0px;
+	line-height: 1.4em; }
+table.searchlist .sublinks img {
+	margin: 5px 0; }
+table.searchlist td.num span.judge {
+	background: url("/html/img/bicons/flash_judge.gif") 40% 20px no-repeat }
+table.searchlist td.num span.great {
+	background: url("/html/img/bicons/flash_great.gif") 40% 20px no-repeat }
+table.searchlist td.num span.awesome {
+	background: url("/html/img/bicons/flash_awesome.gif") 40% 20px no-repeat }
+
+#tablekey {
+	text-align: left;
+	margin-top: 4px; }
+#tablekey li {
+	display: inline;
+	padding: 0 16px;
+	line-height: normal;
+	text-transform: uppercase;
+	background-position: left center;
+	background-repeat: no-repeat; }
+
+#tablekey2 {
+	min-height: 25px;
+	text-align: left;
+	font-size: 1em; }
+#tablekey2 li {
+	float: left;
+	margin-right: 14px;
+	line-height: 2.3em; }
+#tablekey2 li img { float: left; margin-right: 4px; }
+
+table.searchlist tr.even span.falbum, table.searchlist tr.odd span.falbum {
+	float: left; }
+table.searchlist tr.even span.falbum span {
+	display: inline;
+	top: 0; left: 0; }
+table.searchlist tr.odd span.falbum span {
+	display: inline;
+	top: 0; left: 0;
+	background: url("/html/img/cdicons/cd_overlay_hover.png") top left no-repeat; 
+}
+
+
+/* ----- Forum Tables ----- */
+
+
+table.forum td#emptycell {
+	*background: url("/html/img/dot.gif") left bottom repeat-x; }
+
+table.forum {
+font-size: 1em;
+position: relative;
+	width: 100%;
+	border-spacing: 0;
+	margin-bottom: 5px; }
+
+table.forum th {
+	border-bottom: #666d7a 1px dotted;
+	padding: 5px;
+}
+
+table.forum td {
+	border-bottom: #666d7a 1px dotted;
+	vertical-align: middle;
+}
+ 
+table.forum h4 { font-size: 1.1em; margin-bottom: 0; }
+
+table.forum p { font-size: 1em; }
+
+table.forum strong {
+	display: block;
+	color: #f90; }
+
+table.forum .icon_lg {
+	width: 62px;
+	height: 70px;}
+table.forum .icon_lg img {
+	padding-left: 5px;}
+
+
+table.forum .link {
+	text-align: left;
+	font-size: 1.1em;}
+.box table.forum .link a {
+	height: 40px;
+	margin: 10px 0;
+	padding: 5px 5px;
+	display: block;
+	width: 324px;
+	font-weight: normal;
+	line-height: 1.2em;
+	color: #d2d8e3; }
+table.forum .link a:hover {background: #383b44;}
+table.forum .link a.twoline {
+	height: 28px;
+	margin: 10px 0;
+	padding: 11px 5px; }
+
+table.forum .thread {
+	padding: 11px 5px;
+	font-size: 1.1em; }
+table.forum .thread p {
+	display: inline;
+	background: url("/html/img/bicons/bullet5.gif") center left no-repeat;
+	margin-left: 5px;
+	padding-left: 10px; }
+table.forum .thread p a {
+	font-weight: normal; }
+	
+
+table.forum .figures {
+	width: 65px;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;}
+
+table.forum .lastpost {
+	width: 146px;
+	text-align: center;
+	color: #666d7a;
+	 }
+table.forum .lastpost a {
+	display: block; }
+
+table.forum .icon_sm {
+	text-align: center;
+	width: 44px;
+	height: 56px; }
+
+
+/* ----- Store Cart Page ----- */
+
+
+
+table.storecart {
+position: relative;
+	width: 100%;
+	border-spacing: 0;
+	margin-bottom: -5px; }
+
+table.storecart th {
+height: auto;
+	padding-top: 5px;
+	text-align: left; }
+table.storecart th.pricecol {
+	text-align: center; }
+
+table.storecart td {
+height: auto;
+	border-top: #666d7a 1px dotted;
+	vertical-align: middle;
+	padding: 5px 0; }
+ 
+table.storecart th.cartimage {
+	text-align: center; }
+table.storecart .cartimage {
+	width: 80px;
+	padding-right: 15px; }
+table.storecart .cartimage img {
+	height: 46px;
+	width: auto;
+	margin-left: 15px; }
+
+table.storecart .quantity .inputfield {
+	float: left;
+	margin: 0;
+	width: 45px; }
+table.storecart .quantity .button, table.storecart .quantity .delete {
+	margin-left: 10px; }
+
+table.storecart .subtotal {
+	width: 100px;
+	text-align: center;
+	font-size: 1.2em; 
+	font-weight: bold; }
+
+table.storecart td.working {
+	background: url("/html/img/form-indicator.gif") 152px 19px no-repeat; }
+	
+
+
+/* ----- Flagged Submissions List ----- */
+
+
+
+table.admin {
+	position: relative;
+	width: 100%;
+	border-spacing: 0;
+	font-size: 1.1em; }
+table.admin th {
+	padding: 4px;
+	text-align: left;
+	color: #fc0; }
+table.admin .center {
+	text-align: center; }
+table.admin td {
+	padding: 2px 4px; 
+	background-color: #4a4f5a;
+	border: solid 1px #25272d; }
+table.admin a, table.admin a:visited {
+	font-weight: normal;
+	color: #d2d8e3; 
+	text-decoration: underline; }
+table.admin .num {
+	text-align: right;
+	border-right: none;
+	padding: 0 0 0 4px; }
+table.admin .chk {
+	border-left: none;
+	padding: 0 4px 0 2px; }
+	
+
+
+/* ----- Mini Table for crediting co-authors ----- */
+
+
+table.contributors {
+	margin: 10px 10px 5px 10px; }
+table.contributors td {
+	height: 30px;
+	width: 220px; }
+table.contributors th {
+	text-align: left; }
+#formstuff table.contributors select {
+	width: 175px;
+	margin: 0 0; }
+#formstuff table.contributors p {				/* fix for this table in form settings */
+	margin: 0; }
+	
+table.contributors a {
+	font-size: 1.2em; }
+table.contributors em a {
+	font-style: normal; 
+	font-size: 1em;
+	line-height: 2.2em; }
+table.contributors span.btn a {
+	font-size: 11px; }
+table.contributors strong {
+	font-size: 1.5em;
+	line-height: 1.6em; }
+table.contributors td.revshare { width: 90px; }
+table.contributors td.credittitle { width: 180px; }
+table.contributors td.credittitle a { font-size: 1.1em; }
+
+td.revshare input { width: 35px; font-size: 12px; }
+td.creditname input { width: 85px; }
+td.contribution input { width: 141px; }
+	
+table.contributors span.lionshare {
+	float: left;
+	height: 13px;
+	width: 34px;
+	margin: 2px 10px 0 0;
+	padding: 3px 0 2px 5px;
+	font-size: 12px;
+	font-weight: bold;
+	border: 0;
+	color: #101113;
+	background: #dbdbdb url("/html/img/form-inputDead.gif") top left repeat-x; }
+
+
+/* ----- Flash API Table ----- */
+
+
+table.statlist {
+	position: relative;
+	width: 100%;
+	border-spacing: 0; }
+
+table.statlist th {
+	font-size: 1.2em;
+	text-align: center;
+	color: #fc0;
+	font-style: italic;
+	padding: 5px 10px; }
+table.statlist th a {
+	color: #fc0;
+	text-decoration: underline;
+	}
+table.statlist tr.odd td {
+	background: #383b44; }
+table.statlist tr.even td {
+	background: #25272d; }
+
+table.statlist td {
+	font-size: 1.2em;
+	padding: 5px;
+	text-align: center; }
+
+table.statlist .title {
+	text-align: left;
+	padding-left: 5px; }
+table.statlist td.title a {
+	font-weight: normal; }
+
+table.statlist th.stat {
+	text-align: right; }
+table.statlist td.stat {
+	width: 100px;
+	text-align: right;
+	padding-right: 30px; }
+table.statlist .smallstat {
+	width: 50px;
+	text-align: right;
+	padding-right: 10px; }
+table.statlist .options {
+	padding-left: 34px; }
+	
+table.statlist span.btn {
+	float: right;
+	margin-left: 5px; }
+table.statlist span.btn a, table.statlist span.btn span {
+	font-size: 11px; }
+	
+
+/* addenda to "biglist" styles for flash api */
+table.biglist .label {
+	padding-left: 5px;
+	text-align: left; }
+	
+table.biglist td.label {
+	font-weight: bold; }
+	
+table.biglist .stat {
+	padding-right: 5px;
+	text-align: right; }
+
+
+
+/* ----- Generic Table (store faq first) ----- */
+
+table.quicktable {
+	position: relative;
+	width: 100%;
+	border-spacing: 0;
+	border: solid 1px #666d7a;
+	margin: 10px 0;
+	font-size: 1.1em;
+	text-align: center; }
+
+table.quicktable th {
+	padding: 5px; }
+table.quicktable td {
+	padding: 5px;
+	border-left: solid 1px #666d7a;
+	border-top: #666d7a 1px dotted;
+}
+table.quicktable .label {
+	text-align: left; }
+
+/* ----- Art Portal ----- */
+
+/*	IMAGE CENTERING	*/
+
+.vc-abs {
+/*
+height: 100%;
+*/
+width: 100%;
+position: absolute;
+z-index: 1000;
+}
+
+.vc-out[class] {
+display: table;
+/*
+height: 100%;
+vertical-align: middle;
+*position: relative;
+*/
+width: 100%;
+*overflow:hidden;
+*overflow-x: auto;
+}
+
+/*
+.vc-mid[class] {
+display: table-cell;
+vertical-align: middle;
+}
+
+.vc-in {
+*float: left;
+position: relative;
+*top: 50%;
+}
+*/
+
+.vc-cntr {
+display: block;
+margin: 0 auto; 
+/*
+position: relative;
+*top: -50%;
+*/
+}
+
+.vc-cntr img {
+display: block;
+margin: 0 auto; }
+
+
+
+
+
+/*	PORTAL-RELATED	*/
+
+.vertnav {
+	margin-bottom: 5px; }
+.vertnav h4 {
+	margin-top: 9px; 
+	font-size: 1.4em; 
+	font-style: normal;
+	margin-bottom: 2px;
+	padding-left: 13px;
+	background: url("/html/img/bicons/bullet4b.gif") 3px center no-repeat; }
+.vertnav ul {
+	margin: 0 5px;
+	font-size: 1.1em;
+	border-left: dotted 1px #666d7a; }
+.vertnav li {
+	width: 211px;
+	line-height: 1.8em; }
+.vertnav li a {
+	margin-left: -1px;
+	padding-left: 11px;
+	display: block;
+	height: 20px; }
+.vertnav li a:hover {
+	color: #ffdf66;
+	padding-left: 10px;
+	border-left: solid 1px #fff;
+	background: #383b44 url("/html/img/bicons/bgcover.gif") top left no-repeat; }
+
+
+span.imagerating {
+	position: relative;
+	float: right;
+	margin-right: 3px;
+	padding-right: 23px;
+	text-align: right;
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 2.2em; }
+span.imagerating span {
+	position: absolute;
+	display: block;
+	top: 3px;
+	right: 0px;
+	width: 18px;
+	height: 18px;
+	text-indent: 18em;
+	overflow: hidden; }
+	
+.medium_image img {
+	position: relative;
+	display: block;
+	margin: 0 auto; }
+div.fullsize {
+display: block;
+height: 1.4em;
+line-height: 1.2em;
+	margin: 10px 0 0 0 !important;
+	padding-bottom: 0;
+	font-size: 1.2em;
+	text-align: center;
+	font-weight: bold; }
+div.fullsize form {
+	display: inline;
+	border-left: solid 1px #666d7a;
+	margin: 0 0 0 2px;
+	padding-left: 4px; *padding-left: 2px; }
+div.fullsize #item_manage_favorites {
+	display: inline;
+	border-left: solid 1px #666d7a;
+	margin-left: 2px;
+	padding-left: 5px;
+*line-height: 1.6em;
+*padding-top: 3px; }
+
+
+.contentfilter {
+	position: relative;
+	z-index: 1; /* brings pulldowns in front of IE thumbnails */
+	height: 28px;
+	margin-bottom: 7px;
+	color: #666d7a;
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 1.8em;
+	border-bottom: #666d7a 1px dotted;
+}
+.contentfilter div {
+	position: absolute;
+	z-index: 6666;
+	top: 0px; }
+.contentfilter span {
+	float: left; }
+.contentfilter strong {
+	color: #d2d8e3; }
+.contentfilter a.filterselect {
+	float: left;
+	width: 18px;
+	height: 18px;
+	margin: 2px 0 0 5px; 
+	text-indent: -8888em;
+	overflow: hidden; 
+	background: url("/html/img/form-dropdown.gif") top left no-repeat; }
+
+.cf_range { left: 3px; }
+.cf_sort { left: 172px; }
+.cf_rating {
+	position: absolute;
+	z-index: 1;
+	top: 5px;
+	right: 2px;
+	width: 12em; }
+.cf_rating strong {
+	float: left;
+	padding-right: 5px; }
+.cf_rating ul {
+	float: right;
+	text-align: left; 
+	margin: 2px 0 0 0 !important;
+	padding: 0; }
+.cf_rating li {float:left;}
+.cf_rating input {display:none;}
+.cf_rating label {
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin-left: 5px;
+	padding: 0 !important;
+	text-indent: -1818em;
+	overflow: hidden;
+	background-position: top left; 
+	background-repeat: no-repeat;
+	cursor: pointer; }
+.cf_rating li.rate_e label, span.rate_e { background-image: url("/html/img/ricons/minirate_e.gif"); }
+.cf_rating li.rate_t label, span.rate_t { background-image: url("/html/img/ricons/minirate_t.gif"); }
+.cf_rating li.rate_m label, span.rate_m { background-image: url("/html/img/ricons/minirate_m.gif"); }
+.cf_rating li.rate_a label, span.rate_a { background-image: url("/html/img/ricons/minirate_a.gif"); }
+.cf_rating li.unchecked label { background-position: 0 -18px; }
+.cf_rating li label:hover { background-position: -18px 0; }
+.cf_rating li.unchecked label:hover { background-position: -18px -18px; }
+
+ul.filtermenu {
+	position: absolute;
+	top: 19px;
+	right: 0; 
+	width: 100%;
+	margin-right: 1px; *margin-right: 0;
+	*padding-bottom: 2px;
+	background: #25272d;
+	border-top: solid 1px #666d7a;
+	border-bottom: solid 1px #666d7a;
+	*border: solid 1px #666d7a;
+	line-height: 1.3em;
+	filter:alpha(opacity=90);
+	-moz-opacity: 0.9;
+	opacity: 0.9; }
+
+ul.filtermenu li {
+	margin: 0 -1px;
+	*margin: 0;
+	border-left: solid 1px #666d7a; 
+	border-right: solid 1px #666d7a;
+	*border: none; }
+ul.filtermenu li:first-child { padding-top: 2px; }
+ul.filtermenu li:last-child { padding-bottom: 2px; }
+
+ul.filtermenu a, ul.filtermenu a:visited {
+	display: block;
+	margin: 0 2px;
+	padding: 0 5px;
+	color: #fff;
+	font-size: 11px;
+	font-weight: normal; }
+ul.filtermenu a:hover {
+	background: #666d7a; }
+	
+
+/* thumbnails */
+
+
+.thumbgrid {
+	margin: 0 0 0 3px;
+	*width: 475px; }
+.thumbgrid #lonep {
+	position: absolute;
+	margin: 0;
+	top: 100px;
+	width: 488px;
+	text-align: center; }
+div.portal_item {
+position: relative;
+	display: inline;
+	margin: 12px;
+	border: solid 2px #101113; }
+div.portal_item img {
+	max-height: 90px;
+	max-width: 90px;
+	overflow: hidden; }
+	
+.newthumbsright {
+	width: 475px;
+	position: absolute;
+	top: 0;
+	right: -475px;
+	}
+.newthumbsleft {
+	width: 475px;
+	position: absolute;
+	top: 0;
+	left: -475px;
+	}
+
+.artthumbsizer {
+	margin: 18px 0 -2px 0; *margin: 12px 0 -12px 0; }
+#leftcol div.portal_item {
+	margin: 0 3px 13px 10px; }
+/* end thumbnails */
+
+
+div.portal_item a { display: block; }
+div.portal_item a span { display: none; }
+div.portal_item a:hover { position: relative; } /* necessary for IE to recognize a:hover span */
+div.portal_item a:hover span { display: block; }
+div.image_loaded {
+	background: none;
+}
+
+span.hovertitle {
+	float: left;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	height: 90px;
+	width: 90px;
+	z-index: 90;
+	overflow: hidden; }
+span.hovertitle strong {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90px;
+	font-weight: normal;
+	background: #101113;
+	filter:alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8; }
+span.hovertitle em {
+	display: block;
+	margin: 0 2px 2px 3px;
+	color: #fff;
+	font-style: normal; }
+span.hovertitle span {
+	position: absolute; 
+	height: 18px;
+	width: 18px;
+	bottom: 2px;
+	right: 2px;
+	text-indent: -1818em;
+	overflow: hidden; }
+span.hovertitle span.Adult { background-image: url("/html/img/ricons/minirate_a.gif"); }
+span.hovertitle span.Everybody { background-image: url("/html/img/ricons/minirate_e.gif"); }
+span.hovertitle span.Mature { background-image: url("/html/img/ricons/minirate_m.gif"); }
+span.hovertitle span.Teen { background-image: url("/html/img/ricons/minirate_t.gif"); }
+
+
+.authorcontact {
+	line-height: 1.2em;
+	position: relative;
+	display: inline-block;
+	width: 150px; height: 9px;
+	margin-top: 3px;
+	margin-bottom: 10px; }
+.authorcontact a {
+	float: left;
+	width: 12px;
+	height: 9px;
+	margin-right: 10px;
+	overflow: hidden;
+	text-indent: -921em;
+	background-repeat: no-repeat;
+	background-position: 0 0; }
+.authorcontact a:hover, p.authorcontact a:active { background-position: 0 -9px; cursor: pointer; }
+.authorcontact a.ac_wide {width: 16px; margin-right: 2px; }
+.ac_mail {background-image: url("/html/img/bicons/author_contact.gif");}
+.ac_web {background-image: url("/html/img/bicons/author_site.gif");}
+.ac_fave {background-image: url("/html/img/bicons/author_fav_add.gif");}
+.ac_faved {background-image: url("/html/img/bicons/author_fav_manage.gif");}
+.authorcontact span.working_sm { line-height: 1em; }
+
+.authorcontact button {
+	border: none;
+	background-color: #25272d;
+	float: left;
+	width: 12px;
+	height: 9px;
+	margin-right: 10px;
+	overflow: hidden;
+	text-indent: -921em;
+	background-repeat: no-repeat;
+	background-position: 0 0; }
+.authorcontact button:hover { background-position: 0 -9px; cursor: pointer; }
+.authorcontact button.ac_wide {width: 16px; margin-right: 2px; }
+.authorcontact button:focus, .authorcontact button:active { padding: 0 10px; }
+
+
+div.thumbsucker {
+	position: relative;
+	width: 475px; }
+
+
+/* voting of all kinds */
+
+#vote-descriptions p { display: none; }
+#vote-descriptions p.nonvote {
+	text-decoration: underline;
+	color: #feba16;
+	font-style: italic;
+	font-size: 11px;
+	background: none; }
+#vote-descriptions p.current-desc { display: block; }
+
+#votebar .artvote p.voting {
+	float: left;
+	margin-left: 75px;
+	text-align: left;
+	width: 150px; }
+#votebar .artvote .votedead p {
+	color: #feba16;
+	font-style: italic;
+	font-size: 11px;
+	background: none; }
+
+
+.votemessage {
+	position: relative;
+	display: inline;
+	margin-left: 2px;
+	background: url("/html/img/vote3-none.gif") 0px 2px no-repeat; }
+.votemessage p {
+	position: relative;
+	width: 253px;
+	height: 19px;
+	padding-top: 13px;
+	text-align: center;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #891814; }
+.votemessage div {
+	position: absolute;
+	right: 2px;
+	bottom: 3px;
+	width: 197px; }
+.votemessage .sendlinks li {
+	font-size: 1em !important;
+	margin: 0 !important; 
+	height: 11px; }
+.votemessage .sendlinks li a:visited {
+	color: #f90; }
+.votemessage .sendlinks li a:hover {
+	color: #fedf67; }
+.votemessage .sendlinks li p {
+color: white;
+text-transform: none;
+
+	height: 12px;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	width: auto;
+	font-size: 10px;
+}
+
+
+.votemessage form#scout_this_user input, .votemessage form#recommend_this_user input {
+	margin: 0 0 0 -2px;
+	padding: 0;
+	text-align: left;
+	width: auto;
+	line-height: 8px; 
+ }
+
+
+/* review stuff reformatted to be form elements */
+
+.review .foot {
+	padding: 10px 0 0px 0;
+	width: 100%;
+	background: url("/html/img/dot.gif") left top repeat-x;
+	font-size: 1.1em;
+	color: #666d7a; }
+.review .foot form {
+	background: url("/html/img/review-votechoices.gif") right top no-repeat;
+	float: right;
+	width: 75px;
+	margin-top: 2px;
+	text-indent: -999em;
+	overflow: hidden; }
+.review .foot p {
+	background: url("/html/img/review-vote.gif") 0 2px no-repeat;
+	float: left;
+	width: 27px;
+	height: 10px; }
+.review .foot p.voted {
+	background-image: url("/html/img/review-voted.gif"); }
+.review .foot label {
+	margin-left: 6px;
+	float: left;
+	width: 10px;
+	height: 10px;
+	background-position: top left;
+	background-repeat: no-repeat; }
+.review .foot input {
+	display: none; }
+.review .foot label:hover {
+	background-position: 0 -10px;
+	cursor: pointer; }
+label.goodreview { background-image: url("/html/img/review-votegood.gif"); }
+label.badreview { background-image: url("/html/img/review-votebad.gif"); }
+label.abusivereview { background-image: url("/html/img/review-voteflag.gif"); }
+form.portal_review_utility label.voted { visibility: hidden; }
+
+.review .foot label.selected { background-position: 0 -20px; cursor: default; }
+
+.goodreview { color: #5e7048; }
+.badreview { color: #7c4e56; }
+.abusivereview { color: #7c7348; }
+
+
+/* in-page dimmer */
+
+
+
+/* submit form and thumbnail stuff */
+
+
+div#thumbnail_view {
+	min-width: 0;
+	width: 90px;
+	height: 90px;
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+}
+
+#formstuff .upload_thumbs div#thumbnail_view {
+	min-width: 0;
+	margin-top: 0;
+	margin-right: 10px;
+	padding: 0;
+}
+
+div#thumbnail_view img {
+	position: absolute;
+	margin: 0;
+}
+
+#formstuff .facadeform input.upload_working {
+	margin-left: -20px; }
+
+div#thumbnail_form_div {
+	width: 100%; }
+
+div.thumbnailer {
+	z-index: 800;
+	width: 800px;
+	margin: 20px auto;
+	padding: 10px;
+	background: #000 url("/html/img/nene.gif") 555px 20px no-repeat; }
+
+div.thumbnail-intro {
+	float: left;
+	width: 400px; }
+div.thumbnail-intro h1 {
+	display: block;
+	height: 46px;
+	padding: 10px;
+	background: #25272d url("/html/img/thumbnailer-title.gif") 10px 10px no-repeat; 
+	text-indent: -24146em;
+	overflow: hidden; }
+div.thumbnail-intro p {
+	font-size: 1.2em;
+	margin: 10px 0; }
+
+div.thumbnail-submit {
+	float: left;
+	width: 125px;
+	margin: 0 10px;
+	background: #25272d; }
+div.thumbnail-preview {
+	display: block;
+	width: 90px;
+	margin: 10px auto; }
+div.thumbnail-submit .buttonlarge {
+	float: left;
+	margin: 0 10px 10px 10px;  }
+
+div.thumbnail-image {
+	width: 780px;
+	overflow: hidden;
+	margin-top: 10px;
+	padding: 10px;
+	background: #25272d; }
+div.thumbnail-image div.thumbnail-image-overflow {
+	position: relative;
+	max-width: 780px;
+	max-height: 740px;
+	overflow: auto; }
+
+div.cclicense {
+	display: none;
+}
+
+div#creative_commons_descriptions div.cc_current {
+	display: block;
+}
+
+
+iframe#upload_target {
+	border: 0;
+	height: 1px;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0;
+	opacity: 0; }
+
+
+/* moderation pages */
+
+.artmoditem {
+	display: block;
+	position: relative;
+	padding-top: 5px;
+	padding-left: 165px; }
+.artmodlog img {
+	float: left; 
+	margin: 5px 10px 5px 5px;
+	max-width: 150px;
+	max-height: 150px; }
+
+.artmodhistory {
+	position: relative;
+	display: block;
+	padding: 5px;
+	background: #101113; }
+.artmoditem form {
+	position: absolute;
+	top: 5px;
+	right: 5px; }
+.artmoditem .button {
+	margin-left: 5px; }
+	
+.artmodhistory li {
+	display: block;
+	margin-top: 5px;
+	font-size: 1.1em; }
+.artmodhistory dt {
+	display: none; }
+.artmodhistory dd {
+	display: inline-block; }
+.artmodhistory dt:first-child + dd {
+	border-right: solid 1px #666d7a;
+	padding-right: 5px;
+	margin-right: 3px; }
+.artmodhistory dd + dt + dd { text-transform: capitalize; }
+.artmodhistory dd:last-child:before {
+	text-transform: none;
+	content: "by "; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----- Coded by Bob Rudderow for Newgrounds.com ----- */
+
+
+#overlayblackout {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	background-color: #000;
+	filter:alpha(opacity=70);
+	-moz-opacity: 0.7;
+	opacity: 0.7; }
+
+#overlayblackout_ffmac {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 90; }
+
+#pop { margin: 0 auto; }
+#pop .box { margin: 0; width: 100%; }
+
+#popmovie { margin: 0 auto; }	/* Added 6/20 to center flash movie */
+
+.popadtext {
+	text-align: center;
+	margin: 5px auto 0px auto;
+	width: 380px;
+	height: 54px; }
+		
+
+.popadtext p {
+	margin:0;
+	display: inline; 
+	line-height: 6px; }
+
+.popadtext a {
+	display: block;
+	padding-top: 10px;
+	font-weight: normal; }
+
+.popadtext .adHeadline {
+	font-size: 12px;
+	}
+.popadtext .adText {
+	font-size: 10px;
+	font-weight: bold;
+	padding-bottom: 5px;
+	}
+.popadtext .adText span {
+	background: url("/html/img/dot.gif") left bottom repeat-x;
+	}
+
+.adHeadline {
+	margin-bottom: -8px;
+	color: #f90; }
+.adText {
+	margin-bottom: -9px;
+	text-decoration: none; 
+	font-weight: normal;
+	color: #fff; }
+a.cpmstarHeadline, a.cpmstarHeadline:hover, a.cpmstarHeadline:visited {
+	*display: inline-block;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: bold;
+	margin-top: 15px;
+	color: #f90; }
+a.cpmstarText, a.cpmstarText:hover, a.cpmstarText:visited {
+	margin-bottom: 9px;
+	text-decoration: none; 
+	font-weight: normal;
+	font-size: 11px;
+	line-height: 11px;
+	color: #fff; }
+
+
+.popadiframe {
+	display: block;
+	width: 630px;
+	height: 90px;
+	margin: 5px auto 0 auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-top: solid 1px #4c3c00; }
+
+
+
+#popin { position: absolute; margin: 0 auto; width: 500px; /*width overridden in-line*/ }
+#popin .box { width: 100%; }
+
+#popin .boxtop {
+	background: url("/html/img/box-pop.gif") no-repeat 100% 0;
+	margin:0 0 0 13px;
+	height:5px; }
+#popin .boxtop div {
+position: relative;
+	background:#000;
+	width: auto;
+	height:5px;
+	margin:0 0 0 13px; }
+#popin .boxtop div div {
+overflow: hidden;
+	visibility: visible;
+	height:5px;
+	width:13px;
+	left:-26px;
+	background: url("/html/img/box-pop.gif") no-repeat 0 0; }
+
+#popin .boxbot {
+	background: url("/html/img/box-pop.gif") no-repeat 100% 100%;
+	margin:0 0 0 13px;
+	height:5px; }
+#popin .boxbot div {
+position: relative;
+	background:#000;
+	width:auto;
+	height:5px;
+	margin:0 0 0 13px; }
+#popin .boxbot div div {
+visibility: visible;
+	height:5px;
+	width:13px;
+	left:-26px;
+	background: url("/html/img/box-pop.gif") no-repeat 0 100%; }
+
+#popin .boxl {
+	background: #000;
+	padding:0 0 0 10px; }
+#popin .boxr {
+	background:#000;
+	padding:0 10px 0 0; }
+#popin .boxm {
+	background:#000;
+	padding: 0; }
+
+#popin .hr {
+	display: none; }
+
+#popin .title div.boxtop, #popin .title div.boxtop div {
+	height: 5px; }
+
+#popin .box .heading {
+	position: relative;
+	display: block;
+	height: 25px;
+	margin: 0 0 5px 0;
+	padding: 0; 
+	background: none; 
+	color: #666d7a; }
+
+#popin h1.ngpres {
+	background: none;
+	padding: 0; }
+
+#popin .inputfield {
+	width:476px;
+	margin-bottom: 5px;
+	margin-right: 0; }
+
+/*  pop-in login box */
+#popin .poplogin .inputfield {
+	width: 190px;}
+#popin h3 {
+	font-size: 1.7em;
+	padding-left: 0; }
+	
+.poplogin {
+	min-height: 255px; 
+	padding: 15px 20px 0px 20px; }
+.poplogin .dotted {
+	margin-bottom: 15px;
+	padding-bottom: 10px;  }
+.poplogin h4 {
+	font-size: 1.4em; 
+	color: #fff; }
+.poplogin p {
+	height: 2em;
+	margin-top: 15px; }
+.poplogin p strong {
+	float: left; 
+	width: 85px; }
+.poplogin label {
+	font-size: 1.3em;
+	line-height: 1.4em;	}
+	
+	
+#popin .biglogin .inputfield {
+	width:189px;
+	margin:0;
+	float:right; }
+#popin .biglogin {
+	min-height: 265px;
+	padding: 5px 0 0 0;
+	background: none; }
+#popin .biglogin div {
+	margin-bottom: 0; padding-bottom: 0; }
+#popin .biglogin .dotted {
+	margin-bottom: 20px;
+	padding-bottom: 10px; }
+#popin .biglogin span.gray {
+	display: block;
+	margin-bottom: 15px; }
+#popin .biglogin p span.gray { display: inline; }
+
+
+
+/*    ----    beginning in-page image viewer stuff    ----    */
+
+.popimage .toggling {
+	height: 20px;
+	margin-top: 8px;
+	margin-bottom: 8px; }
+.popimage a.wantthis {
+	display: block;
+	text-align: center;
+	font-size: 1.7em; }

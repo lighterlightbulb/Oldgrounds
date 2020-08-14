@@ -1,23 +1,19 @@
 # Oldgrounds
-A fan recreation of Newgrounds, with goals to recreate to add in more of a social network feel into it.
+A fan recreation of Newgrounds from early 2011.
 
-This repository contains no copyrighted, or stolen code. All content here is 100% original. Oldgrounds is not sponsored by, hosted by, or affiliated with Newgrounds in any way.
+Oldgrounds is not sponsored by, hosted by, or affiliated with Newgrounds in any way.
 
 ## Features
-- Selling Feature: Customizability
-    - User CSS modification
-    - Jukebox, upload a song that represents you
-    - Site customizability is up to the user
 - User security
-    - We don't collect your data, either:
-        - The only data collected using the Oldgrounds web service is your E-Mail address, which only happens via registration. Even this is encrypted.
+    - We don't collect your data:
+        - The only data collected using the Oldgrounds web service is your E-Mail address and IP address, which only happens via registration. Even this is encrypted.
+        - We do not collect your IP address if you don't have an account. This is literally impossible for us to do.
     - We don't sell your data
     - All private user details (e.g E-Mail addresses) are securely encrypted with military grade encryption
     - Modern-day Argon2 password hashing, winner of the [Password Hashing Contest](https://password-hashing.net/)
     - Extensive privacy controls
     - Top-notch security
 - Open source, public domain software
-- Programmed by someone with over 10 braincells
 - Docker, which makes setting up exponentially easier, and helps with security
 
 ## How can I help?
