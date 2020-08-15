@@ -5,7 +5,17 @@
 <div id="foot">
     <div id="originalfooterdiv">
         <div class="box boxsizer">
+            <div class="featurefix">
+                <h4>Movies of the Week</h4>
+            </div>
 
+            <div class="featurefix">
+                <h4>Games of the Week</h4>
+            </div>
+
+            <div class="featurefix">
+                <h4>Today's Best</h4>
+            </div>
         </div>
 
         <span id="originalfooterspan">
