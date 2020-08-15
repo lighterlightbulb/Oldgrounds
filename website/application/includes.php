@@ -6,7 +6,6 @@
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/functions.php");
 	
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/main.php");
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/database.php");
 	
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/html.php");
 	

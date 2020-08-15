@@ -5,6 +5,7 @@
  * Notes:
  * Page from https://web.archive.org/web/20110203080057/http://www.newgrounds.com/
  * Images begin with https://web.archive.org/web/20110203080353im_/http://img.ngfiles.com/
+ * Todo: cdn.hitius.com? (strreplace '/html/' with 'https://cdn.hitius.com/')
  */
 
 /* ----- Site-Wide Elements ----- */
@@ -327,10 +328,11 @@ div.logged a {
 }
 	
 form#search {
-	display: inline;
 	background: url("/html/img/form-mag.gif") top left no-repeat; 
 	padding-left: 19px;
 	margin: 109px 0 0 5px;
+	float: right;
+	width: 240px;
 }
 
 .search { float: left }

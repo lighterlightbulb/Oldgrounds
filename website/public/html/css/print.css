@@ -1,0 +1,26 @@
+#wholeloginbox, #search, #nav-sub, #nav-main { display: none }
+
+iframe { display: none }
+
+a, a:hover, a:visited, a:active { text-decoration: none; color: #000; }
+
+div.oneline, span.btn { display: none }
+
+ul.bread { margin: 0; padding: 0; }
+ul.bread li { display: inline; padding-right: 5px; }
+ul.bread li:before { content: "> " }
+
+div#foot .dotted + .dotted + .dotted, a.yellow { display: none }
+div#foot .dotted { display: block }
+div#foot .boxsizer { display: none }
+
+
+/* BBS-specific */
+
+.post { border: solid 2px black; margin-bottom: 10px; padding: 10px; }
+.post .heading  { display: block; height: 44px; border-bottom: solid 1px black; }
+.post .heading img { display: none }
+.post .heading a { float: left; margin: 0 0 0 10px; }
+.post .heading h3, .post .heading p { float: left; font-size: 1em; padding-right: 10px; line-height: 1.1em; }
+.post .userlinks, .post .userstats { display: none }
+select, .shortsearch { display: none }
