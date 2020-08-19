@@ -1,4 +1,6 @@
-# Oldgrounds
+# Oldgrounds v1.1
+Now with 99% less security flaws!
+
 A fan recreation of Newgrounds from early 2011.
 
 Oldgrounds is not sponsored by, hosted by, or affiliated with Newgrounds in any way.
