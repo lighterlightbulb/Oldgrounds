@@ -1,5 +1,5 @@
 # Oldgrounds v1.1
-Now with 99% less security flaws!
+Now with 99% less security flaws! (Unlike our competitors [4grounds])
 
 A fan recreation of Newgrounds from early 2011.
 
